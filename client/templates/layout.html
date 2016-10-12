@@ -1,0 +1,12 @@
+<template name="layout">
+  <div class="menu">
+    <i class="fa fa-bars" aria-hidden="true"></i>
+    <div class="lista">
+
+      <a href="/contactos"  style="width: 95px;">Contactos</a>
+      <a href="/anuncios" class="seleccionado">Todos</a>
+      <a href="/favoritos"  style="width: 95px;">Favoritos</a>
+    </div>
+  </div>
+  {{> Template.dynamic template=contenido}}
+</template>

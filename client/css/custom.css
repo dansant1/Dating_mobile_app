@@ -1,0 +1,226 @@
+@import 'https://fonts.googleapis.com/css?family=Raleway:100,200,300,300i,400,600,700,900';
+
+html , body {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+
+}
+
+textarea:focus, input:focus{
+    outline: none;
+}
+
+.contenedor {
+  width: 100%;
+  height: 100vh;
+  background-image: url('/principal.jpg');
+  background-size: 100% 100%;
+}
+
+.wrapper {
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(14, 14, 14, 0.8);
+}
+
+.formulario {
+  width: 90%;
+  padding-top: 200px;
+  margin: 0 auto;
+
+}
+
+.formulario p {
+  text-align: center;
+  color: #7f8c8d;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 300;
+  margin-top: 7.5px;
+  font-size: 14px;
+}
+
+.formulario p a {
+  color: white;
+  text-decoration: none;
+}
+
+a:hover {
+  cursor: pointer;
+}
+
+.search {
+  width: 80%;
+  margin: 0px auto;
+	position: relative;
+	top: -11px;
+
+	padding-top: 19px;
+	color: white;
+}
+.search input {
+	text-indent: 30px;
+  margin-right: 0 auto;
+	display: block;
+	width: 100%;
+  color: white;
+  padding-top: 15px;
+	height: 40px;
+	background: transparent;
+	border: none;
+	border-radius: 0px;
+	border-bottom: 1px solid #95a5a6;
+
+}
+
+.search input:focus {
+  border-bottom-color: #8e44ad;
+}
+
+.search .icon {
+  position: absolute;
+  top: 46px;
+  left: 0px;
+  font-size: 15px;
+}
+
+.boton {
+  border: none;
+  background: transparent;
+  border-radius: 32px;
+}
+
+.ingresar {
+  display: block;
+  font-family: 'Raleway', sans-serif;
+  width: 82%;
+  height: 60px;
+  margin: 25px auto;
+  text-align: center;
+  font-size: 20px;
+  color: white;
+
+  background: #834d9b; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #834d9b , #d04ed6); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #834d9b , #d04ed6); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+  font-weight: 300;
+}
+
+.anunciar {
+  display: block;
+  font-family: 'Raleway', sans-serif;
+  width: 82%;
+  height: 60px;
+  text-align: center;
+  font-size: 20px;
+  color: white;
+  font-weight: 300;
+  border: 2px solid white;
+  background: transparent;
+}
+
+.formulario h1 {
+  margin: 5px auto;
+  width: 90%;
+  text-align: center;
+  font-family: 'Raleway', sans-serif;
+  color: white;
+  font-size: 18px;
+  font-weight: 300;
+}
+
+.menu {
+  width: 100%;
+  height: 120px;
+  background: #834d9b; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #834d9b , #d04ed6); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #834d9b , #d04ed6); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .1);
+}
+
+.menu i {
+  position: relative;
+  left: 20px;
+  top: 35px;
+  color: white;
+  font-size: 25px;
+  display: block;
+}
+
+.lista {
+  width: 99%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.lista a {
+  display: inline-block;
+  width: 80px;
+
+  padding: 10px;
+  margin: 40px auto 5px;
+  text-align: center;
+  color: white;
+  text-transform: uppercase;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 300;
+  text-decoration: none;
+
+}
+
+.seleccionado {
+  border: 2px solid white;
+  border-radius: 25px;
+}
+
+.anuncios {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding-top: 15px;
+}
+
+.anuncio {
+  width: 80%;
+  margin: 5px 7.5px;
+  height: 165px;
+  border: 1px solid #bdc3c7;
+  border-radius: 4px;
+  box-shadow: 0px 4px 5px -3px rgba(204,200,204,0.72);
+}
+
+.anuncio img {
+  display: block;
+  margin: 10px auto;
+  width: 80px;
+  height: 80px;
+  border-radius: 70%;
+}
+
+.anuncio span {
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+  font-family: 'Raleway', sans-serif;
+  font-weight: bold;
+  color: #bdc3c7;
+}
+
+.anuncio .foot {
+  position: relative;
+  bottom: -6px;
+  height: 40px;
+  margin: 0;
+  width: 100%;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  text-align: center;
+  background: #ecf0f1;
+}
+
+.foot span {
+  display: inline-block;
+  width: 40px;
+  margin: 11px 5px;
+}
