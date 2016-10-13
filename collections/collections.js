@@ -43,6 +43,13 @@ Schemas.Anunciantes = new SimpleSchema({
     calificacion: {
       type: Number,
       decimal: true
+    },
+    ubicacion: {
+      type: String,
+      optional: true
+    },
+    telefono: {
+      type: String
     }
 });
 
@@ -64,6 +71,8 @@ Schemas.Favoritos = new SimpleSchema({
 Favoritos.attachSchema(Schemas.Favoritos);
 
 Contactos = new Mongo.Collection('contactos');
+
+Comentarios = new Mongo.Collection('comentarios');
 
 
 let docStore = new FS.Store.GridFS("fotos", {

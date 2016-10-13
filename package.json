@@ -5,6 +5,7 @@
     "start": "meteor run"
   },
   "dependencies": {
+    "call-number": "^1.0.1",
     "meteor-node-stubs": "~0.2.0"
   }
 }
