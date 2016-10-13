@@ -39,6 +39,10 @@ Schemas.Anunciantes = new SimpleSchema({
     anuncia: {
       type: Boolean,
       label: "Tiene anuncios si o no"
+    },
+    calificacion: {
+      type: Number,
+      decimal: true
     }
 });
 
@@ -58,6 +62,8 @@ Schemas.Favoritos = new SimpleSchema({
 });
 
 Favoritos.attachSchema(Schemas.Favoritos);
+
+Contactos = new Mongo.Collection('contactos');
 
 
 let docStore = new FS.Store.GridFS("fotos", {

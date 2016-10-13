@@ -1,0 +1,33 @@
+<template name="Contactos">
+  <div class="anuncios">
+<!-- {{#each contactos}} -->
+
+    <div class="anuncio">
+      <img src="/principal.jpg">
+      <span><i class="fa fa-map-marker" aria-hidden="true"></i> Isabela</span>
+      <button>Llamar</button>
+    </div>
+
+    <div class="anuncio">
+      <!-- {{#each fotosDeContacto}} -->
+      <img src="/principal.jpg">
+      <!-- {{/each}} -->
+      <span><i class="fa fa-map-marker" aria-hidden="true"></i> Daniela <!--{{nombreDeContacto}} --></span>
+      <!--{{#if ContactoPendiente this.anuncianteId}} -->
+        <button>Pendiente</button>
+    <!--  {{else}} -->
+        <!-- <button>Llamar</button> -->
+      <!-- {{/if}} -->
+    </div>
+
+<!-- {{/each}} -->
+
+    <div class="anuncio">
+      <img src="/principal.jpg">
+      <span><i class="fa fa-map-marker" aria-hidden="true"></i> Callao</span>
+      <button>
+        Pendiente
+      </button>
+    </div>
+  </div>
+</template>

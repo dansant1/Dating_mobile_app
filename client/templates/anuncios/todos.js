@@ -5,6 +5,12 @@ Template.todos.onCreated( function () {
   });
 });
 
+Template.todos.events({
+  'click .anuncio': function () {
+    FlowRouter.go('/anunciante/fdsf');
+  }
+});
+
 Template.todos.helpers({
   anunciantes() {
     return Anunciantes.find();

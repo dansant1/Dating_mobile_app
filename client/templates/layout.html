@@ -1,4 +1,5 @@
 <template name="layout">
+  {{#if currentUser}}
   <div class="menu">
     <i class="fa fa-bars" aria-hidden="true"></i>
     <div class="lista">
@@ -8,5 +9,7 @@
       <a href="/favoritos"  style="width: 95px;">Favoritos</a>
     </div>
   </div>
+
   {{> Template.dynamic template=contenido}}
+  {{/if}}
 </template>
