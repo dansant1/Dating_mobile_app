@@ -1,4 +1,4 @@
-import CallNumber from 'call-number';
+//import CallNumber from 'call-number';
 
 Template.PerfilAnunciante.onRendered(function () {
   var mySwiper = new Swiper ('.swiper-container', {
@@ -25,7 +25,7 @@ Template.PerfilAnunciante.onRendered(function () {
 Template.PerfilAnunciante.events({
   'click .llamar'() {
     let numero = this.telefono;
-    
+
     function onSuccess(result){
       console.log("Success: " + result);
     }
@@ -34,20 +34,20 @@ Template.PerfilAnunciante.events({
       console.log("Error: " + result);
     }
 
-    CallNumber.callNumber(onSuccess, onError, numero, false);
+    //CallNumber.callNumber(onSuccess, onError, numero, false);
   },
   'click .panico'() {
 
         let number = document.getElementById('numberTxt').value;
         let message = document.getElementById('messageTxt').value;
-        
+
         console.log("número: " + number + ", mensaje: " + message);
 
         //CONFIGURACIÓN
         var options = {
-            replaceLineBreaks: false, 
+            replaceLineBreaks: false,
             android: {
-                intent: 'INTENT'  
+                intent: 'INTENT'
             }
         };
 

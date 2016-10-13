@@ -1,0 +1,77 @@
+<template name="Administrador">
+
+  <div class="container">
+  <h2>Solicitudes</h2>
+  <p>Lista de solicitudes de anuncios</p>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>email</th>
+        <th>Teléfono</th>
+        <th>Color de piel</th>
+        <th>Intereses</th>
+        <th>Género</th>
+        <th>Edad</th>
+        <th>Color de cabello</th>
+        <th>Medidas</th>
+        <th>Ubicación</th>
+        <th>Fotos</th>
+        <th>Aprobar</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>John</td>
+        <td>Doe</td>
+        <td>john@example.com</td>
+        <td>Doe</td>
+        <td>Doe</td>
+        <td>Doe</td>
+        <td>Doe</td>
+        <td>Doe</td>
+        <td>Doe</td>
+        <td>Doe</td>
+        <td>
+          <input type="file">
+        </td>
+        <td>
+          <button class="aprobar">Aprobar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+</template>
+
+<template name="menu">
+  <nav class="navbar navbar-default navbar-static-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">SinCompromiso.pe</a>
+      </div>
+      <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="/admin">Solicitudes</a></li>
+          <li><a href="/admin/anuncios">Anuncios</a></li>
+          <li><a href="/admin/usuarios">Usuarios</a></li>
+          <li><a href="/admin/reportes">Reportes</a></li>
+          <li><a href="/admin/contratos">Contratos</a></li>
+
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+
+          <li><a href="#">Salir</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</template>
