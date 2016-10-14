@@ -1,5 +1,13 @@
 //import CallNumber from 'call-number';
 
+Template.PerfilAnunciante.onCreated(function () {
+  var self = this;
+  self.autorun(function () {
+    self.subscribe('anunciantes');
+    self.subscribe('fotos');
+  });
+});
+
 Template.PerfilAnunciante.onRendered(function () {
   var mySwiper = new Swiper ('.swiper-container', {
     // Optional parameters
@@ -67,5 +75,11 @@ Template.PerfilAnunciante.helpers({
     } else {
       return false;
     }
+  },
+  fotos() {
+      return Fotos.find({'metadata.anuncianteId': Template.parentData(0)._id});
+  },
+  anunciante: function () {
+    return Anunciantes.findOne({_id: FlowRouter.getParam('anuncianteId')});
   }
 });

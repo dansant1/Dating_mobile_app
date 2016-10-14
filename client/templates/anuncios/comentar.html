@@ -1,0 +1,27 @@
+<template name="Comentar">
+  {{#if currentUser}}
+  <div class="menu" style="height: 97px;">
+    <i class="fa fa-bars abrir" aria-hidden="true"></i>
+    <div class="lista">
+      <a href="/anuncios" style="width: 160px; margin-top: 18px;">Comentar</a>
+    </div>
+  </div>
+
+  <div class="sidebar {{mostrar}}">
+    <i class="fa fa-times cerrar" aria-hidden="true"></i>
+    <br>
+    <br>
+    <br>
+    <div class="sidebar-lista">
+      <button class="anunciar"><a href="/cuenta">Mi cuenta</a></button>
+      <button class="anunciar"><a>Pánico</a></button>
+      <button class="anunciar"><a href="/anunciar">Anunciar</a></button>
+    </div>
+  </div>
+
+  <div class="contenedor">
+
+
+  </div>
+  {{/if}}
+</template>

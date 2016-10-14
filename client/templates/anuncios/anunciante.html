@@ -1,19 +1,16 @@
 <template name="PerfilAnunciante">
+
+  {{#with anunciante}}
   <div class="perfil">
     <div class="swiper-container">
     <!-- Additional required wrapper -->
     <div class="swiper-wrapper">
         <!-- Slides -->
+        {{#each fotos}}
         <div class="swiper-slide">
-          <img src="/principal.jpg" alt="">
+          <img src="{{this.url}}" alt="{{this.url}}">
         </div>
-        <div class="swiper-slide">
-          <img src="/principal.jpg" alt="">
-        </div>
-        <div class="swiper-slide">
-          <img src="/principal.jpg" alt="">
-        </div>
-
+        {{/each}}
     </div>
     <!-- If we need pagination -->
     <div class="swiper-pagination"></div>
@@ -25,7 +22,7 @@
     <!-- If we need scrollbar -->
     <div class="swiper-scrollbar"></div>
 </div>
-    <span class="s-anunciante"><i class="fa fa-map-marker" aria-hidden="true"></i> Callao</span>
+    <span class="s-anunciante"><i class="fa fa-map-marker" aria-hidden="true"></i> {{this.ubicacion}}</span>
     <div class="calificacion">
       <button>
         <i class="fa fa-star" aria-hidden="true"></i>
@@ -59,37 +56,38 @@
       </button>
     </div>
 
-    <p>8.5</p>
+    <p>{{this.calificacion}}</p>
     <input type="button" value="Contactate" class="contacto">
   </div>
+
   <div class="caracteristicas">
     <table>
 
       <tbody>
         <tr>
           <td>Género</td>
-          <td>Item</td>
+          <td>{{this.genero}}</td>
 
         </tr>
         <tr>
 
           <td>Contextura</td>
-          <td>Item</td>
+          <td>{{this.contextura}}</td>
         </tr>
         <tr>
 
           <td>Color de Piel</td>
-          <td>Item</td>
+          <td>{{this.piel}}</td>
         </tr>
         <tr>
 
           <td>Color de Cabello</td>
-          <td>Item</td>
+          <td>{{this.cabello}}</td>
         </tr>
         <tr>
 
           <td>Edad</td>
-          <td>Item</td>
+          <td>{{this.edad}}</td>
         </tr>
        </tbody>
     </table>
@@ -97,7 +95,7 @@
     <div class="comentarios">
       <br>
       <br>
-    
+
       <div class="comentario">
         <img src="/principal.jpg">
         <p>
@@ -122,4 +120,5 @@
 
     </div>
   </div>
+  {{/with}}
 </template>

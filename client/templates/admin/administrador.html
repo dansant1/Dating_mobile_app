@@ -7,7 +7,6 @@
     <thead>
       <tr>
         <th>Nombre</th>
-        <th>email</th>
         <th>Teléfono</th>
         <th>Color de piel</th>
         <th>Intereses</th>
@@ -17,28 +16,33 @@
         <th>Medidas</th>
         <th>Ubicación</th>
         <th>Fotos</th>
+        <th>Precio</th>
         <th>Aprobar</th>
       </tr>
     </thead>
     <tbody>
+      {{#each postulantes}}
       <tr>
-        <td>John</td>
-        <td>Doe</td>
-        <td>john@example.com</td>
-        <td>Doe</td>
-        <td>Doe</td>
-        <td>Doe</td>
-        <td>Doe</td>
-        <td>Doe</td>
-        <td>Doe</td>
-        <td>Doe</td>
+        <td>{{this.nombre}}</td>
+        <td>{{this.telefono}}</td>
+        <td>{{this.piel}}</td>
+        <td>{{this.intereses}}</td>
+        <td>{{this.genero}}</td>
+        <td>{{this.edad}}</td>
+        <td>{{this.cabello}}</td>
+        <td>{{this.contextura}}</td>
+        <td>{{this.ubicacion}}</td>
         <td>
-          <input type="file">
+          <input type="file" id="foto">
+        </td>
+        <td>
+          <input type="text" class="precio" name="{{this._id}}" value="{{this.precio}}">
         </td>
         <td>
           <button class="aprobar">Aprobar</button>
         </td>
       </tr>
+      {{/each}}
     </tbody>
   </table>
 </div>
@@ -60,7 +64,7 @@
       </div>
       <div id="navbar" class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
-          <li class="active"><a href="/admin">Solicitudes</a></li>
+          <li><a href="/admin">Solicitudes</a></li>
           <li><a href="/admin/anuncios">Anuncios</a></li>
           <li><a href="/admin/usuarios">Usuarios</a></li>
           <li><a href="/admin/reportes">Reportes</a></li>
@@ -69,9 +73,91 @@
         </ul>
         <ul class="nav navbar-nav navbar-right">
 
-          <li><a href="#">Salir</a></li>
+          <li class="salir"><a href="#">Salir</a></li>
         </ul>
       </div>
     </div>
   </nav>
+</template>
+
+<template name="AdministradorAnuncios">
+
+  <div class="container">
+  <h2>Anuncios</h2>
+  <p>Lista de anuncios aprobados</p>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Teléfono</th>
+        <th>Color de piel</th>
+        <th>Intereses</th>
+        <th>Género</th>
+        <th>Edad</th>
+        <th>Color de cabello</th>
+        <th>Medidas</th>
+        <th>Ubicación</th>
+        <th>Fotos</th>
+        <th>Precio</th>
+        <th>Aprobar</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each anuncios}}
+      <tr>
+        <td>{{this.nombre}}</td>
+        <td>{{this.telefono}}</td>
+        <td>{{this.piel}}</td>
+        <td>{{this.intereses}}</td>
+        <td>{{this.genero}}</td>
+        <td>{{this.edad}}</td>
+        <td>{{this.cabello}}</td>
+        <td>{{this.contextura}}</td>
+        <td>{{this.ubicacion}}</td>
+        <td>
+          <input type="file" id="foto">
+        </td>
+        <td>
+          <input type="text" class="precio" name="{{this._id}}" value="{{this.precio}}">
+        </td>
+        <td>
+          <button class="aprobar">Desaprobar</button>
+        </td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</div>
+</template>
+
+<template name="Usuarios">
+
+  <div class="container">
+  <h2>Usuarios</h2>
+  <p>Lista de usuarios registrados</p>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Teléfono</th>
+
+        <th>Edad</th>
+
+
+
+      </tr>
+    </thead>
+    <tbody>
+      {{#each users}}
+      <tr>
+        <td>{{this.profile.nombre}}</td>
+        <td>{{this.profile.telefono}}</td>
+        <td>{{this.profile.edad}}</td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</div>
+
+
 </template>

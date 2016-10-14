@@ -3,7 +3,7 @@ let Schemas = {};
 Anunciantes = new Mongo.Collection('anunciantes');
 
 Schemas.Anunciantes = new SimpleSchema({
-    Nombre: {
+    nombre: {
         type: String,
         label: "Nombre",
         max: 250
@@ -49,6 +49,9 @@ Schemas.Anunciantes = new SimpleSchema({
       optional: true
     },
     telefono: {
+      type: String
+    },
+    precio: {
       type: String
     }
 });
@@ -97,6 +100,6 @@ Fotos.allow({
     return true;
   },
   download: function () {
-    return false;
+    return true;
   }
 });
