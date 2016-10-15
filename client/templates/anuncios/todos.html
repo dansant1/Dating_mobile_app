@@ -3,17 +3,39 @@
   {{#each anunciantes}}
     <div class="anuncio">
 
-      {{#each foto}}
-      {{#if isImage}}
-      <img src="{{this.url}}">
-      {{/if}}
-      {{/each}}
+
+
+      <div class="swiper-container" style="height: 97px;">
+      <!-- Additional required wrapper -->
+      <div class="swiper-wrapper">
+          <!-- Slides -->
+          {{#each foto}}
+          <div class="swiper-slide">
+            {{#if isImage}}
+            <img src="{{this.url}}" alt="{{this.url}}" style="width: 95px; height: 95px; margin-top: 2px;">
+            {{/if}}
+          </div>
+          {{/each}}
+      </div>
+      <!-- If we need pagination -->
+      <div class="swiper-pagination"></div>
+
+      <!-- If we need navigation buttons -->
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div>
+
+      <!-- If we need scrollbar -->
+      <div class="swiper-scrollbar"></div>
+      </div>
+
+
+
 
       <span><i class="fa fa-map-marker" aria-hidden="true"></i> {{this.ubicacion}}</span>
       <div class="foot">
         <span><i class="fa fa-star" aria-hidden="true"></i> {{this.calificacion}}</span>
         <span style="width: 55px;"><i class="fa fa-credit-card-alt" aria-hidden="true"></i> {{this.precio}}</span>
-        <span><i class="fa fa-comment" aria-hidden="true"></i> 10</span>
+        <span><i class="fa fa-comment" aria-hidden="true"></i> {{comentarios}}</span>
       </div>
     </div>
   {{/each}}

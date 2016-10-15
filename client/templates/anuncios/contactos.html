@@ -2,19 +2,13 @@
   <div class="anuncios">
 <!-- {{#each contactos}} -->
 
-    <div class="anuncio">
-      <img src="/principal.jpg">
-      <span><i class="fa fa-map-marker" aria-hidden="true"></i> Isabela</span>
-      <button>Llamar</button>
-    </div>
-
-    <div class="anuncio">
+    <div class="anuncio" style="height: 255px;">
       <!-- {{#each fotosDeContacto}} -->
-      <img src="/principal.jpg">
+      <img src="/principal.jpg" style="width: 120px; height: 120px;">
       <!-- {{/each}} -->
-      <span><i class="fa fa-map-marker" aria-hidden="true"></i> Daniela <!--{{nombreDeContacto}} --></span>
+      <span><i class="fa fa-user" aria-hidden="true"></i> Claudia <!--{{nombreDeContacto}} --></span>
       <!--{{#if ContactoPendiente this.anuncianteId}} -->
-        <button>Pendiente</button>
+        <button class="contacto">Pendiente</button>
     <!--  {{else}} -->
         <!-- <button>Llamar</button> -->
       <!-- {{/if}} -->
@@ -22,12 +16,6 @@
 
 <!-- {{/each}} -->
 
-    <div class="anuncio">
-      <img src="/principal.jpg">
-      <span><i class="fa fa-map-marker" aria-hidden="true"></i> Callao</span>
-      <button>
-        Pendiente
-      </button>
-    </div>
+
   </div>
 </template>

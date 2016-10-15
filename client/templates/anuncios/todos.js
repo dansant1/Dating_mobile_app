@@ -3,6 +3,7 @@ Template.todos.onCreated( function () {
   self.autorun(function () {
     self.subscribe('anunciantes');
     self.subscribe('fotos');
+    self.subscribe('todosComentarios');
   });
 });
 
@@ -18,5 +19,8 @@ Template.todos.helpers({
   },
   foto: function () {
     return Fotos.find({'metadata.anuncianteId': Template.parentData(0)._id});
+  },
+  comentarios: function () {
+    return Comentarios.find({anuncianteId: this._id}).fetch().length;
   }
 });
