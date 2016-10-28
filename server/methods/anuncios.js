@@ -6,9 +6,9 @@ Meteor.methods({
       let anuncia = Anunciantes.find({userId: this.userId}).fetch().length;
 
       if (anuncia === 0) {
-        datos.nombre = Meteor.users.findOne({_id: this.userId}).profile.nombre;
+        datos.nombre = Meteor.users.findOne({_id: this.userId}).username;
         datos.edad = Meteor.users.findOne({_id: this.userId}).profile.edad;
-        datos.telefono = Meteor.users.findOne({_id: this.userId}).profile.telefono;
+        datos.telefono = 1;
         datos.userId = this.userId;
         datos.calificacion = 0;
         datos.anuncia = false;
