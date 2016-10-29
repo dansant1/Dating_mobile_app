@@ -1,10 +1,23 @@
 <template name="todos">
   <div class="anuncios">
+  <button type="button" style="display: block; margin-bottom: 15px;" class="btn btn-info" data-toggle="collapse" data-target="#demo"><i class="fa fa-filter" aria-hidden="true"></i> Filtros</button>
+  <div id="demo" class="collapse" >
+  <br>
+    <div class="filtros">
+    {{>filtroProvincia}}
+    {{>filtroDistrito}}
+    {{>filtroPreferencia}}
+    {{>filtroEdad}}
+    {{>filtroPiel}}
+    {{>filtroCabello}}
+    {{>filtroContextura}}
+  </div>
+  </div>
+    
+
   {{#each anunciantes}}
+
     <div class="anuncio">
-
-
-
       <div class="swiper-container" style="height: 97px;">
       <!-- Additional required wrapper -->
       <div class="swiper-wrapper">
@@ -27,10 +40,6 @@
       <!-- If we need scrollbar -->
       <div class="swiper-scrollbar"></div>
       </div>
-
-
-
-
       <span><i class="fa fa-map-marker" aria-hidden="true"></i> {{this.ubicacion}}</span>
       <div class="foot">
         <span><i class="fa fa-star" aria-hidden="true"></i> {{this.calificacion}}</span>
@@ -39,5 +48,164 @@
       </div>
     </div>
   {{/each}}
+  </div>
+</template>
+
+<template name="filtroProvincia">
+  <div class="md-select">
+
+  <label for="ul-id">
+  <button type="button" class="ng-binding">Provincia</button></label>
+  <ul role="listbox" id="ul-id" class="md-whiteframe-z1" aria-activedescendant="state2_AK" name="ul-id">
+    <li role="option" id="lima" class="ng-binding ng-scope active" tabindex="-1" aria-selected="true">Lima</li>
+    <li role="option" id="callao" class="ng-binding ng-scope" tabindex="-1" aria-selected="false">Callao</li>
+    <li role="option" id="amazonas" class="ng-binding ng-scope" tabindex="-1" aria-selected="false">Amazonas</li>
+    <li role="option" id="ancash" class="ng-binding ng-scope" tabindex="-1" aria-selected="false">Áncash</li>
+    <li role="option" id="apurimac" class="ng-binding ng-scope" tabindex="-1" aria-selected="false">Apurímac</li>
+    <li role="option" id="arequipa" class="ng-binding ng-scope" tabindex="-1" aria-selected="false">Arequipa</li>
+    <li role="option" id="ayacuhco" class="ng-binding ng-scope" tabindex="-1" aria-selected="false">Ayacuhco</li>
+    <li role="option" id="cajamarca" class="ng-binding ng-scope" tabindex="-1" aria-selected="false">Cajamarca</li>
+    <li role="option" id="cusco" class="ng-binding ng-scope" tabindex="-1" aria-selected="false">Cusco</li>
+    <li role="option" id="huancavelica" class="ng-binding ng-scope" tabindex="-1" aria-selected="false">Huancavelica</li>
+    <li role="option" id="huanico" class="ng-binding ng-scope" tabindex="-1" aria-selected="false">Huánuco</li>7
+    <li role="option" id="ica" class="ng-binding ng-scope" tabindex="-1" aria-selected="false">Ica</li>
+    <li role="option" id="junin" class="ng-binding ng-scope" tabindex="-1" aria-selected="false">Junín</li>
+    <li role="option" id="lalibertad" class="ng-binding ng-scope" tabindex="-1" aria-selected="false">La Libertad</li>
+    <li role="option" id="lambayeque" class="ng-binding ng-scope" tabindex="-1" aria-selected="false">Lambayeque</li>
+    <li role="option" id="loreto" class="ng-binding ng-scope" tabindex="-1" aria-selected="false">Loreto</li>
+    <li role="option" id="madrededios" class="ng-binding ng-scope" tabindex="-1" aria-selected="false">Madre de Dios</li>
+    <li role="option" id="moquegua" class="ng-binding ng-scope" tabindex="-1" aria-selected="false">Moquegua</li>
+    <li role="option" id="pasco" class="ng-binding ng-scope" tabindex="-1" aria-selected="false">Pasco</li>
+    <li role="option" id="piura" class="ng-binding ng-scope" tabindex="-1" aria-selected="false">Piura</li>
+    <li role="option" id="puno" class="ng-binding ng-scope" tabindex="-1" aria-selected="false">Puno</li>
+    <li role="option" id="sanmartin" class="ng-binding ng-scope" tabindex="-1" aria-selected="false">San Martín</li>
+    <li role="option" id="tacna" class="ng-binding ng-scope" tabindex="-1" aria-selected="false">Tacna</li>
+    <li role="option" id="tumbes" class="ng-binding ng-scope" tabindex="-1" aria-selected="false">Tumbes</li>
+    <li role="option" id="ucayali" class="ng-binding ng-scope" tabindex="-1" aria-selected="false">Ucayali</li>
+    
+  </ul>
+
+</div>
+</template>
+
+<template name="filtroDistrito">
+  <div class="md-select">
+
+  <label for="ul-id"><button type="button" class="ng-binding">Distrito</button></label>
+  <ul role="listbox" id="ul-id" class="md-whiteframe-z1" aria-activedescendant="state2_AK" name="ul-id">
+    <li role="option" id="cercadodelima" class="ng-binding ng-scope active" tabindex="-1" aria-selected="true">Cercado de Lima</li>
+    <li role="option" id="ate" class="ng-binding ng-scope" tabindex="-1" aria-selected="false">Ate</li>
+    <li role="option" id="barranco" class="ng-binding ng-scope" tabindex="-1" aria-selected="false">Barranco</li>
+    <li role="option" id="brena" class="ng-binding ng-scope" tabindex="-1" aria-selected="false">Breña</li>
+    <li role="option" id="comas" class="ng-binding ng-scope" tabindex="-1" aria-selected="false">Comas</li>
+    <li role="option" id="chorrillos" class="ng-binding ng-scope" tabindex="-1" aria-selected="false">Chorrillos</li>
+    <li role="option" id="elagustino" class="ng-binding ng-scope" tabindex="-1" aria-selected="false">El agustino</li>
+    <li role="option" id="jesusmaria" class="ng-binding ng-scope" tabindex="-1" aria-selected="false">Jesús María</li>
+    <li role="option" id="lavictoria" class="ng-binding ng-scope" tabindex="-1" aria-selected="false">La Victoria</li>
+    <li role="option" id="lince" class="ng-binding ng-scope" tabindex="-1" aria-selected="false">Lince</li>
+    <li role="option" id="magdalenadelmar" class="ng-binding ng-scope" tabindex="-1" aria-selected="false">Magdalena del Mar</li>
+    <li role="option" id="miraflores" class="ng-binding ng-scope" tabindex="-1" aria-selected="false">Miraflores</li>
+    <li role="option" id="pueblolibre" class="ng-binding ng-scope" tabindex="-1" aria-selected="false">Pueblo Libre</li>
+    <li role="option" id="puentepiedra" class="ng-binding ng-scope" tabindex="-1" aria-selected="false">Puente Piedra</li>
+    <li role="option" id="rimac" class="ng-binding ng-scope" tabindex="-1" aria-selected="false">Rimac</li>
+    <li role="option" id="sanisidro" class="ng-binding ng-scope" tabindex="-1" aria-selected="false">San Isidro</li>
+    <li role="option" id="independencia" class="ng-binding ng-scope" tabindex="-1" aria-selected="false">Independencia</li>
+    <li role="option" id="sanjuandemiraflores" class="ng-binding ng-scope" tabindex="-1" aria-selected="false">San Juan de Miraflores</li>
+    <li role="option" id="sanluis" class="ng-binding ng-scope" tabindex="-1" aria-selected="false">San Luis</li>
+    <li role="option" id="sanmartindeporres" class="ng-binding ng-scope" tabindex="-1" aria-selected="false">San Martin de Porres</li>
+    <li role="option" id="sanmiguel" class="ng-binding ng-scope" tabindex="-1" aria-selected="false">San Miguel</li>
+    <li role="option" id="santiagodesurco" class="ng-binding ng-scope" tabindex="-1" aria-selected="false">Santiago de Surco</li>
+    <li role="option" id="surquillo" class="ng-binding ng-scope" tabindex="-1" aria-selected="false">Surquillo</li>
+    <li role="option" id="villamariadeltriunfo" class="ng-binding ng-scope" tabindex="-1" aria-selected="false">Villa María del Triunfo</li>
+    <li role="option" id="sanjuandelurigancho" class="ng-binding ng-scope" tabindex="-1" aria-selected="false">San Juan de Lurigancho</li>
+    <li role="option" id="santarosa" class="ng-binding ng-scope" tabindex="-1" aria-selected="false">Santa Rosa</li>
+    <li role="option" id="losolivos" class="ng-binding ng-scope" tabindex="-1" aria-selected="false">Los Olivos</li>
+    <li role="option" id="sanborja" class="ng-binding ng-scope" tabindex="-1" aria-selected="false">San Borja</li>
+    <li role="option" id="villaelsalvador" class="ng-binding ng-scope" tabindex="-1" aria-selected="false">Villa El Salvador</li>
+    <li role="option" id="santaanita" class="ng-binding ng-scope" tabindex="-1" aria-selected="false">Santa Anita</li>
+    <li role="option" id="callao" class="ng-binding ng-scope" tabindex="-1" aria-selected="false">Callao</li>
+    <li role="option" id="ventanilla" class="ng-binding ng-scope" tabindex="-1" aria-selected="false">Ventanilla</li>
+    <li role="option" id="lapunta" class="ng-binding ng-scope" tabindex="-1" aria-selected="false">La Punta</li>
+    <li role="option" id="carmendelalegua" class="ng-binding ng-scope" tabindex="-1" aria-selected="false">Carmen de La Legua</li>
+    <li role="option" id="bellavista" class="ng-binding ng-scope" tabindex="-1" aria-selected="false">Bellavista</li>
+    <li role="option" id="laperla" class="ng-binding ng-scope" tabindex="-1" aria-selected="false">La Perla</li>
+  </ul>
+
+</div>
+</template>
+
+<template name="filtroPreferencia">
+  <div class="md-select">
+
+  <label for="ul-id">
+  <button type="button" class="ng-binding">Preferencia</button></label>
+  <ul role="listbox" id="ul-id" class="md-whiteframe-z1" aria-activedescendant="state2_AK" name="ul-id">
+    <li role="option" id="hm" class="ng-binding ng-scope active" tabindex="-1" aria-selected="true">Hombre - Mujer</li>
+    <li role="option" id="mh" class="ng-binding ng-scope" tabindex="-1" aria-selected="false">Mujer - Hombre</li>
+    <li role="option" id="hh" class="ng-binding ng-scope" tabindex="-1" aria-selected="false">Hombre - Hombre</li>
+    <li role="option" id="hmh" class="ng-binding ng-scope" tabindex="-1" aria-selected="false">Hombre - Mujer/Hombre</li>
+    <li role="option" id="mhm" class="ng-binding ng-scope" tabindex="-1" aria-selected="false">Mujer - Hombre/Mujer</li>
+  </ul>
+
+  </div>
+</template>
+
+<template name="filtroEdad">
+  <div class="md-select">
+
+  <label for="ul-id">
+  <button type="button" class="ng-binding">Edad</button></label>
+  <ul role="listbox" id="ul-id" class="md-whiteframe-z1" aria-activedescendant="state2_AK" name="ul-id">
+    <li role="option" id="i1825" class="ng-binding ng-scope active" tabindex="-1" aria-selected="true">18 - 25</li>
+    <li role="option" id="i2535" class="ng-binding ng-scope" tabindex="-1" aria-selected="false">25 - 35</li>
+    <li role="option" id="i3545" class="ng-binding ng-scope" tabindex="-1" aria-selected="false">35 - 45</li>
+  </ul>
+
+  </div>
+</template>
+
+<template name="filtroContextura">
+  <div class="md-select">
+
+  <label for="ul-id">
+  <button type="button" class="ng-binding">Contextura</button></label>
+  <ul role="listbox" id="ul-id" class="md-whiteframe-z1" aria-activedescendant="state2_AK" name="ul-id">
+    <li role="option" id="delgada" class="ng-binding ng-scope active" tabindex="-1" aria-selected="true">Delgada</li>
+    <li role="option" id="fitness" class="ng-binding ng-scope" tabindex="-1" aria-selected="false">Fitness</li>
+    <li role="option" id="Voluptuosa" class="ng-binding ng-scope" tabindex="-1" aria-selected="false">Voluptuosa</li>
+    <li role="option" id="rellenita" class="ng-binding ng-scope" tabindex="-1" aria-selected="false">Rellenita</li>
+    
+  </ul>
+
+  </div>
+</template>
+
+<template name="filtroPiel">
+  <div class="md-select">
+
+  <label for="ul-id">
+  <button type="button" class="ng-binding">Piel</button></label>
+  <ul role="listbox" id="ul-id" class="md-whiteframe-z1" aria-activedescendant="state2_AK" name="ul-id">
+    <li role="option" id="blanca" class="ng-binding ng-scope active" tabindex="-1" aria-selected="true">Blanca</li>
+    <li role="option" id="triguena" class="ng-binding ng-scope" tabindex="-1" aria-selected="false">Trigueña</li>
+    <li role="option" id="morena" class="ng-binding ng-scope" tabindex="-1" aria-selected="false">Morena</li>
+    <li role="option" id="negra" class="ng-binding ng-scope" tabindex="-1" aria-selected="false">Negra</li>
+  </ul>
+
+  </div>
+</template>
+
+<template name="filtroCabello">
+  <div class="md-select">
+
+  <label for="ul-id">
+  <button type="button" class="ng-binding">Cabello</button></label>
+  <ul role="listbox" id="ul-id" class="md-whiteframe-z1" aria-activedescendant="state2_AK" name="ul-id">
+    <li role="option" id="rubio" class="ng-binding ng-scope active" tabindex="-1" aria-selected="true">Rubio</li>
+    <li role="option" id="castano" class="ng-binding ng-scope" tabindex="-1" aria-selected="false">Castaño</li>
+    <li role="option" id="negro" class="ng-binding ng-scope" tabindex="-1" aria-selected="false">Negro</li>
+    
+  </ul>
+
   </div>
 </template>

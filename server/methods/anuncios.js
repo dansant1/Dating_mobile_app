@@ -13,7 +13,7 @@ Meteor.methods({
         datos.calificacion = 0;
         datos.anuncia = false;
         datos.precio = 0;
-        //console.log(datos);
+        
         Anunciantes.insert(datos);
       } else {
         return;

@@ -1,6 +1,6 @@
 <template name="Admin">
   {{#if currentUser}}
-    {{#if isInRole 'administrador' 'default-group'}}
+    {{#if isInRole 'admin' 'default-group'}}
       {{> menu}}
       {{> Template.dynamic template=administrador}}
     {{/if}}
