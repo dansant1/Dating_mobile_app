@@ -35,16 +35,7 @@ Template.PerfilAnunciante.onRendered(function () {
 
 Template.PerfilAnunciante.events({
   'click .llamar'() {
-    let numero = this.telefono;
-
-    function onSuccess(result){
-      console.log("Success: " + result);
-    }
-
-    function onError(result) {
-      console.log("Error: " + result);
-    }
-
+    Modal.show('contactoAnunciante');
     //CallNumber.callNumber(onSuccess, onError, numero, false);
   },
   'click .panico'() {
@@ -206,6 +197,8 @@ Template.PerfilAnunciante.helpers({
     return Comentarios.find({}, {sort: {createdAt: -1}});
   }
 });
+
+
 
 Template.calificar.events({
   'click .comentar': function (event, template) {

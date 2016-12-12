@@ -1,0 +1,10 @@
+{
+  "galaxy.meteor.com":
+		{
+			"env":
+				{
+        	"ROOT_URL": "http://io.sincompromiso.pe",
+					"MONGO_URL": "mongodb://admin:admin@ds127958.mlab.com:27958/sincompromiso"
+				}
+		}
+}

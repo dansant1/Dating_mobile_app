@@ -13,11 +13,54 @@ Meteor.methods({
         datos.calificacion = 0;
         datos.anuncia = false;
         datos.precio = 0;
-        
+
         Anunciantes.insert(datos);
       } else {
         return;
       }
+
+    } else {
+      return;
+    }
+  },
+  agregarTerminos: function (termino) {
+    if (Terminos.find().fetch().length > 0) {
+
+    } else {
+      Terminos.insert({
+        contenido: termino
+      });
+    }
+
+  },
+  agregarPoliticas: function (politica) {
+    if (Politicas.find().fetch().length > 0) {
+
+    } else {
+      Politicas.insert({
+        contenido: politica
+      });
+    }
+
+  },
+  agregarAnunciante: function (data) {
+
+    if (this.userId) {
+
+      //let anuncia = Anunciantes.find({userId: this.userId}).fetch().length;
+
+      //if (anuncia === 0) {
+
+        data.userId = '';
+        data.calificacion = 0;
+        data.anuncia = true;
+        data.userId = '12x';
+        //datos.precio = data.precio;
+
+        Anunciantes.insert(data);
+      //} else {
+        //return;
+      //}
 
     } else {
       return;
@@ -68,6 +111,20 @@ Meteor.methods({
       });
     }
   },
+  calificarProducto: function (numero, anuncianteId) {
+    if (this.userId) {
+
+      let calificacion = Productos.findOne({_id: anuncianteId}).calificacion;
+
+      let calificacionFinal = numero + calificacion
+
+      Productos.update({_id: anuncianteId}, {
+        $set: {
+          calificacion: calificacionFinal
+        }
+      });
+    }
+  },
   comentar: function (comentario, anuncianteId) {
     if (this.userId) {
       Comentarios.insert({
@@ -75,6 +132,17 @@ Meteor.methods({
         createdAt: new Date(),
         comentario: comentario,
         anuncianteId: anuncianteId,
+        username: Meteor.users.findOne({_id: this.userId}).username
+      });
+    }
+  },
+  comentarProducto: function (comentario, anuncianteId) {
+    if (this.userId) {
+      ComentariosProductos.insert({
+        userId: this.userId,
+        createdAt: new Date(),
+        comentario: comentario,
+        productoId: anuncianteId,
         username: Meteor.users.findOne({_id: this.userId}).username
       });
     }

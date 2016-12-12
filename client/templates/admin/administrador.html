@@ -1,52 +1,5 @@
 <template name="Administrador">
 
-  <div class="container">
-  <h2>Solicitudes</h2>
-  <p>Lista de solicitudes de anuncios</p>
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Nombre</th>
-        <th>Teléfono</th>
-        <th>Color de piel</th>
-        <th>Intereses</th>
-        <th>Género</th>
-        <th>Edad</th>
-        <th>Color de cabello</th>
-        <th>Medidas</th>
-        <th>Ubicación</th>
-        <th>Fotos</th>
-        <th>Precio</th>
-        <th>Aprobar</th>
-      </tr>
-    </thead>
-    <tbody>
-      {{#each postulantes}}
-      <tr>
-        <td>{{this.nombre}}</td>
-        <td>{{this.telefono}}</td>
-        <td>{{this.piel}}</td>
-        <td>{{this.intereses}}</td>
-        <td>{{this.genero}}</td>
-        <td>{{this.edad}}</td>
-        <td>{{this.cabello}}</td>
-        <td>{{this.contextura}}</td>
-        <td>{{this.ubicacion}}</td>
-        <td>
-          <input type="file" id="foto">
-        </td>
-        <td>
-          <input type="text" class="precio" name="{{this._id}}" value="{{this.precio}}">
-        </td>
-        <td>
-          <button class="aprobar">Aprobar</button>
-        </td>
-      </tr>
-      {{/each}}
-    </tbody>
-  </table>
-</div>
-
 
 </template>
 
@@ -67,7 +20,7 @@
           <li><a href="/admin">Solicitudes</a></li>
           <li><a href="/admin/anuncios">Anuncios</a></li>
           <li><a href="/admin/usuarios">Usuarios</a></li>
-          <li><a href="/admin/reportes">Reportes</a></li>
+        <!--  <li><a href="/admin/reportes">Reportes</a></li> -->
           <li><a href="/admin/contratos">Contratos</a></li>
 
         </ul>
@@ -78,9 +31,32 @@
       </div>
     </div>
   </nav>
+
+
+
 </template>
 
 <template name="AdministradorAnuncios">
+
+  <div class="col-md-6">
+    <form style="display: block">
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" name="email" class="form-control" id="email">
+      </div>
+      <div class="form-group">
+        <label for="tienda">Nombre de la tienda</label>
+        <input type="text" name="tienda" class="form-control" id="tienda">
+      </div>
+      <div class="form-group">
+        <label for="pwd">Contraseña:</label>
+        <input type="password" name="password" class="form-control" id="pwd">
+      </div>
+      <button type="submit" class="btn btn-default">Agregar vendedor</button>
+    </form>
+    <br>
+
+  </div>
 
   <div class="container">
   <h2>Anuncios</h2>
@@ -103,6 +79,44 @@
       </tr>
     </thead>
     <tbody>
+      <tr>
+        <td>
+          <input type="text" name="nombre">
+        </td>
+        <td>
+          <input type="text" name="telefono">
+        </td>
+        <td>
+          <input type="text" name="piel">
+        </td>
+        <td>
+          <input type="text" name="intereses">
+        </td>
+        <td>
+          <input type="text" name="genero">
+        </td>
+        <td>
+          <input type="text" name="edad">
+        </td>
+        <td>
+          <input type="text" name="cabello">
+        </td>
+        <td>
+          <input type="text" name="contextura">
+        </td>
+        <td>
+          <input type="text" name="ubicacion">
+        </td>
+        <td>
+          Foto
+        </td>
+        <td>
+          <input type="text" name="precio">
+        </td>
+        <td>
+          <button class="aprob">Aprobar</button>
+        </td>
+      </tr>
       {{#each anuncios}}
       <tr>
         <td>{{this.nombre}}</td>
@@ -160,4 +174,17 @@
 </div>
 
 
+</template>
+
+<template name="AdministradorContratos">
+  <br>
+  <div class="container">
+    <br>
+    <h1>Terminos y Condiciones</h1>
+    <textarea name="terminos" rows="8" cols="80"></textarea>
+    <butto type="button" class="gt">Guardar terminos</butto>
+    <h1>Políticas de privacidad</h1>
+    <textarea name="politicas" rows="8" cols="80"></textarea>
+    <button class="gp" type="button">Guardar Políticas</button>
+  </div>
 </template>

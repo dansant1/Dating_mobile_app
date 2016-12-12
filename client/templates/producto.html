@@ -1,6 +1,6 @@
-<template name="PerfilAnunciante">
+<template name="producto">
 
-  {{#with anunciante}}
+  {{#with producto}}
   <div class="perfil">
     <div class="swiper-container">
     <!-- Additional required wrapper -->
@@ -22,7 +22,7 @@
     <!-- If we need scrollbar -->
     <div class="swiper-scrollbar"></div>
 </div>
-    <span class="s-anunciante"><i class="fa fa-map-marker" aria-hidden="true"></i> {{this.ubicacion}}</span>
+    <span class="s-anunciante"><i class="fa fa-shopping-basket" aria-hidden="true"></i> {{this.titulo}}</span>
     <div class="calificacion">
       <button class="1">
         <i class="fa fa-star" aria-hidden="true"></i>
@@ -58,8 +58,7 @@
 
     <p>{{this.calificacion}}</p>
 
-    <input type="button" value="Llamar" class="contacto llamar">
-    <input type="button" value="Ofertar" class="contacto ofertar">
+    <input type="button" value="Comprar" class="contacto">
 
   </div>
 
@@ -68,29 +67,14 @@
 
       <tbody>
         <tr>
-          <td>Género</td>
-          <td>{{this.genero}}</td>
+          <td>Descripción</td>
+          <td>{{this.descripcion}}</td>
 
         </tr>
         <tr>
 
-          <td>Contextura</td>
-          <td>{{this.contextura}}</td>
-        </tr>
-        <tr>
-
-          <td>Color de Piel</td>
-          <td>{{this.piel}}</td>
-        </tr>
-        <tr>
-
-          <td>Color de Cabello</td>
-          <td>{{this.cabello}}</td>
-        </tr>
-        <tr>
-
-          <td>Edad</td>
-          <td>{{this.edad}}</td>
+          <td>Precio</td>
+          <td>{{this.precio}}</td>
         </tr>
        </tbody>
     </table>
@@ -108,18 +92,17 @@
       </div>
       {{/each}}
 
-
     </div>
   </div>
   {{/with}}
 </template>
 
-<template name="calificar">
+<template name="calificarProducto">
   <div class="modal fade">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-body">
-                    <input type="text" class="box-comentario" name="comentario" placeholder="¿Por que calificaste con ese puntaje?">
+                    <input type="text" style="color: black" class="box-comentario" name="comentario" placeholder="¿Por que calificaste con ese puntaje?">
                     <button type="button" class="comentar">Comentar</button>
                 </div>
             </div>
@@ -127,12 +110,12 @@
     </div>
 </template>
 
-<template name="contactoAnunciante">
+<template name="contactar">
   <div class="modal fade">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-body">
-                    <h4>Contactate a 985623447</h4>
+                    <h4>Comunicate a : daniel@grupoddv.com o al telefono: 985698624</h4>
                 </div>
             </div>
         </div>

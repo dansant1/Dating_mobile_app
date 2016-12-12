@@ -8,12 +8,12 @@ _.each(users, function (user) {
 
   id = Accounts.createUser({
     email: user.email,
-    password: "20dejunio",
+    password: "miguel24",
     profile: { name: user.name }
   });
 
   if (user.roles.length > 0) {
-    
+
     Roles.addUsersToRoles(id, user.roles, 'default-group');
   }
 

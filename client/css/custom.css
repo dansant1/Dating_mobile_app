@@ -11,6 +11,19 @@ textarea:focus, input:focus{
     outline: none;
 }
 
+.nombre {
+  width: 80px;
+  padding: 20px;
+  text-align: center;
+  color: white;
+  font-size: 25px;
+  display: block;
+  margin: 20px auto;
+  height: 80px;
+  border-radius: 70%;
+  background-color: #9b59b6;
+}
+
 .marketing {
   width: 95%;
   margin: 10px auto;
@@ -19,7 +32,7 @@ textarea:focus, input:focus{
 
 .marketing img {
   text-align: center;
-  width: 90%;
+  width: 280px;
   height: 225px;
 }
 
@@ -530,12 +543,12 @@ table th.last {
 }
 
 .md-select {
-  
+
   -webkit-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
   display: block;
   margin: 5px auto;
-  
+
   padding-bottom: 2px;
   text-align: center;
   width: 45%;
@@ -603,4 +616,3 @@ table th.last {
   -webkit-transition: all 0.2s ease;
   transition: all 0.2s ease;
 }
-

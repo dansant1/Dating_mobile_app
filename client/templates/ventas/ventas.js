@@ -103,7 +103,7 @@
         });
     }
 // Fin de la funcion para convertir string con tildes a string normal
-function subirFoto (event, template, anuncianteId) {
+function subirFoto (event, template, tiendaId) {
 
     let archivo = document.getElementById("foto");
 
@@ -126,14 +126,13 @@ function subirFoto (event, template, anuncianteId) {
             doc.name(nuevoNombre);
 
             doc.metadata = {
-              anuncianteId: anuncianteId,
+              tiendaId: tiendaId,
             };
 
-            Fotos.insert(doc, function (err, fileObj) {
+            FotosProductos.insert(doc, function (err, fileObj) {
               if (err) {
                 console.log(err);
               } else {
-
                 console.log('Foto subida');
               }
             });
@@ -142,167 +141,52 @@ function subirFoto (event, template, anuncianteId) {
     }
 } // Fin de la funcion subirFoto
 
-Template.Administrador.onCreated( function () {
-  var self = this;
-
-  self.autorun(function () {
-    self.subscribe('postulantes');
-  });
-});
-
-Template.AdministradorAnuncios.onCreated(function () {
-  var self = this;
-
-  self.autorun(function () {
-    self.subscribe('anunciantes');
-  });
-});
-
-Template.AdministradorAnuncios.helpers({
-  anuncios: function () {
-      return Anunciantes.find({anuncia: true});
-  }
-});
-
-Template.Administrador.helpers({
-  postulantes: function () {
-    return Anunciantes.find({anuncia: false});
-  }
-});
-
-Template.Administrador.events({
-  'click .aprobar': function () {
-    Meteor.call('aprobar', this._id, function (error) {
-      if (error) {
-        console.log('Hubo un error');
-      } else {
-        console.log('aprobado');
-      }
-    });
-  },
-  'change #foto': function (event, template) {
-    subirFoto(event, template, this._id);
-  },
-  'keyup .precio': function (event, template) {
-
-    if (event.which === 13) {
-      let precio = template.find(`[name= ${this._id}]`).value;
-      Meteor.call('ponerPrecio', precio, this._id, function (err) {
-        if (err) {
-          console.log(err);
-        } else {
-          console.log('salio bien');
-        }
-      });
-    }
-  }
-});
-
-Template.menu.events({
-  'click .salir': function () {
-    Meteor.logout();
-  }
-});
-
-Template.AdministradorAnuncios.events({
-  'click .aprobar': function () {
-    Meteor.call('desaprobar', this._id, function (error) {
-      if (error) {
-        console.log('Hubo un error');
-      } else {
-        console.log('aprobado');
-      }
-    });
-  },
-  'click .aprob': function (event, template) {
-    let datos = {
-      nombre: template.find("[name='nombre']").value,
-      telefono: template.find("[name='telefono']").value,
-      piel: template.find("[name='piel']").value,
-      intereses: template.find("[name='intereses']").value,
-      genero: template.find("[name='genero']").value,
-      edad: template.find("[name='edad']").value,
-      cabello: template.find("[name='cabello']").value,
-      contextura: template.find("[name='contextura']").value,
-      ubicacion: template.find("[name='ubicacion']").value,
-      precio: template.find("[name='precio']").value,
-    }
-
-    Meteor.call('agregarAnunciante', datos, function (err) {
-        if (err) {
-          console.log(err);
-        }
-    });
-  },
-  'change #foto': function (event, template) {
-    subirFoto(event, template, this._id);
-  },
-  'keyup .precio': function (event, template) {
-
-    if (event.which === 13) {
-      let precio = template.find(`[name= ${this._id}]`).value;
-      Meteor.call('ponerPrecio', precio, this._id, function (err) {
-        if (err) {
-          console.log(err);
-        } else {
-          console.log('salio bien');
-        }
-      });
-    }
-  },
+Template.Ventas.events({
   'submit form': function (event, template) {
-
     event.preventDefault();
 
+    let email = template.find("[name='email']").value;
+    let password = template.find("[name='password']").value;
+
+    if (email !== "" && password !== "") {
+      Meteor.loginWithPassword(email, password, function (error) {
+        if (error) {
+          console.log('Hubo un error');
+        }
+      });
+    }
+  },
+  'click #guardar': function (event, template) {
     let datos = {
-      email: template.find("[name='email']").value,
-      password: template.find("[name='password']").value
+      titulo: template.find("[name='titulo']").value,
+      descripcion: template.find("[name='descripcion']").value,
+      precio: template.find("[name='precio']").value
     }
 
-    let tienda = template.find("[name='tienda']").value;
-
-    Meteor.call('crearVendedor', datos, tienda, function (err) {
+    Meteor.call('crearProducto', datos, function (err) {
       if (err) {
         console.log(err);
       } else {
-        console.log('funciono!');
-      }
-    });
-  }
-});
-
-Template.Usuarios.onCreated(function () {
-  var self = this;
-  self.autorun(function () {
-    self.subscribe('users');
-  });
-});
-
-Template.Usuarios.helpers({
-  users: function () {
-    return Meteor.users.find({});
-  }
-});
-
-Template.AdministradorContratos.events({
-  'click .gt': function (event, template) {
-    let termino = template.find("[name='terminos']").value
-    Meteor.call('agregarTerminos', termino, function (err) {
-      if (err) {
-        console.log(err);
-      } else {
-        console.log('funco!');
+        console.log('funco!!');
       }
     });
   },
-  'click .gp': function (event, template) {
-    let termino = template.find("[name='politicas']").value
-    Meteor.call('agregarPoliticas', termino, function (err) {
-      if (err) {
-        console.log(err);
-      } else {
-        console.log('funco!');
-      }
-    });
+  'change #foto': function (event, template) {
+    subirFoto(event, template, this._id);
+  },
+});
+
+Template.adminVentas.onCreated(function () {
+  var self = this;
+
+  self.autorun(function () {
+      self.subscribe('productosxtienda');
+  });
+
+});
+
+Template.adminVentas.helpers({
+  productos: function () {
+    return Productos.find();
   }
 });

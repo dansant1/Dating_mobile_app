@@ -75,8 +75,13 @@ Favoritos.attachSchema(Schemas.Favoritos);
 
 Contactos = new Mongo.Collection('contactos');
 
+Politicas = new Mongo.Collection('politicas');
+
+Terminos = new Mongo.Collection('terminos');
+
 Comentarios = new Mongo.Collection('comentarios');
 
+Tiendas = new Mongo.Collection('tiendas');
 
 let docStore = new FS.Store.GridFS("fotos", {
   maxTries: 3
@@ -103,3 +108,35 @@ Fotos.allow({
     return true;
   }
 });
+
+
+// Fotos de productos
+let docStore2 = new FS.Store.GridFS("fotosp", {
+  maxTries: 3
+});
+
+
+// Creamos la DB para Fotos
+FotosProductos = new FS.Collection("fotosp", {
+  stores: [docStore2]
+});
+
+// agregamos los permisos allow/deny
+FotosProductos.allow({
+  insert: function () {
+    return true;
+  },
+  update: function () {
+    return true;
+  },
+  remove: function () {
+    return true;
+  },
+  download: function () {
+    return true;
+  }
+});
+
+ComentariosProductos = new Mongo.Collection('comentariosproductos');
+
+Productos = new Mongo.Collection('productos');

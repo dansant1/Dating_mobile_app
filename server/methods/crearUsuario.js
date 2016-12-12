@@ -1,14 +1,5 @@
 Meteor.methods({
   crearUsuario: function (datos)  {
-		/*check(datos, {
-			email: String,
-			password: String,
-      username: String
-      profile: {
-				nombre: String,
-
-			}
-		}); */
 
 		let usuarioId = Accounts.createUser(datos);
 
@@ -26,7 +17,7 @@ Meteor.methods({
 		}
 
 	},
-  crearAdministrador: function () {
+  crearAdministrador: function (datos) {
 
     let usuarioId = Accounts.createUser(datos);
 		if (usuarioId) {
@@ -36,5 +27,34 @@ Meteor.methods({
 		} else {
 			return;
 		}
+  },
+  crearVendedor: function (datos, tienda) {
+
+    let usuarioId = Accounts.createUser(datos);
+
+    let tiendaId = Tiendas.insert({
+      nombre: tienda,
+      usuarioId: usuarioId
+    });
+
+		if (usuarioId) {
+			Roles.addUsersToRoles(usuarioId, ['vendedor'], 'app');
+		} else {
+			return;
+		}
+  },
+  crearProducto: function (datos) {
+    if (this.userId) {
+      let tiendaId = Tiendas.findOne({usuarioId: this.userId})._id;
+      let producto = Productos.insert({
+        tiendaId: tiendaId,
+        titulo: datos.titulo,
+        descripcion: datos.descripcion,
+        precio: datos.precio,
+        calificacion: 0
+      });
+    } else {
+      return;
+    }
   }
 });
