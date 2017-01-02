@@ -10,13 +10,13 @@ Template.login.events({
     if (datos.email !== "" && datos.password !== "") {
       Meteor.loginWithPassword(datos.email, datos.password, function (error) {
         if (error) {
-          console.log('Hubo un error');
+          alert(error);
         } else {
           FlowRouter.go('/anuncios');
         }
       });
     } else {
-      console.log('Hubo un error :p' );
+      alert('Completa los datos' );
     }
 
 

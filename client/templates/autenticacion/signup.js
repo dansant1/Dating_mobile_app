@@ -18,17 +18,23 @@ Template.signup.events({
       if (datos.email !== "" && datos.password !== "" && datos.profile.edad >= 18 && datos.profile.edad <= 70) {
         Meteor.call('crearUsuario', datos, function (error, result) {
             if (error) {
-              console.log('Hubo un error');
+              alert('Hubo un error');
             } else {
               Meteor.loginWithPassword(datos.email, datos.password, function (error) {
                 if (error) {
-                  console.log('Hubo un error');
+                  alert(error);
                 } else {
                   FlowRouter.go('/anuncios');
                 }
               });
             }
         });
+      } else {
+        if (datos.profile.edad < 18) {
+          alert('No puedes registrarter, eres menor de 18 años');
+        } else {
+          alert('completa los datos');
+        }
       }
   }
 });
