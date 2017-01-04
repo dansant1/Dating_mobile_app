@@ -16,10 +16,26 @@ Meteor.publish('tiendas', function () {
   }
 });
 
-
-Meteor.publish('productosxtienda', function () {
+Meteor.publish('productos', function (tiendaId) {
   if (this.userId) {
-    let tiendaId = Tiendas.findOne({usuarioId: this.userId})._id;
+    return Productos.find({tiendaId: tiendaId});
+  } else {
+    this.stop();
+    return;
+  }
+});
+
+Meteor.publish('todosproductos', function () {
+  if (this.userId) {
+    return Productos.find({});
+  } else {
+    this.stop();
+    return;
+  }
+});
+
+Meteor.publish('productosxtienda', function (tiendaId) {
+  if (this.userId) {
     return Productos.find({tiendaId: tiendaId});
   } else {
     this.stop();

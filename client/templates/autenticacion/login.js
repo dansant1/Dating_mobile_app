@@ -6,7 +6,7 @@ Template.login.events({
       email: template.find("[name='usuario']").value,
       password: template.find("[name='password']").value
     }
-
+    alert(datos);
     if (datos.email !== "" && datos.password !== "") {
       Meteor.loginWithPassword(datos.email, datos.password, function (error) {
         if (error) {
@@ -16,7 +16,9 @@ Template.login.events({
         }
       });
     } else {
+
       alert('Completa los datos' );
+    
     }
 
 

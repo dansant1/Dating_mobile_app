@@ -1,7 +1,7 @@
 Template.productos.onCreated( function () {
   var self = this;
   self.autorun(function () {
-    self.subscribe('productos');
+    self.subscribe('todosproductos');
     self.subscribe('fotosp');
     self.subscribe('todosComentariosProductos');
   });
@@ -25,6 +25,23 @@ Template.productos.helpers({
   }
 });
 
+Template.tienda.onCreated(function () {
+  var self = this;
+
+  self.autorun(function () {
+    self.subscribe('tiendas');
+    self.subscribe('productos',  FlowRouter.getParam('tiendaId'));
+  });
+});
+
+Template.tienda.helpers({
+  nombre: function () {
+    return Tiendas.findOne({_id: FlowRouter.getParam('tiendaId')}).nombre
+  },
+  productos: function () {
+    return Productos.find();
+  }
+});
 
 Template.tiendas.onCreated( function () {
   var self = this;

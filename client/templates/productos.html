@@ -1,15 +1,10 @@
 <template name="productos">
   <div class="anuncios">
-  <button type="button" style="display: block; margin-bottom: 15px;" class="btn btn-info" data-toggle="collapse" data-target="#demo"><i class="fa fa-filter" aria-hidden="true"></i> Filtros</button>
-  <div id="demo" class="collapse" >
-  <br>
-
-  </div>
 
 
   {{#each productos}}
 
-    <div class="anuncio">
+    <div class="anuncio" style="height: 186px;">
       <div class="swiper-container" style="height: 97px;">
       <!-- Additional required wrapper -->
       <div class="swiper-wrapper">
@@ -36,7 +31,7 @@
       <span><i class="fa fa-star" aria-hidden="true"></i> {{this.descripcion}}</span>
       <div class="foot">
 
-        <span style="width: 55px;"><i class="fa fa-credit-card-alt" aria-hidden="true"></i> {{this.precio}}</span>
+        <span style="width: 60px;"><i class="fa fa-credit-card-alt" aria-hidden="true"></i> S/{{this.precio}}</span>
         <span><i class="fa fa-comment" aria-hidden="true"></i> {{comentarios}}</span>
       </div>
     </div>
@@ -46,19 +41,34 @@
 
 <template name="tiendas">
   <div class="anuncios">
-  <div id="demo" class="collapse" >
-  <br>
-
-  </div>
-
-
   {{#each tiendas}}
 
-    <div class="anuncio" style="padding-top: 20px;">
-    <span class="nombre" style="color: white;">T</span>
+    <div class="anuncio" style="padding-top: 20px; height: 210px">
+    <a class="nombre" href="/tiendas/{{this._id}}" style="color: white;">T</a>
       <span><i class="fa fa-shopping-basket" aria-hidden="true"></i> {{this.nombre}}</span>
       <div class="foot">
         <span><i class="fa fa-comment" aria-hidden="true"></i> {{productos this._id}}</span>
+      </div>
+    </div>
+  {{/each}}
+  </div>
+</template>
+
+<template name="tienda">
+  <div class="menu2">
+    <a href="/productos" style="color: white"><i class="fa fa-chevron-left" aria-hidden="true"></i>
+    <span style="color: white">Tienda {{nombre}}</span></a>
+  </div>
+   <div class="anuncios">
+  {{#each productos}}
+
+    <div class="anuncio" style="padding-top: 20px; height: 210px">
+    <a class="nombre" href="/productos/{{this._id}}" style="color: white;">
+      
+    </a>
+      <span><i class="fa fa-shopping-basket" aria-hidden="true"></i> {{this.nombre}}</span>
+      <div class="foot">
+        <span>S/ {{this.precio}}</span>
       </div>
     </div>
   {{/each}}

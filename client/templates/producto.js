@@ -5,7 +5,7 @@ Template.producto.onCreated(function () {
     self.subscribe('fotosp');
     let productoId = FlowRouter.getParam('productoId')
    self.subscribe('ComentariosProductos', productoId);
-
+   self.subscribe('tiendas');
   });
 });
 
@@ -179,6 +179,9 @@ Template.producto.helpers({
   },
   comentarios: function () {
     return ComentariosProductos.find({}, {sort: {createdAt: -1}});
+  },
+  telefonoc: function (tiendaId) {
+    return Tiendas.findOne({_id: tiendaId}).telefono;
   }
 });
 

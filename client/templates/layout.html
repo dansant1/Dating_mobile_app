@@ -3,9 +3,12 @@
   <div class="menu">
     <i class="fa fa-bars abrir" aria-hidden="true"></i>
     <div class="lista">
-
-      <a href="/contactos"  style="width: 105px;">Contactos</a>
-      <a href="/anuncios" class="seleccionado">Todos</a>
+        {{#if isInRole 'anunciante' 'app'}}
+          <a href="/ofertas2"  style="width: 105px;">Ofertas</a>
+        {{else}}
+          <a href="/contactos"  style="width: 105px;">Contactos</a>
+        {{/if}}
+      <a href="/anuncios" >Todos</a>
       <a href="/favoritos"  style="width: 95px;">Favoritos</a>
     </div>
   </div>
@@ -17,11 +20,12 @@
     <br>
     <br>
     <div class="sidebar-lista">
-      <button class="anunciar"><a href="/cuenta">Mi cuenta</a></button>
+      
       <button class="anunciar"><a href="/anuncios">Anuncios</a></button>
-      <button class="anunciar"><a href="/productos">Tiendas</a></button>
+      <button class="anunciar"><a href="/ofertas">Mis ofertas</a></button>
+      <button class="anunciar t"><a href="/productos">Tiendas</a></button>
       <button class="anunciar panico"><a>Pánico</a></button>
-      <button class="anunciar"><a href="/anunciar">Anunciar</a></button>
+      <button class="anunciar a"><a href="/anunciar">Anunciar</a></button>
       <button class="anunciar logout"><a href="/#">Logout</a></button>
     </div>
   </div>
@@ -29,5 +33,30 @@
   </div>
 
   {{> Template.dynamic template=contenido}}
+
+  <div class="banners" style="position: fixed; bottom: 0px;">
+     <div class="swiper-container" style="height: 97px; width: 100%;">
+      <!-- Additional required wrapper -->
+      <div class="swiper-wrapper" style="width: 100%; border-radius: 0;">
+          <!-- Slides -->
+          {{#each banners}}
+          <div class="swiper-slide" style="margin-bottom: 0;">
+            {{#if isImage}}
+            <a href="{{this.metadata.url}}" target="_blank"><img src="{{this.url}}" alt="{{this.url}}" style="width: 100%; height: 70px; border-radius: 0; margin-bottom: : 0px;"></a>
+            {{/if}}
+          </div>
+          {{/each}}
+      </div>
+      <!-- If we need pagination -->
+      <div class="swiper-pagination"></div>
+
+      <!-- If we need navigation buttons -->
+      <!--<div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div> -->
+
+      <!-- If we need scrollbar -->
+      <div class="swiper-scrollbar"></div>
+      </div>
+  </div>
   {{/if}}
 </template>

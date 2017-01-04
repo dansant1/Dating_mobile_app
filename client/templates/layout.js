@@ -15,7 +15,7 @@ navigator.geolocation.getCurrentPosition(function (position) {
           let number = 982200441;
           //let number = Meteor.user().profile.telefonoDeConocido;
           let ubicacion = results[0].formatted_address;
-          let message = '¡Necesito ayuda!, estoy en ' + ubicacion;
+          let message = '¡Necesito ayuda!, estoy en ' + ubicacion + " Mis coordenadas son: " + latlng.lat + ", " + latlng.lng;
 
           if (message) {
             
@@ -54,6 +54,14 @@ navigator.geolocation.getCurrentPosition(function (position) {
  
 }
 
+Template.layout.onCreated(function () {
+  var self = this;
+
+  self.autorun(function () {
+    self.subscribe('bannersPub');
+  });
+});
+
 Template.layout.onRendered(function () {
   GoogleMaps.load({ v: '3', key: 'AIzaSyAVctAqnGHneN7aqeg7o5NTQTU-378KqEM', libraries: 'geometry,places' });
   Session.set('abrir', '');
@@ -62,6 +70,9 @@ Template.layout.onRendered(function () {
 Template.layout.helpers({
   mostrar: function () {
     return Session.get('abrir');
+  },
+  banners: function () {
+    return BannersPub.find();
   }
 });
 
@@ -81,37 +92,19 @@ Template.layout.events({
     }
   },
   'click .panico': function () {
-    //let number = 982200441;
-    //let message;
-    if (GoogleMaps.loaded()) {
-    
+    if (GoogleMaps.loaded()) {   
+      //alert('holas');
       let ubicacion = geocodeLatLng();
-
-     /* if (ubicacion) {
-        message = '¡Necesito ayuda!, estoy en ' + ubicacion;
-      } else {
-        message = '¡Necesito ayuda!';
-      }*/
+      Session.set('abrir', '');
     }
-    
-    
-
-    /*console.log("número: " + number + ", mensaje: " + message);
-
-    //CONFIGURACIÓN
-    var options = {
-        replaceLineBreaks: false,
-        android: {
-            intent: 'INTENT'
-        }
-    };
-
-    var success = function () { //alert('Mensaje enviado exitosamente'); 
-    };
-    var error = function (e) { alert('Mensaje fallido:' + e); };
-    sms.send(number, message, options, success, error);*/
   },
   'click .logout': function  () {
     Meteor.logout();
+  },
+  'click .a': function () {
+    Session.set('abrir', '');
+  },
+  'click .t':function () {
+    Session.set('abrir', '');
   }
 });

@@ -43,24 +43,38 @@ Meteor.methods({
     }
 
   },
-  agregarAnunciante: function (data) {
+  agregarAnunciante: function (data, password) {
 
     if (this.userId) {
+      
+        let usuarioId = Accounts.createUser({
+          email: data.email,
+          password: password
+        });
 
-      //let anuncia = Anunciantes.find({userId: this.userId}).fetch().length;
-
-      //if (anuncia === 0) {
-
-        data.userId = '';
+        data.userId = usuarioId;
         data.calificacion = 0;
         data.anuncia = true;
-        data.userId = '12x';
-        //datos.precio = data.precio;
+        data.destacado = false;
+        
+        let anuncianteId;
 
-        Anunciantes.insert(data);
-      //} else {
-        //return;
-      //}
+        if (usuarioId) {
+          anuncianteId = Anunciantes.insert(data);
+          Roles.addUsersToRoles(usuarioId, ['anunciante'], 'app');
+
+          Meteor.users.update({_id: usuarioId}, {
+            $set: {
+              'profile.anuncianteId': anuncianteId
+            }
+          });
+        }
+
+        
+
+        return {
+          id: anuncianteId
+        }
 
     } else {
       return;
@@ -156,12 +170,68 @@ Meteor.methods({
         Contactos.insert({
           de: this.userId,
           anuncianteId: anuncianteId,
-          createdAt: new Date(),
-          aprobado: false
+          createdAt: new Date()
         });
       }
 
 
+    }
+  },
+  favorito: function (anuncianteId) {
+    if (this.userId) {
+
+      if (Favoritos.find({anuncianteId: anuncianteId, de: this.userId}).fetch().length >= 1 ) {
+        return;
+      } else {
+        Favoritos.insert({
+          de: this.userId,
+          anuncianteId: anuncianteId,
+          createdAt: new Date()
+        });
+      }
+
+
+    }
+  },
+  ofertar: function (anuncianteId, oferta) {
+    Ofertas.insert({
+      anuncianteId: anuncianteId,
+      userId: this.userId,
+      oferta: oferta,
+      aprobado: false,
+      createdAt: new Date()
+    });
+  },
+  aprobarOferta: function (id) {
+    Ofertas.update({_id: id}, {
+      $set: {
+        aprobado: true
+      }
+    });
+  },
+  desaprobarOferta: function (id) {
+    Ofertas.update({_id: id}, {
+      $set: {
+        aprobado: false
+      }
+    });
+  },
+  agregarProductos: function (datos) {
+    if (this.userId) {
+
+      let productoId = Productos.insert({
+        nombre: datos.nombre,
+        descripcion: datos.descripcion,
+        precio: datos.precio,
+        tiendaId: Meteor.users.findOne({_id: this.userId}).profile.tiendaId,
+        calificacion: 0
+      });
+
+      return {
+        id: productoId
+      }
+    } else {
+      return;
     }
   }
 });

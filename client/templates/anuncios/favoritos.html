@@ -1,25 +1,35 @@
 <template name="Favoritos">
-  <div class="anuncios">
+  {{#each favoritos}}
 
-    <div class="anuncio">
-      <img src="/principal.jpg">
-      <span><i class="fa fa-map-marker" aria-hidden="true"></i> Callao</span>
-      <div class="foot">
-        <span><i class="fa fa-star" aria-hidden="true"></i> 20</span>
-        <span style="width: 55px;"><i class="fa fa-credit-card-alt" aria-hidden="true"></i> 400</span>
-        <span><i class="fa fa-comment" aria-hidden="true"></i> 10</span>
+    <div class="anuncio" style="margin: 20px auto; height: 175px; padding-top: 5px;">
+      <div class="swiper-container" style="height: 97px; margin-bottom: 5px;">
+      <!-- Additional required wrapper -->
+      <div class="swiper-wrapper">
+          <!-- Slides -->
+          {{#each fotosDeContacto}}
+          <div class="swiper-slide">
+            {{#if isImage}}
+            <img src="{{this.url}}" alt="{{this.url}}" style="width: 95px; height: 95px; margin-top: 2px;">
+            {{/if}}
+          </div>
+          {{/each}}
+      </div>
+      <!-- If we need pagination -->
+      <div class="swiper-pagination"></div>
+
+      <!-- If we need navigation buttons -->
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div>
+
+      <!-- If we need scrollbar -->
+      <div class="swiper-scrollbar"></div>
+      </div>
+
+      <span ><i class="fa fa-user" aria-hidden="true"></i> {{nombreDeContacto this.anuncianteId}}</span>
+      <div class="foot" style="padding-top: 10px;">
+        <a href="tel:+{{telefono this.anuncianteId}}" class="contacto" style="width: 100px; height: 20px; font-size: 12px; color: white; margin-top: 0px;">Llamar</a>
       </div>
     </div>
-
-    <div class="anuncio">
-      <img src="/principal.jpg">
-      <span><i class="fa fa-map-marker" aria-hidden="true"></i> Callao</span>
-      <div class="foot">
-        <span><i class="fa fa-star" aria-hidden="true"></i> 20</span>
-        <span style="width: 55px;"><i class="fa fa-credit-card-alt" aria-hidden="true"></i> 400</span>
-        <span><i class="fa fa-comment" aria-hidden="true"></i> 10</span>
-      </div>
-    </div>
-</div>
+  {{/each}}
 
 </template>

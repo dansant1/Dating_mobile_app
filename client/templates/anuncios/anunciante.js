@@ -16,6 +16,7 @@ Template.PerfilAnunciante.onRendered(function () {
     // Optional parameters
     direction: 'horizontal',
     loop: true,
+    autoplay: 10000,
 
     // If we need pagination
     pagination: '.swiper-pagination',
@@ -26,7 +27,7 @@ Template.PerfilAnunciante.onRendered(function () {
 
     // And if we need scrollbar
     scrollbar: '.swiper-scrollbar',
-    watchSlidesProgress: false
+    watchSlidesProgress: true
   });
 
   $('table tr').each(function(){  $(this).find('th').first().addClass('first');  $(this).find('th').last().addClass('last');  $(this).find('td').first().addClass('first');
@@ -34,10 +35,7 @@ Template.PerfilAnunciante.onRendered(function () {
 });
 
 Template.PerfilAnunciante.events({
-  'click .llamar'() {
-    Modal.show('contactoAnunciante');
-    //CallNumber.callNumber(onSuccess, onError, numero, false);
-  },
+  
   'click .panico'() {
 
         let number = document.getElementById('numberTxt').value;
@@ -164,6 +162,34 @@ Template.PerfilAnunciante.events({
         console.log(error);
       } else {
         console.log('Listo');
+      }
+    });
+  },
+  'click .ofertar': function () {
+    Modal.show('ofertar');
+  },
+  'click .favorito': function () {
+    let anuncianteId = FlowRouter.getParam('anuncianteId')
+    Meteor.call('favorito', anuncianteId, function (error) {
+      if (error) {
+        console.log(error);
+      } else {
+        alert('Agregado a favoritos');
+      }
+    });
+  }
+});
+
+Template.ofertar.events({
+  'click .comentar': function (e, t) {
+    let anuncianteId = FlowRouter.getParam('anuncianteId');
+    let oferta = t.find("[name='oferta']").value;
+    Meteor.call('ofertar', anuncianteId, oferta, function (err) {
+      if (err) {
+        alert('hubo un error');
+      } else {
+        Modal.hide('ofertar');
+        alert('Ofertaste, muy pronto recibiras noticias');
       }
     });
   }

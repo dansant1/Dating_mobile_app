@@ -56,3 +56,13 @@ Meteor.publish('contactos', function () {
 
   }
 });
+
+Meteor.publish('ofertas', function () {
+  if (this.userId) {
+    return Ofertas.find({});
+  } else {
+    this.stop();
+    return;
+
+  }
+});

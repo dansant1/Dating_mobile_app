@@ -4,7 +4,7 @@ html , body {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  background: black;
+  /*background: black;*/
 }
 
 textarea:focus, input:focus{
@@ -290,6 +290,7 @@ a:hover {
   width: 80%;
   background-color: white;
   color: #8e44ad;
+  text-align: center;
   height: 65px;
   margin: 10px auto;
   box-shadow: 0px 4px 5px -3px rgba(204,200,204,0.72);
@@ -297,6 +298,7 @@ a:hover {
   border-radius: 35px;
   font-family: 'Raleway', sans-serif;
   font-size: 23px;
+  padding-top: 20px;
 }
 
 .contacto {
@@ -519,6 +521,29 @@ table th.last {
   border: none;
   color: #fff;
   margin-top: -10px;
+}
+
+.menu2{
+  width: 100%;
+  color: white;
+  padding: 15px;
+  height: 50px;
+ background: #834d9b; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #834d9b , #d04ed6); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #834d9b , #d04ed6); 
+}
+
+.box-comentario::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: rgba(127, 140, 141,1.0);
+}
+.box-comentario::-moz-placeholder { /* Firefox 19+ */
+  color: rgba(127, 140, 141,1.0);
+}
+.box-comentario:-ms-input-placeholder { /* IE 10+ */
+  color: rgba(127, 140, 141,1.0);
+}
+.box-comentario:-moz-placeholder { /* Firefox 18- */
+  color: rgba(127, 140, 141,1.0);
 }
 
 .comentar {

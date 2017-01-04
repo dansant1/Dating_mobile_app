@@ -1,7 +1,7 @@
 Template.Contactos.onCreated(function () {
   var self = this;
   self.autorun(function () {
-    self.subscribe('contactos');
+    self.subscribe('contactos2');
     self.subscribe('anunciantes');
     self.subscribe('fotos');
   });
@@ -9,13 +9,16 @@ Template.Contactos.onCreated(function () {
 
 Template.Contactos.helpers({
   contactos() {
-    return Contactos.find({ userId: Meteor.userId() });
+    return Contactos.find({ de: Meteor.userId() });
   },
   fotosDeContacto(anuncianteId) {
-    return Fotos.find({anuncianteId: anuncianteId});
+    return Fotos.find({'metadata.anuncianteId': anuncianteId});
   },
   nombreDeContacto(anuncianteId) {
     return Anunciantes.findOne({_id: anuncianteId}).nombre;
+  },
+  telefono: function (anuncianteId) {
+    return Anunciantes.findOne({_id: anuncianteId}).telefono;
   },
   ContactoPendiente(anuncianteId) {
     let anuncioId = anuncianteId

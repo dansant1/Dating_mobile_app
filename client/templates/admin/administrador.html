@@ -1,6 +1,7 @@
 <template name="Administrador">
 
-
+  {{>AdministradorAnuncios}}
+  
 </template>
 
 <template name="menu">
@@ -17,10 +18,11 @@
       </div>
       <div id="navbar" class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
-          <li><a href="/admin">Solicitudes</a></li>
-          <li><a href="/admin/anuncios">Anuncios</a></li>
+          <li><a href="/admin">Anuncios</a></li>
+         
           <li><a href="/admin/usuarios">Usuarios</a></li>
-        <!--  <li><a href="/admin/reportes">Reportes</a></li> -->
+          <li><a href="/admin/publicidad">Publicidad</a></li>
+          <li><a href="/admin/reportes">Reportes</a></li> 
           <li><a href="/admin/contratos">Contratos</a></li>
 
         </ul>
@@ -36,10 +38,10 @@
 
 </template>
 
-<template name="AdministradorAnuncios">
-
+<template name="AgregarTienda">
   <div class="col-md-6">
-    <form style="display: block">
+    <h2>Agregar tienda</h2>
+    <form>
       <div class="form-group">
         <label for="email">Email</label>
         <input type="email" name="email" class="form-control" id="email">
@@ -49,98 +51,295 @@
         <input type="text" name="tienda" class="form-control" id="tienda">
       </div>
       <div class="form-group">
+        <label for="rubro">Rubro</label>
+          <select class="form-control" id="rubro">
+            <option>Sexshop</option>
+            <option>Ropa / lenceria </option>
+            <option>Articulos</option>
+            <option>Otros</option>
+          </select>
+      </div>
+      <div class="form-group">
+        <label for="telefonotienda">Teléfono</label>
+        <input type="text" name="telefonotienda" class="form-control" id="telefonotienda">
+      </div>
+      <div class="form-group">
+        <label for="horario">Horario de atención</label>
+        <input type="text" name="horario" class="form-control" id="horario">
+      </div>
+      <div class="form-group">
         <label for="pwd">Contraseña:</label>
         <input type="password" name="password" class="form-control" id="pwd">
       </div>
-      <button type="submit" class="btn btn-default">Agregar vendedor</button>
+      <button type="submit" class="btn btn-default">Agregar tienda</button>
     </form>
     <br>
 
   </div>
+</template>
+
+<template name="AdministradorAnuncios">
 
   <div class="container">
-  <h2>Anuncios</h2>
-  <p>Lista de anuncios aprobados</p>
-  <table class="table">
+  <div class="row">
+    <div class="col-md-6">
+    <h2>Agregar anunciante</h2>
+    <form>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" name="email" class="form-control" id="email">
+      </div>
+      <div class="form-group">
+        <label for="nombre">Nombre completo</label>
+        <input type="text" name="nombre" class="form-control" id="nombre">
+      </div>
+      <div class="form-group">
+        <label for="telefono">Téléfono</label>
+        <input type="text" name="telefono" class="form-control" id="telefono">
+      </div>
+      <div class="form-group">
+        <label for="piel">Color de piel</label>
+          <select class="form-control" id="piel">
+            <option>Blanca</option>
+            <option>Trigueña </option>
+            <option>Morena</option>
+            <option>Negra</option>
+          </select>
+      </div>
+       <div class="form-group">
+        <label for="intereses">Intereses</label>
+        <input type="text" name="intereses" class="form-control" id="intereses">
+      </div>
+       <div class="form-group">
+        <label for="genero">Género</label>
+          <select class="form-control" id="genero">
+            <option>Mujer</option>
+            <option>Hombre </option>
+          </select>
+      </div>
+      <div class="form-group">
+        <label for="edad">Edad</label>
+        <input type="number" name="edad" class="form-control" id="edad">
+      </div>
+       <div class="form-group">
+         <label for="cabello">Color de cabello</label>
+          <select class="form-control" id="cabello">
+            <option>Rubio</option>
+            <option>Castaño</option>
+            <option>Negro</option>
+          </select>
+      </div>
+      <div class="form-group">
+        <label for="contextura">Contextura</label>
+        <select class="form-control" id="contextura">
+            <option>Delgada</option>
+            <option>Fitness</option>
+            <option>Voluptuosa</option>
+            <option>Rellenita</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="provincia">Provincia</label>
+         <select class="form-control" id="provincia">
+            <option>lima</option>
+            <option>callao</option>
+            <option>Amazonas</option>
+            <option>Áncash</option>
+            <option>Apurímac</option>
+            <option>Arequipa</option>
+            <option>Ayacucho</option>
+            <option>Cajamarca</option>
+            <option>Huancavelica</option>
+            <option>Cusco</option>
+            <option>Huánuco</option>
+            <option>Ica</option>
+            <option>Junín</option>
+            <option>Lambayeque</option>
+            <option>Tacna</option>
+            <option>Piura</option>
+            <option>Puno</option>
+            <option>Loreto</option>
+            <option>Ucayali</option>
+            <option>Madre de Dios</option>
+            <option>Moquegua</option>
+            <option>Pasco</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="distrito">Distrito</label>
+        <select class="form-control" id="distrito">
+            <option>Ancón</option>
+            <option>Ate</option>
+            <option>Barranco</option>
+            <option>Breña</option>
+            <option>Carabayllo</option>
+            <option>Chaclacayo</option>
+            <option>Chorrillos</option>
+            <option>Cieneguilla</option>
+            <option>Comas</option>
+            <option>El Agustino</option>
+            <option>Independencia</option>
+            <option>Jesús María</option>
+            <option>La Molina</option>
+            <option>La Victoria</option>
+            <option>Lima</option>
+            <option>Lince</option>
+            <option>Los Olivos</option>
+            <option>San Juan de Lurigancho</option>
+            <option>Lurín</option>
+            <option>Magdalena del Mar</option>
+            <option>Miraflores</option>
+            <option>Pachacamac</option>
+            <option>Pucusana</option>
+            <option>Pueblo Libre</option>
+            <option>Puente Piedra</option>
+            <option>Rímac</option>
+            <option>San Borja </option>
+            <option>San Isidro</option>
+            <option>San Juan de Miraflores</option>
+            <option>San Martín de Porres</option>
+            <option>San Miguel</option>
+            <option>Santa Anita</option>
+            <option>Santiago de Surco</option>
+            <option>Santa Rosa</option>
+            <option>Surquillo</option>
+            <option>Villa El Salvador</option>
+            <option>Villa María del Triunfo</option>
+            <option>Otros</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="btn btn-default btn-file">
+          Subir foto <input type="file" id="foto" style="display: none;">
+        </label>
+      </div>
+      <div class="form-group">
+        <label for="precio">Precio</label>
+        <input type="number" name="precio" class="form-control" id="precio">
+      </div>
+      <div class="form-group">
+        <label for="pwd">Contraseña:</label>
+        <input type="password" name="password" class="form-control" id="pwd">
+      </div>
+      <button type="submit" class="btn btn-default">Agregar anunciante</button>
+    </form>
+    <br>
+
+  </div>
+    {{>AgregarTienda}}
+
+  </div>
+  <div class="row">
+     <h2>Anuncios</h2>
+      <p>Lista de anuncios aprobados</p>
+       <table style="border-bottom-color: white;" class="table">
     <thead>
       <tr>
-        <th>Nombre</th>
-        <th>Teléfono</th>
-        <th>Color de piel</th>
-        <th>Intereses</th>
-        <th>Género</th>
-        <th>Edad</th>
-        <th>Color de cabello</th>
-        <th>Medidas</th>
-        <th>Ubicación</th>
-        <th>Fotos</th>
-        <th>Precio</th>
-        <th>Aprobar</th>
+        <th style="padding: 0px; background: white; color: black; text-align: center;">Nombre</th>
+        <th style="padding: 0px; background: white; color: black; text-align: center;">Teléfono</th>
+        <!--<th>Color de piel</th>
+        <th>Intereses</th> -->
+        <th style="padding: 0px; background: white; color: black; text-align: center;">Género</th> 
+        <th style="padding: 0px; background: white; color: black; text-align: center;">Edad</th>
+        <!--<th>Color de cabello</th>
+        <th>Medidas</th> -->
+        <th style="padding: 0px; background: white; color: black; text-align: center;">Ubicación</th>
+        
+        <th style="padding: 0px; background: white; color: black; text-align: center;">Precio</th>
+        <th style="padding: 0px; background: white; color: black; text-align: center;">Destacar</th>
+        <th style="padding: 0px; background: white; color: black; text-align: center;">Aprobar</th>
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>
-          <input type="text" name="nombre">
-        </td>
-        <td>
-          <input type="text" name="telefono">
-        </td>
-        <td>
-          <input type="text" name="piel">
-        </td>
-        <td>
-          <input type="text" name="intereses">
-        </td>
-        <td>
-          <input type="text" name="genero">
-        </td>
-        <td>
-          <input type="text" name="edad">
-        </td>
-        <td>
-          <input type="text" name="cabello">
-        </td>
-        <td>
-          <input type="text" name="contextura">
-        </td>
-        <td>
-          <input type="text" name="ubicacion">
-        </td>
-        <td>
-          Foto
-        </td>
-        <td>
-          <input type="text" name="precio">
-        </td>
-        <td>
-          <button class="aprob">Aprobar</button>
-        </td>
-      </tr>
       {{#each anuncios}}
       <tr>
-        <td>{{this.nombre}}</td>
-        <td>{{this.telefono}}</td>
-        <td>{{this.piel}}</td>
-        <td>{{this.intereses}}</td>
-        <td>{{this.genero}}</td>
-        <td>{{this.edad}}</td>
-        <td>{{this.cabello}}</td>
-        <td>{{this.contextura}}</td>
-        <td>{{this.ubicacion}}</td>
-        <td>
-          <input type="file" id="foto">
-        </td>
-        <td>
+        <td style="padding: 5px">{{this.nombre}}</td>
+        <td style="padding: 5px">{{this.telefono}}</td>
+        
+        <td style="padding: 5px">{{this.genero}}</td>
+        <td style="padding: 5px">{{this.edad}}</td>
+        <td style="padding: 5px">{{this.ubicacion}}</td>
+        <td style="padding: 5px">
           <input type="text" class="precio" name="{{this._id}}" value="{{this.precio}}">
         </td>
-        <td>
-          <button class="aprobar">Desaprobar</button>
+         <td style="padding: 5px">
+          <input type="checkbox" name="destacado" id="destacado" {{checked}}>
+        </td>
+        <td style="padding: 5px">
+          <button class="desaprobar btn btn-default">Desaprobar</button>
         </td>
       </tr>
       {{/each}}
     </tbody>
-  </table>
+    </table>
+    <p>Lista de anuncios por aprobar</p>
+    <table style="border-bottom-color: white;" class="table">
+    <thead>
+      <tr>
+        <th style="padding: 0px; background: white; color: black; text-align: center;">Nombre</th>
+        <th style="padding: 0px; background: white; color: black; text-align: center;">Teléfono</th>
+        <!--<th>Color de piel</th>
+        <th>Intereses</th> -->
+        <th style="padding: 0px; background: white; color: black; text-align: center;">Género</th> 
+        <th style="padding: 0px; background: white; color: black; text-align: center;">Edad</th>
+        <!--<th>Color de cabello</th>
+        <th>Medidas</th> -->
+        <th style="padding: 0px; background: white; color: black; text-align: center;">Ubicación</th>
+        
+        <th style="padding: 0px; background: white; color: black; text-align: center;">Precio</th>
+        <th style="padding: 0px; background: white; color: black; text-align: center;">Aprobar</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each anunciosNoAprobados}}
+      <tr>
+        <td style="padding: 5px">{{this.nombre}}</td>
+        <td style="padding: 5px">{{this.telefono}}</td>
+        
+        <td style="padding: 5px">{{this.genero}}</td>
+        <td style="padding: 5px">{{this.edad}}</td>
+        <td style="padding: 5px">{{this.ubicacion}}</td>
+        <td style="padding: 5px">
+          <input type="text" class="precio" name="{{this._id}}" value="{{this.precio}}">
+        </td>
+        <td style="padding: 5px">
+          <button class="aprobar btn btn-default">Aprobar</button>
+        </td>
+      </tr>
+      {{/each}}
+    </tbody>
+    </table>
+  </div>
+
+  <div class="row">
+     <h2>Tiendas</h2>
+      <p>Lista de tiendas registradas</p>
+       <table style="border-bottom-color: white;" class="table">
+    <thead>
+      <tr>
+        <th style="padding: 0px; background: white; color: black; text-align: center;">Nombre</th>
+        <th style="padding: 0px; background: white; color: black; text-align: center;">Teléfono</th>
+        <th style="padding: 0px; background: white; color: black; text-align: center;">Rubro</th>
+        <th style="padding: 0px; background: white; color: black; text-align: center;">Horario de atención</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each tiendas}}
+      <tr>
+        <td style="padding: 5px">{{this.nombre}}</td>
+        <td style="padding: 5px">{{this.telefono}}</td>
+        <td style="padding: 5px">{{this.rubro}}</td>
+        <td style="padding: 5px">{{this.horario}}</td>
+     
+        
+       
+      </tr>
+      {{/each}}
+    </tbody>
+    </table>
+  </div>
+ 
+ 
 </div>
 </template>
 
@@ -179,12 +378,25 @@
 <template name="AdministradorContratos">
   <br>
   <div class="container">
-    <br>
-    <h1>Terminos y Condiciones</h1>
-    <textarea name="terminos" rows="8" cols="80"></textarea>
-    <butto type="button" class="gt">Guardar terminos</butto>
-    <h1>Políticas de privacidad</h1>
-    <textarea name="politicas" rows="8" cols="80"></textarea>
-    <button class="gp" type="button">Guardar Políticas</button>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+          <label for="comment">Terminos y condiciones</label>
+          <textarea class="form-control" rows="10" id="t" name="t"></textarea>
+          <br>
+          <button class="gt btn btn-default">Guardar</button>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+          <label for="comment">Politicas de privacidad</label>
+          <textarea class="form-control" rows="10" id="p" name="p"></textarea>
+          <br>
+          <button class="gp btn btn-default">Guardar</button>
+        </div>
+      </div>
+    </div>
   </div>
 </template>

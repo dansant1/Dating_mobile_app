@@ -1,6 +1,7 @@
 let Schemas = {};
 
 Anunciantes = new Mongo.Collection('anunciantes');
+Ofertas = new Mongo.Collection('ofertas');
 
 Schemas.Anunciantes = new SimpleSchema({
     nombre: {
@@ -59,19 +60,6 @@ Schemas.Anunciantes = new SimpleSchema({
 Anunciantes.attachSchema(Schemas.Anunciantes);
 
 Favoritos = new Mongo.Collection('favoritos');
-
-Schemas.Favoritos = new SimpleSchema({
-    de: {
-        type: String,
-        label: "De quien es la lista de favoritos",
-    },
-    para: {
-        type: String,
-        label: "El id del anunciante"
-    }
-});
-
-Favoritos.attachSchema(Schemas.Favoritos);
 
 Contactos = new Mongo.Collection('contactos');
 
@@ -140,3 +128,31 @@ FotosProductos.allow({
 ComentariosProductos = new Mongo.Collection('comentariosproductos');
 
 Productos = new Mongo.Collection('productos');
+
+
+// Fotos de productos
+let docStore3 = new FS.Store.GridFS("fotosbanner", {
+  maxTries: 3
+});
+
+
+// Creamos la DB para Fotos
+BannersPub = new FS.Collection("fotosbanner", {
+  stores: [docStore2]
+});
+
+// agregamos los permisos allow/deny
+BannersPub.allow({
+  insert: function () {
+    return true;
+  },
+  update: function () {
+    return true;
+  },
+  remove: function () {
+    return true;
+  },
+  download: function () {
+    return true;
+  }
+});

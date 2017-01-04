@@ -7,6 +7,7 @@ Meteor.methods({
 		if (usuarioId) {
 
 			Roles.addUsersToRoles(usuarioId, ['usuario'], 'app');
+      console.log('creado');
 
       return {
         user: usuarioId
@@ -28,17 +29,30 @@ Meteor.methods({
 			return;
 		}
   },
-  crearVendedor: function (datos, tienda) {
+  crearVendedor: function (datos) {
 
-    let usuarioId = Accounts.createUser(datos);
+    let usuarioId = Accounts.createUser({
+      email: datos.email,
+      password: datos.password
+    });
 
     let tiendaId = Tiendas.insert({
-      nombre: tienda,
-      usuarioId: usuarioId
+      nombre: datos.nombre,
+      rubro: datos.rubro,
+      telefono: datos.telefono,
+      horario: datos.horario
     });
 
 		if (usuarioId) {
+
 			Roles.addUsersToRoles(usuarioId, ['vendedor'], 'app');
+
+      Meteor.users.update({_id: usuarioId}, {
+        $set: {
+          'profile.tiendaId': tiendaId
+        }
+      });
+      
 		} else {
 			return;
 		}

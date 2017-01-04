@@ -22,7 +22,7 @@
     <!-- If we need scrollbar -->
     <div class="swiper-scrollbar"></div>
 </div>
-    <span class="s-anunciante"><i class="fa fa-shopping-basket" aria-hidden="true"></i> {{this.titulo}}</span>
+    <span class="s-anunciante"><i class="fa fa-shopping-basket" aria-hidden="true"></i> {{this.nombre}}</span>
     <div class="calificacion">
       <button class="1">
         <i class="fa fa-star" aria-hidden="true"></i>
@@ -58,7 +58,7 @@
 
     <p>{{this.calificacion}}</p>
 
-    <input type="button" value="Comprar" class="contacto">
+    <a class="contacto" href="tel:+{{telefonoc this.tiendaId}}">Comprar</a>
 
   </div>
 

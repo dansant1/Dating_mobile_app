@@ -2,19 +2,22 @@ Template.Favoritos.onCreated(function () {
   var self = this;
   self.autorun(function () {
     self.subscribe('favoritos');
-    self.subscribe('fotos');
     self.subscribe('anunciantes');
+    self.subscribe('fotos');
   });
 });
 
 Template.Favoritos.helpers({
   favoritos() {
-    return Favoritos.find({});
+    return Favoritos.find({ de: Meteor.userId() });
   },
-  fotosDeFavoritos(anuncianteId) {
-    return Fotos.find({anuncianteId: anuncianteId});
+  fotosDeContacto(anuncianteId) {
+    return Fotos.find({'metadata.anuncianteId': anuncianteId});
   },
-  nombreDeFavoritos(anuncianteId) {
+  nombreDeContacto(anuncianteId) {
     return Anunciantes.findOne({_id: anuncianteId}).nombre;
+  },
+  telefono: function (anuncianteId) {
+    return Anunciantes.findOne({_id: anuncianteId}).telefono;
   }
 });

@@ -7,3 +7,15 @@ Meteor.publish('fotos', function () {
   }
 
 });
+
+
+Meteor.publish('bannersPub', function () {
+  if (this.userId) {
+    return BannersPub.find({});
+  } else {
+    this.stop();
+    return;
+  }
+
+});
+

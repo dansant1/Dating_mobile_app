@@ -58,8 +58,12 @@
 
     <p>{{this.calificacion}}</p>
 
-    <input type="button" value="Llamar" class="contacto llamar">
-    <input type="button" value="Ofertar" class="contacto ofertar">
+    <a href="tel:+{{this.telefono}}" class="contacto llamar">Llamar</a>
+    <a class="contacto ofertar">Ofertar</a>
+
+    <button class="favorito" style="display: block; width: 40px; height: 40px; margin: 10px auto; border: none; background-color: transparent; color: rgba(241, 196, 15,1.0); font-size: 35px;">
+        <i class="fa fa-star" aria-hidden="true"></i>
+    </button>
 
   </div>
 
@@ -119,8 +123,21 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-body">
-                    <input type="text" class="box-comentario" name="comentario" placeholder="¿Por que calificaste con ese puntaje?">
+                    <input type="text" class="box-comentario" name="comentario" placeholder="¿Por que calificaste con ese puntaje?" style="color: rgba(127, 140, 141,1.0)">
                     <button type="button" class="comentar">Comentar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<template name="ofertar">
+  <div class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <input type="number" class="box-comentario" name="oferta" placeholder="Con que precios deseas negociar" style="color: rgba(127, 140, 141,1.0)">
+                    <button type="button" class="comentar">Ofertar</button>
                 </div>
             </div>
         </div>

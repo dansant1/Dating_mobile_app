@@ -155,18 +155,35 @@ Template.AdministradorAnuncios.onCreated(function () {
 
   self.autorun(function () {
     self.subscribe('anunciantes');
+    self.subscribe('tiendas');
   });
 });
 
 Template.AdministradorAnuncios.helpers({
   anuncios: function () {
       return Anunciantes.find({anuncia: true});
+  },
+  checked: function () {
+    if ( Anunciantes.findOne({_id: this._id}).destacado === false || Anunciantes.findOne({_id: this._id}).destacado === undefined ) {
+      return 'checked';
+    } else {
+      return '';
+    }
   }
 });
 
 Template.Administrador.helpers({
   postulantes: function () {
     return Anunciantes.find({anuncia: false});
+  }
+});
+
+Template.AdministradorAnuncios.helpers({
+  anunciosNoAprobados: function () {
+     return Anunciantes.find({anuncia: false});
+  },
+  tiendas: function () {
+    return Tiendas.find();
   }
 });
 
@@ -191,6 +208,7 @@ Template.Administrador.events({
         if (err) {
           console.log(err);
         } else {
+          alert('Cambiaste el precio');
           console.log('salio bien');
         }
       });
@@ -206,36 +224,50 @@ Template.menu.events({
 
 Template.AdministradorAnuncios.events({
   'click .aprobar': function () {
-    Meteor.call('desaprobar', this._id, function (error) {
+    Meteor.call('aprobar', this._id, function (error) {
       if (error) {
         console.log('Hubo un error');
       } else {
-        console.log('aprobado');
+        alert('aprobado');
       }
     });
   },
-  'click .aprob': function (event, template) {
+  'click .desaprobar': function () {
+    Meteor.call('desaprobar', this._id, function (error) {
+      if (error) {
+        alert('Hubo un error');
+      } else {
+        alert('Desaprobado');
+      }
+    });
+  },
+  'submit form': function (event, template) {
+    event.preventDefault();
     let datos = {
+      email: template.find("[name='email']").value,
       nombre: template.find("[name='nombre']").value,
       telefono: template.find("[name='telefono']").value,
-      piel: template.find("[name='piel']").value,
+      piel: $( "#piel option:selected" ).text(),
       intereses: template.find("[name='intereses']").value,
-      genero: template.find("[name='genero']").value,
+      genero: $( "#genero option:selected" ).text(),
       edad: template.find("[name='edad']").value,
-      cabello: template.find("[name='cabello']").value,
-      contextura: template.find("[name='contextura']").value,
-      ubicacion: template.find("[name='ubicacion']").value,
+      cabello: $( "#cabello option:selected" ).text(),
+      contextura: $( "#contextura option:selected" ).text(),
+      provincia: $( "#provincia option:selected" ).text(),
+      ubicacion: $( "#distrito option:selected" ).text(),
       precio: template.find("[name='precio']").value,
     }
 
-    Meteor.call('agregarAnunciante', datos, function (err) {
+    let password = template.find("[name='password']").value
+
+    Meteor.call('agregarAnunciante', datos, password, function (err, result) {
         if (err) {
-          console.log(err);
+          alert(err);
+        } else {
+          subirFoto(event, template, result.id);
+          alert('Anunciante agregado')
         }
     });
-  },
-  'change #foto': function (event, template) {
-    subirFoto(event, template, this._id);
   },
   'keyup .precio': function (event, template) {
 
@@ -250,24 +282,8 @@ Template.AdministradorAnuncios.events({
       });
     }
   },
-  'submit form': function (event, template) {
-
-    event.preventDefault();
-
-    let datos = {
-      email: template.find("[name='email']").value,
-      password: template.find("[name='password']").value
-    }
-
-    let tienda = template.find("[name='tienda']").value;
-
-    Meteor.call('crearVendedor', datos, tienda, function (err) {
-      if (err) {
-        console.log(err);
-      } else {
-        console.log('funciono!');
-      }
-    });
+  'change #destacado': function (e, t) {
+      console.log(e);
   }
 });
 
@@ -304,5 +320,36 @@ Template.AdministradorContratos.events({
         console.log('funco!');
       }
     });
+  }
+});
+
+Template.AgregarTienda.events({
+  'submit form': function (e, t) {
+    e.preventDefault();
+    let datos = {
+      email: t.find("[name='email']").value,
+      password: t.find("[name='password']").value,
+      nombre: t.find("[name='tienda']").value,
+      rubro: $( "#rubro option:selected" ).text(),
+      telefono: t.find("[name='telefonotienda']").value,
+      horario: t.find("[name='horario']").value
+    }
+
+    if (datos.email !== "" && datos.password !== "" && datos.nombre !== "" && datos.rubro !== "" && datos.telefonotienda !== "" && datos.horario !== "") {
+        Meteor.call('crearVendedor', datos, function (err) {
+          if (err) {
+            alert(err);
+          } else {
+            t.find("[name='email']").value = "";
+            t.find("[name='password']").value = "";
+            t.find("[name='tienda']").value = "";
+            t.find("[name='telefonotienda']").value = "";
+            t.find("[name='horario']").value = "";
+            alert('Tienda agregada');
+          }
+        });
+    } else {
+      alert('Complete los datos de la tienda :)');
+    }
   }
 });
