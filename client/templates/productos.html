@@ -1,6 +1,8 @@
 <template name="productos">
   <div class="anuncios">
-
+  <div class="form-group" style="width: 80%;">
+    <input placeholder="Busca por ejem: nombre, precio, tienda" type="text" class="form-control"  name="buscador" >
+  </div>
 
   {{#each productos}}
 
@@ -41,6 +43,9 @@
 
 <template name="tiendas">
   <div class="anuncios">
+  <div class="form-group" style="width: 80%;">
+    <input placeholder="Busca por ejem: nombre, tipo y zona" type="text" class="form-control"  name="buscador" >
+  </div>
   {{#each tiendas}}
 
     <div class="anuncio" style="padding-top: 20px; height: 210px">
