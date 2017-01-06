@@ -173,7 +173,13 @@ Template.Ventas.events({
   },
   'change #foto': function (event, template) {
     subirFoto(event, template, this._id);
-  },
+  }
+});
+
+Template.menuVentas.events({
+  'click .salir': function () {
+      Meteor.logout();
+  } 
 });
 
 Template.adminVentas.onCreated(function () {

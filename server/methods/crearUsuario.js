@@ -29,6 +29,18 @@ Meteor.methods({
 			return;
 		}
   },
+  actualizarInfo: function (datos) {
+    
+    Meteor.users.update({_id: this.userId}, {
+      $set: {
+        'profile.nombre': datos.nombre,
+        'profile.edad': datos.edad,
+        'profile.telefono': datos.telefono,
+        'profile.telefonoDeConocido': datos.telefonoDeConocido
+      }
+    })
+
+  },
   crearVendedor: function (datos) {
 
     let usuarioId = Accounts.createUser({

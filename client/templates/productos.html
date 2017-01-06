@@ -1,8 +1,12 @@
 <template name="productos">
   <div class="anuncios">
   <div class="form-group" style="width: 80%;">
-    <input placeholder="Busca por ejem: nombre, precio, tienda" type="text" class="form-control"  name="buscador" >
+    <input placeholder="Busca por ejem: nombre, precio, tienda" type="text" class="form-control"  name="search" >
   </div>
+
+  {{#if searching}}
+      <h2>Cargando...</h2>
+  {{else}}
 
   {{#each productos}}
 
@@ -37,15 +41,23 @@
         <span><i class="fa fa-comment" aria-hidden="true"></i> {{comentarios}}</span>
       </div>
     </div>
+  {{else}}
+    <h2>No se encontro resultados para {{query}}</h2>
   {{/each}}
+  {{/if}}
+
   </div>
 </template>
 
 <template name="tiendas">
   <div class="anuncios">
   <div class="form-group" style="width: 80%;">
-    <input placeholder="Busca por ejem: nombre, tipo y zona" type="text" class="form-control"  name="buscador" >
+    <input placeholder="Busca por ejem: nombre, tipo y zona" type="text" class="form-control"  name="search" >
   </div>
+
+  {{#if searching}}
+      <h2>Cargando...</h2>
+  {{else}}
   {{#each tiendas}}
 
     <div class="anuncio" style="padding-top: 20px; height: 210px">
@@ -55,7 +67,10 @@
         <span><i class="fa fa-comment" aria-hidden="true"></i> {{productos this._id}}</span>
       </div>
     </div>
+  {{else}}
+    <h2>No hay resultados para {{query}}</h2>
   {{/each}}
+  {{/if}}
   </div>
 </template>
 

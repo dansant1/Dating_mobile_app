@@ -12,30 +12,50 @@ navigator.geolocation.getCurrentPosition(function (position) {
     geocoder.geocode({'location': latlng}, function(results, status) {
       if (status === google.maps.GeocoderStatus.OK) {
         if (results[1]) {
-          let number = 982200441;
-          //let number = Meteor.user().profile.telefonoDeConocido;
-          let ubicacion = results[0].formatted_address;
-          let message = '¡Necesito ayuda!, estoy en ' + ubicacion + " Mis coordenadas son: " + latlng.lat + ", " + latlng.lng;
+          //let number = 982200441;
+          let number = Meteor.user().profile.telefonoDeConocido;
 
-          if (message) {
-            
-            //CONFIGURACIÓN
-            var options = {
-              replaceLineBreaks: false,
-                android: {
-                  intent: 'INTENT'
+          if (number) {
+              let ubicacion = results[0].formatted_address;
+              let message = '¡Necesito ayuda!, estoy en ' + ubicacion + " Mis coordenadas son: " + latlng.lat + ", " + latlng.lng;
+
+              if (message) {
+                
+                //CONFIGURACIÓN
+                var options = {
+                  replaceLineBreaks: false,
+                    android: {
+                      intent: 'INTENT'
+                  }
+                };
+
+                var success = function () {
+                  let datos = {
+                    usuario: Meteor.user().profile.nombre,
+                    userId: Meteor.userId(),
+                    lat: latlng.lat,
+                    long: latlng.lng,
+                    lugar: ubicacion,
+                    fecha: new Date()
+                  }
+
+                  Meteor.call('panico', datos, function (err) {
+                    if (err) {
+                      console.log(err);
+                    }
+                  });
+                }
+                var error = function (e) { alert('Mensaje fallido:' + e); };
+                sms.send(number, message, options, success, error);
+              
               }
-            };
 
-            var success = function () { //alert('Mensaje enviado exitosamente'); 
-            };
-            var error = function (e) { alert('Mensaje fallido:' + e); };
-            sms.send(number, message, options, success, error);
+              console.log(results[1]);
+              //return results[1].formatted_address;
+          } else {
+            alert('Configura tu número de conocido en tu cuenta');
+          }
           
-        }
-
-          console.log(results[1]);
-          //return results[1].formatted_address;
         } else {
           alert('No results found');
         }
@@ -106,5 +126,15 @@ Template.layout.events({
   },
   'click .t':function () {
     Session.set('abrir', '');
+  },
+  'click .cuenta': function () {
+    FlowRouter.go('/cuenta');
+  },
+  'click .clic': function (e, t) {
+    Meteor.call('aumentarClick', this._id, function (err) {
+      if (err) {
+        alert('Hubo un err');
+      }
+    });
   }
 });

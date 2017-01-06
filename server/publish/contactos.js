@@ -6,3 +6,11 @@ Meteor.publish('contactos2', function () {
     return;
   }
 });
+
+Meteor.publish('terminos', function () {
+	return Terminos.find();
+});
+
+Meteor.publish('politicas', function () {
+	return Politicas.find();
+});

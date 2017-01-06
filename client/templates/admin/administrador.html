@@ -264,7 +264,7 @@
           <input type="text" class="precio" name="{{this._id}}" value="{{this.precio}}">
         </td>
          <td style="padding: 5px">
-          <input type="checkbox" name="destacado" id="destacado" {{checked}}>
+          <input type="checkbox" name="destacado" class="{{this._id}}" id="destacado" {{checked}}>
         </td>
         <td style="padding: 5px">
           <button class="desaprobar btn btn-default">Desaprobar</button>
@@ -311,6 +311,30 @@
     </tbody>
     </table>
   </div>
+  
+   <div class="row">
+     <h2>Interesados</h2>
+      <p>Lista de personas interesadas en publicar</p>
+       <table style="border-bottom-color: white;" class="table">
+    <thead>
+      <tr>
+        <th style="padding: 0px; background: white; color: black; text-align: center;">Nombre</th>
+        <th style="padding: 0px; background: white; color: black; text-align: center;">Teléfono</th>
+        <th style="padding: 0px; background: white; color: black; text-align: center;">Tipo</th>
+        
+      </tr>
+    </thead>
+    <tbody>
+      {{#each interesados}}
+      <tr>
+        <td style="padding: 5px">{{this.nombre}}</td>
+        <td style="padding: 5px">{{this.telefono}}</td>
+        <td style="padding: 5px">{{this.tipo}}</td>
+      </tr>
+      {{/each}}
+    </tbody>
+    </table>
+  </div>
 
   <div class="row">
      <h2>Tiendas</h2>
@@ -330,10 +354,7 @@
         <td style="padding: 5px">{{this.nombre}}</td>
         <td style="padding: 5px">{{this.telefono}}</td>
         <td style="padding: 5px">{{this.rubro}}</td>
-        <td style="padding: 5px">{{this.horario}}</td>
-     
-        
-       
+        <td style="padding: 5px">{{this.horario}}</td>   
       </tr>
       {{/each}}
     </tbody>
@@ -386,7 +407,9 @@
       <div class="col-md-12">
         <div class="form-group">
           <label for="comment">Terminos y condiciones</label>
-          <textarea class="form-control" rows="10" id="t" name="t"></textarea>
+          {{#each terminos}}
+          <textarea class="form-control" rows="10" id="t" name="t">{{this.contenido}}</textarea>
+          {{/each}}
           <br>
           <button class="gt btn btn-default">Guardar</button>
         </div>
@@ -396,7 +419,9 @@
       <div class="col-md-12">
         <div class="form-group">
           <label for="comment">Politicas de privacidad</label>
-          <textarea class="form-control" rows="10" id="p" name="p"></textarea>
+          {{#each politicas}}
+          <textarea class="form-control" rows="10" id="p" name="p">{{this.contenido}}</textarea>
+          {{/each}}
           <br>
           <button class="gp btn btn-default">Guardar</button>
         </div>

@@ -46,7 +46,7 @@ Template.producto.events({
     //CallNumber.callNumber(onSuccess, onError, numero, false);
   },
   'click .contacto'() {
-    Modal.show('contactar');
+    //Modal.show('contactar');
   },
   'click .panico'() {
 

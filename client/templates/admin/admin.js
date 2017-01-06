@@ -166,6 +166,7 @@ function subirFotoBanner (event, template, url) {
 
             doc.metadata = {
               url: url,
+              clicks: 0
             };
 
             BannersPub.insert(doc, function (err, fileObj) {
@@ -197,6 +198,12 @@ Template.loginAdmin.events({
       });
     }
   }
+});
+
+Template.menuVenta.events({
+  'click .salir': function () {
+      Meteor.logout();
+  } 
 });
 
 Template.AdminProductos.onCreated(function () {
@@ -261,5 +268,43 @@ Template.AdministradorPublicidad.events({
   'click .subir': function (e, t) {
     e.preventDefault();
     subirFotoBanner(e, t, t.find("[name='url']").value);
+  },
+  'click .e': function () {
+    Meteor.call('eliminarBanner', this._id, function (err) {
+      if (err) {
+        alert('hubo un error');
+      } else {
+        alert('Banner eliminado');
+      }
+    });
+  }
+});
+
+Template.AdministradorReportes.onCreated(function () {
+  var self = this;
+
+  self.autorun(function () {
+    self.subscribe('panico');
+  });
+
+});
+
+function formatDate(date) {
+  var hours = date.getHours();
+  var minutes = date.getMinutes();
+  var ampm = hours >= 12 ? 'pm' : 'am';
+  hours = hours % 12;
+  hours = hours ? hours : 12; // the hour '0' should be '12'
+  minutes = minutes < 10 ? '0'+minutes : minutes;
+  var strTime = hours + ':' + minutes + ' ' + ampm;
+  return date.getMonth()+1 + "/" + date.getDate() + "/" + date.getFullYear() + "  " + strTime;
+}
+
+Template.AdministradorReportes.helpers({
+  panico: function () {
+    return Panico.find();
+  },
+  f: function (fecha) {
+    return formatDate(fecha);
   }
 });

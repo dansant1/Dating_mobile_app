@@ -1,23 +1,26 @@
-Template.todos.onCreated( function () {
-  var self = this;
-  self.autorun(function () {
-    self.subscribe('anunciantes');
-    self.subscribe('fotos');
-    self.subscribe('todosComentarios');
-  });
-});
+Template.todos.onCreated( () => {
+  
+  let template = Template.instance();
 
-Template.todos.onRendered(function () {
-  $('.md-select').on('click', function(){
-  $(this).toggleClass('active')
-})
+    template.searchQuery = new ReactiveVar();
+    template.searching   = new ReactiveVar( false );
 
-$('.md-select ul li').on('click', function() {
-  var v = $(this).text();
-  $('.md-select ul li').not($(this)).removeClass('active');
-  $(this).addClass('active');
-  $('.md-select label button').text(v)
-})
+    template.autorun( () => {
+      template.subscribe( 'anunciantes2', template.searchQuery.get(), () => {
+          console.log('funco');
+          setTimeout( () => {
+            console.log(template.searching.get());
+            template.searching.set( false );
+          }, 300 );
+    });
+
+
+    template.subscribe( 'todosComentarios' );
+    template.subscribe( 'fotos' );
+
+    });
+
+    
 });
 
 Template.todos.events({
@@ -27,13 +30,71 @@ Template.todos.events({
 });
 
 Template.todos.helpers({
-  anunciantes() {
-    return Anunciantes.find({anuncia: true});
+  anunciantes: function () {
+    
+    let a = Anunciantes.find({});
+    if ( a ) {
+      return a;
+    }
+    
+
+    //return Anunciantes.find({});
   },
   foto: function () {
     return Fotos.find({'metadata.anuncianteId': Template.parentData(0)._id});
   },
   comentarios: function () {
     return Comentarios.find({anuncianteId: this._id}).fetch().length;
+  },
+  searching() {
+    return Template.instance().searching.get();
+  },
+  query() {
+    return Template.instance().searchQuery.get();
+  }
+});
+
+Template.todos.events({
+  'keyup [name="search"]' ( event, template ) {
+    console.log('hola');
+    let value = event.target.value.trim();
+
+    if ( value !== '' && event.keyCode === 13 ) {
+      template.searchQuery.set( value );
+      console.log(template.searchQuery.get());
+      template.searching.set( true );
+    }
+
+    if ( value === '' ) {
+      template.searchQuery.set( value );
+    }
+  }
+});
+
+Template.p.onCreated(function () {
+  var self = this;
+
+  self.autorun(function () {
+    self.subscribe('politicas');
+  });
+});
+
+Template.p.helpers({
+  p: function () {
+    return Politicas.find();
+  }
+});
+
+Template.t.onCreated(function () {
+  var self = this;
+
+  self.autorun(function () {
+    self.subscribe('terminos');
+  });
+});
+
+Template.t.helpers({
+  t: function () {
+    return Terminos.find();
   }
 });

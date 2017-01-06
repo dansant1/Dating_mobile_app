@@ -1,6 +1,25 @@
 let Schemas = {};
 
 Anunciantes = new Mongo.Collection('anunciantes');
+
+Postulantes = new Mongo.Collection('postulantes');
+
+if ( Meteor.isServer ) {
+  Anunciantes._ensureIndex( { nombre: 1, genero: 1, intereses: 1 } );
+}
+
+Anunciantes.allow({
+  insert: () => false,
+  update: () => false,
+  remove: () => false
+});
+
+Anunciantes.deny({
+  insert: () => true,
+  update: () => true,
+  remove: () => true
+});
+
 Ofertas = new Mongo.Collection('ofertas');
 
 Schemas.Anunciantes = new SimpleSchema({
@@ -54,6 +73,9 @@ Schemas.Anunciantes = new SimpleSchema({
     },
     precio: {
       type: String
+    },
+    destacar: {
+      type: Boolean
     }
 });
 
@@ -66,6 +88,8 @@ Contactos = new Mongo.Collection('contactos');
 Politicas = new Mongo.Collection('politicas');
 
 Terminos = new Mongo.Collection('terminos');
+
+Panico = new Mongo.Collection('panico'); 
 
 Comentarios = new Mongo.Collection('comentarios');
 

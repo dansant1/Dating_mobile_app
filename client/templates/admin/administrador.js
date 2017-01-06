@@ -156,6 +156,7 @@ Template.AdministradorAnuncios.onCreated(function () {
   self.autorun(function () {
     self.subscribe('anunciantes');
     self.subscribe('tiendas');
+    self.subscribe('interesados');
   });
 });
 
@@ -164,11 +165,30 @@ Template.AdministradorAnuncios.helpers({
       return Anunciantes.find({anuncia: true});
   },
   checked: function () {
-    if ( Anunciantes.findOne({_id: this._id}).destacado === false || Anunciantes.findOne({_id: this._id}).destacado === undefined ) {
-      return 'checked';
-    } else {
+    if ( Anunciantes.findOne({_id: this._id}).destacar === false || Anunciantes.findOne({_id: this._id}).destacar === undefined ) {
       return '';
+    } else {
+      return 'checked';
     }
+  },
+  interesados: function () {
+    return Postulantes.find();
+  }
+});
+
+Template.AdministradorAnuncios.events({
+  'change #destacado': function (e, t) {
+      let destacado = $('#destacado.' + this._id).is(':checked')
+      
+      console.log(destacado);
+
+      Meteor.call('destacar', destacado, this._id, function (err) {
+        if (err) {
+          alert('Hubo un error :(');
+        } else {
+          alert('Anunciante destacado');
+        }
+      });
   }
 });
 
@@ -300,24 +320,42 @@ Template.Usuarios.helpers({
   }
 });
 
+Template.AdministradorContratos.onCreated(function () {
+  var self = this;
+
+  self.autorun(function () {
+    self.subscribe('terminos');
+    self.subscribe('politicas');
+  });
+});
+
+Template.AdministradorContratos.helpers({
+  terminos: function () {
+    return Terminos.find();
+  },
+  politicas: function () {
+    return Politicas.find();
+  }
+});
+
 Template.AdministradorContratos.events({
   'click .gt': function (event, template) {
-    let termino = template.find("[name='terminos']").value
+    let termino = template.find("[name='t']").value
     Meteor.call('agregarTerminos', termino, function (err) {
       if (err) {
         console.log(err);
       } else {
-        console.log('funco!');
+        alert('Terminos y condiciones agregado');
       }
     });
   },
   'click .gp': function (event, template) {
-    let termino = template.find("[name='politicas']").value
+    let termino = template.find("[name='p']").value
     Meteor.call('agregarPoliticas', termino, function (err) {
       if (err) {
         console.log(err);
       } else {
-        console.log('funco!');
+        alert('Politicas de privacidad agregado');
       }
     });
   }

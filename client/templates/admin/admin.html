@@ -35,9 +35,6 @@
       <div id="navbar" class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
           <li><a href="/vendedores">Productos</a></li>
-         
-         <!-- <li><a href="/vendedores/ventas">Ventas</a></li> -->
-
         </ul>
         <ul class="nav navbar-nav navbar-right">
 
@@ -125,6 +122,34 @@
         <button type="text" class="btn btn-default subir">Subir</button>
       </form>
     </div>
+
+    <div class="row">
+      <h2>Banners</h2>
+      <p>lista de banners</p>            
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Preview</th>
+        <th>URL</th>
+        <th>Clicks</th>
+        <th>Eliminar</th>
+      </tr>
+    </thead>
+    <tbody>
+
+    {{#each banners}}
+      <tr>
+        <td>
+          <img src="{{this.url}}" style="width: 100px; height: 100px;">
+        </td>
+        <td>{{this.metadata.url}}</td>
+        <td>{{this.metadata.clicks}}</td>
+        <td><button class="btn btn-default e">Eliminar</button></td>
+      </tr>
+    {{/each}}
+    </tbody>
+  </table>
+    </div>
   </div>
 </template>
 
@@ -145,6 +170,38 @@
         </form>
 
       </div>
+    </div>
+  </div>
+</template>
+
+<template name="AdministradorReportes">
+  <div class="container">
+    <div class="row">
+      <h2>Seguridad</h2>
+      <p>Lista de usuarios que han hecho uso del boton de panico</p>
+
+       <table class="table">
+    <thead>
+      <tr>
+        <th>Usuario</th>
+        <th>Coordenadas</th>
+        <th>Lugar</th>
+        <th>Fecha</th>
+      </tr>
+    </thead>
+    <tbody>
+
+    {{#each panico}}
+      <tr>
+        
+        <td>{{this.usuario}}</td>
+        <td>{{this.lat}} , {{this.long}} </td>
+        <td> {{this.lugar}} </td>
+        <td> {{f this.fecha}} </td>
+      </tr>
+    {{/each}}
+    </tbody>
+  </table>
     </div>
   </div>
 </template>

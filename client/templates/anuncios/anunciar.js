@@ -23,30 +23,46 @@ Template.Anunciar.events({
     event.preventDefault();
 
     let datos = {
-      piel: template.find("[name='piel']").value,
-      cabello: template.find("[name='pelo']").value,
-      intereses: template.find("[name='intereses']").value,
-      genero: template.find("[name='genero']").value,
-      ubicacion: template.find("[name='ubicacion']").value,
-      contextura: template.find("[name='medidas']").value
+      nombre: template.find("[name='nombre']").value,
+      telefono: template.find("[name='cel']").value,
+      tipo: $( "#tipo" ).val()
     }
 
     if (
-      datos.piel !== "" &&
-      datos.intereses !== "" &&
-      datos.cabello !== "" &&
-      datos.genero !== "" &&
-      datos.ubicacion !== "" &&
-      datos.contextura !== ""
+      datos.nombre !== "" &&
+      datos.telefono !== "" &&
+      datos.tipo !== ""
     ) {
       Meteor.call('postular', datos, function (error) {
         if (error) {
           console.log('Hubo un error');
           FlowRouter.go('/anuncios');
         } else {
+          alert('Muy pronto nos contactaremos contigo');
           FlowRouter.go('/anuncios');
         }
       });
     }
+  }
+});
+
+Template.cuenta.events({
+  'click .guardar': function (e, t) {
+    e.preventDefault();
+
+    let datos = {
+      nombre: t.find("[name='nombre']").value,
+      edad: t.find("[name='edad']").value,
+      telefono: t.find("[name='telefono']").value,
+      telefonoDeConocido: t.find("[name='telefonoc']").value
+    }
+
+    Meteor.call('actualizarInfo', datos, function (err) {
+      if (err) {
+        alert('Hubo un error');
+      } else {
+        FlowRouter.go('/anuncios');
+      }
+    });
   }
 });

@@ -3,7 +3,7 @@ Meteor.methods({
 
     if (this.userId) {
 
-      let anuncia = Anunciantes.find({userId: this.userId}).fetch().length;
+      /*let anuncia = Anunciantes.find({userId: this.userId}).fetch().length;
 
       if (anuncia === 0) {
         datos.nombre = Meteor.users.findOne({_id: this.userId}).username;
@@ -17,7 +17,9 @@ Meteor.methods({
         Anunciantes.insert(datos);
       } else {
         return;
-      }
+      }*/
+
+      Postulantes.insert(datos);
 
     } else {
       return;
@@ -25,7 +27,11 @@ Meteor.methods({
   },
   agregarTerminos: function (termino) {
     if (Terminos.find().fetch().length > 0) {
-
+        Terminos.update({_id: Terminos.findOne()._id}, {
+          $set: {
+            contenido: termino
+          }
+        });
     } else {
       Terminos.insert({
         contenido: termino
@@ -35,7 +41,11 @@ Meteor.methods({
   },
   agregarPoliticas: function (politica) {
     if (Politicas.find().fetch().length > 0) {
-
+        Politicas.update({_id: Politicas.findOne()._id}, {
+          $set: {
+            contenido: politica
+          }
+        });
     } else {
       Politicas.insert({
         contenido: politica
@@ -55,7 +65,7 @@ Meteor.methods({
         data.userId = usuarioId;
         data.calificacion = 0;
         data.anuncia = true;
-        data.destacado = false;
+        data.destacar = false;
         
         let anuncianteId;
 
@@ -173,8 +183,6 @@ Meteor.methods({
           createdAt: new Date()
         });
       }
-
-
     }
   },
   favorito: function (anuncianteId) {
@@ -233,5 +241,26 @@ Meteor.methods({
     } else {
       return;
     }
+  },
+  destacar: function (destacar, anuncianteId) {
+
+    Anunciantes.update({_id: anuncianteId}, {
+      $set: {
+        destacar: destacar
+      }
+    });
+  },
+  eliminarBanner: function (id) {
+    BannersPub.remove({_id: id });
+  },
+  aumentarClick: function (id) {
+    BannersPub.update({_id: id}, {
+      $inc: {
+        'metadata.clicks': 1
+      }
+    });
+  },
+  panico: function (datos) {
+    Panico.insert(datos);
   }
 });

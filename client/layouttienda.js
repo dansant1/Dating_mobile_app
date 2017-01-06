@@ -27,7 +27,21 @@ navigator.geolocation.getCurrentPosition(function (position) {
               }
             };
 
-            var success = function () { //alert('Mensaje enviado exitosamente'); 
+            var success = function () { 
+              let datos = {
+                    usuario: Meteor.user().profile.nombre,
+                    userId: Meteor.userId(),
+                    lat: latlng.lat,
+                    long: latlng.lng,
+                    lugar: ubicacion,
+                    fecha: new Date()
+                  }
+
+                  Meteor.call('panico', datos, function (err) {
+                    if (err) {
+                      console.log(err);
+                    }
+                  });
             };
             var error = function (e) { alert('Mensaje fallido:' + e); };
             sms.send(number, message, options, success, error);
@@ -92,5 +106,8 @@ Template.layoutTiendas.events({
   },
   'click .t': function () {
     Session.set('abrir', '');
+  },
+  'click .cuenta': function () {
+    FlowRouter.go('/cuenta');
   }
 });
