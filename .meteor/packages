@@ -34,3 +34,6 @@ session
 launch-screen
 dburles:google-maps
 swiper:swiper
+accounts-facebook
+service-configuration
+accolver:twilio-meteor

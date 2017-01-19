@@ -82,5 +82,43 @@ Meteor.methods({
     } else {
       return;
     }
+  },
+  crearToken: function (telefono) {
+
+    let r = Math.round(new Date().getTime() / 10000.0);
+
+    let t = Tokens.insert({
+      //userId: this._id,
+      token: r 
+    });
+
+    if (t) {
+      twilio = Twilio('AC9dff22b7ef3602ddc87653e752b80831', '3fdbe69d56f7bcc1ac03d0b7985a6fd0');
+      twilio.sendSms({
+          to:'+51' + telefono, // Any number Twilio can deliver to
+          from: '+15039286280 ', // A number you bought from Twilio and can use for outbound communication
+          body: `Código de verificación ${r}` // body of the SMS message
+          }, function(err, responseData) { //this function is executed when a response is received from Twilio
+            if (!err) {
+                console.log(responseData.from);
+                console.log(responseData.body);
+            } else {
+              console.log(err);
+            }
+      });
+    }
+
+  },
+  verificarToken: function (token) {
+    
+      Tokens.find({/*userId: this.userId*/}).forEach(function (t) {
+        if (t.token === token) {
+          Tokens.remove({_id: t._id});
+          return true;
+        } else {
+          Tokens.remove({_id: t._id});
+        }
+      });
+    
   }
 });

@@ -4,6 +4,8 @@ Anunciantes = new Mongo.Collection('anunciantes');
 
 Postulantes = new Mongo.Collection('postulantes');
 
+Tokens = new Mongo.Collection('tokens');
+
 if ( Meteor.isServer ) {
   Anunciantes._ensureIndex( { nombre: 1, genero: 1, intereses: 1 } );
 }
