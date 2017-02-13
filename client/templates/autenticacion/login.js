@@ -21,17 +21,30 @@ Template.login.events({
     
     }*/
 
-    /*Meteor.loginWithFacebook({}, function(err){
-            if (err) {
-                throw new Meteor.Error("Facebook login failed");
-            } else {
-              FlowRouter.go('/verificar');
-            }
-    });*/
+    console.log('test');
+    Meteor.loginWithFacebook({
+      requestPermissions: ['public_profile', 'email']
+    }, function (err) {
+      console.log(err);
+      if (err) {
+        throw new Meteor.Error("Facebook login failed");
+      } else {
+        //FlowRouter.go('/verificar');
+      }
+    });
 
-    FlowRouter.go('/verificar');
+    //FlowRouter.go('/verificar');
   }
 });
+
+Template.tiendas.onCreated( (options, user) => {
+
+  console.log(options);
+  console.log(user);
+
+});
+
+
 
 Template.Verificar.events({
   'click .sms': function (e, t) {
@@ -40,7 +53,7 @@ Template.Verificar.events({
     let datos = {
       user: t.find("[name='user']").value,
       celular: t.find("[name='celular']").value,
-      
+
     }
 
     if (datos.user !== "" && datos.celular !== "") {
@@ -61,7 +74,7 @@ Template.Verificar.events({
 Template.codigo.events({
   'click .v': function (e, t) {
     let codigo = t.find("[name='codigo']").value;
-    
+
     if (codigo !== "") {
       Meteor.call('verificarToken', codigo, function (err) {
         if (err) {
