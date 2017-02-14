@@ -103,9 +103,9 @@
         });
     }
 // Fin de la funcion para convertir string con tildes a string normal
-function subirFoto (event, template, tiendaId) {
+function subirFoto (event, template, tiendaId, id) {
 
-    let archivo = document.getElementById("foto");
+    let archivo = id; //document.getElementById(id);
 
     if ('files' in archivo) {
 
@@ -151,7 +151,7 @@ Template.Ventas.events({
     if (email !== "" && password !== "") {
       Meteor.loginWithPassword(email, password, function (error) {
         if (error) {
-          console.log('Hubo un error');
+          alert(error);
         }
       });
     }
@@ -171,8 +171,11 @@ Template.Ventas.events({
       }
     });
   },
-  'change #foto': function (event, template) {
-    subirFoto(event, template, this._id);
+  'change .fotos': function (event, template) {
+    let _id = this._id;
+    let id = document.getElementById('foto' + _id)
+
+    subirFoto(event, template, this._id, id);
   }
 });
 

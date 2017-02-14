@@ -17,20 +17,20 @@
             <input name="password" type="password" placeholder="Contraseña">
           </div> -->
 
-          <input type="button" style="background-color: #4862A3" class="boton ingresar" value="Ingresar con Facebook">
-          <p>¿Eres anunciantes? <a href="/signup">Regístrate</a></p>
+          
 
 
              {{#if currentUser}}
 
 
-             {{currentUser}}
-        {{currentUser.services.facebook.name}} -
-        {{currentUser.services.facebook.gender}}
-        <button id="logout">Logout</button>
-    {{else}}
-        <button id="facebook-login" class="btn btn-default"> Login with Facebook</button>
-    {{/if}}
+              {{currentUser}}
+              {{currentUser.services.facebook.name}} -
+              {{currentUser.services.facebook.gender}}
+                <button id="logout">Logout</button>
+              {{else}}
+                <input type="button" style="background-color: #4862A3" class="boton ingresar" value="Ingresar con Facebook">
+                <p>¿Eres anunciantes? <a href="/signup">Regístrate</a></p>
+              {{/if}}
       </div>
     </div>
   </div>

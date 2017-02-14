@@ -34,7 +34,8 @@ Meteor.publish('todosproductos', function () {
   }
 });
 
-Meteor.publish('productosxtienda', function (tiendaId) {
+Meteor.publish('productosxtienda', function () {
+  let tiendaId = Meteor.users.findOne({_id: this.userId}).profile.tiendaId
   if (this.userId) {
     return Productos.find({tiendaId: tiendaId});
   } else {

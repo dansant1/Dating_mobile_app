@@ -3,26 +3,28 @@
   {{#with anunciante}}
   <div class="perfil">
     <div class="swiper-container">
-    <!-- Additional required wrapper -->
-    <div class="swiper-wrapper">
-        <!-- Slides -->
-        {{#each fotos}}
-        <div class="swiper-slide">
-          <img src="{{this.url}}" alt="{{this.url}}">
-        </div>
-        {{/each}}
+      <!-- Additional required wrapper -->
+      <div class="swiper-wrapper">
+          <!-- Slides -->
+          {{#each fotos}}
+          <div class="swiper-slide">
+            <img src="{{this.url}}" alt="{{this.url}}">
+          </div>
+          {{/each}}
+      </div>
+      <!-- If we need pagination -->
+      <div class="swiper-pagination"></div>
+
+      <!-- If we need navigation buttons -->
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div>
+
+      <!-- If we need scrollbar -->
+      <div class="swiper-scrollbar"></div>
     </div>
-    <!-- If we need pagination -->
-    <div class="swiper-pagination"></div>
-
-    <!-- If we need navigation buttons -->
-    <div class="swiper-button-prev"></div>
-    <div class="swiper-button-next"></div>
-
-    <!-- If we need scrollbar -->
-    <div class="swiper-scrollbar"></div>
-</div>
     <span class="s-anunciante"><i class="fa fa-map-marker" aria-hidden="true"></i> {{this.ubicacion}}</span>
+    <span class="s-anunciante"><i class="fa fa-user" aria-hidden="true"></i> {{this.nombre}}</span>
+    <!--<span class="s-anunciante"><i class="fa fa-map-marker" aria-hidden="true"></i> {{this.ubicacion}}</span>
     <div class="calificacion">
       <button class="1">
         <i class="fa fa-star" aria-hidden="true"></i>
@@ -56,10 +58,11 @@
       </button>
     </div>
 
-    <p>{{this.calificacion}}</p>
+    <p>{{this.calificacion}}</p> -->
 
     <a href="tel:+{{this.telefono}}" class="contacto llamar">Llamar</a>
-    <a class="contacto ofertar">Ofertar</a>
+    <a href="tel:+{{this.telefono}}" class="contacto llamar">SMS</a>
+   <!-- <a class="contacto ofertar">Ofertar</a> -->
 
     <button class="favorito" style="display: block; width: 40px; height: 40px; margin: 10px auto; border: none; background-color: transparent; color: rgba(241, 196, 15,1.0); font-size: 35px;">
         <i class="fa fa-star" aria-hidden="true"></i>
@@ -98,7 +101,7 @@
         </tr>
        </tbody>
     </table>
-    <h1>Comentarios</h1>
+   <!-- <h1>Comentarios</h1>
     <div class="comentarios">
       <br>
       <br>
@@ -113,7 +116,7 @@
       {{/each}}
 
 
-    </div>
+    </div>-->
   </div>
   {{/with}}
 </template>

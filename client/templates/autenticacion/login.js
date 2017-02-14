@@ -29,7 +29,7 @@ Template.login.events({
       if (err) {
         throw new Meteor.Error("Facebook login failed");
       } else {
-        //FlowRouter.go('/verificar');
+        FlowRouter.go('/verificar');
       }
     });
 

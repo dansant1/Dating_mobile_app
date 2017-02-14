@@ -46,9 +46,9 @@
       </div>
       <div id="navbar" class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
-          <li><a href="/admin">Productos</a></li>
-          <li><a href="/admin/anuncios">Ventas</a></li>
-          <li><a href="/admin/usuarios">Mi cuenta</a></li>
+          <li><a href="/">Productos</a></li>
+          
+          
         </ul>
         <ul class="nav navbar-nav navbar-right">
 
@@ -87,7 +87,7 @@
         <td>{{this.descripcion}}</td>
           <td>{{this.precio}}</td>
         <td>
-          <input type="file" id="foto" name="foto">
+          <input type="file" id="foto{{this._id}}" class="fotos" name="foto{{this._id}}">
         </td>
       </tr>
       {{/each}}

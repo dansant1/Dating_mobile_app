@@ -120,6 +120,7 @@ Template.layout.events({
   },
   'click .logout': function  () {
     Meteor.logout();
+    FlowRouter.go('/');
   },
   'click .a': function () {
     Session.set('abrir', '');

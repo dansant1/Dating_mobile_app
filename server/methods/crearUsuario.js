@@ -52,7 +52,8 @@ Meteor.methods({
       nombre: datos.nombre,
       rubro: datos.rubro,
       telefono: datos.telefono,
-      horario: datos.horario
+      horario: datos.horario,
+      userId: usuarioId
     });
 
 		if (usuarioId) {
@@ -71,7 +72,8 @@ Meteor.methods({
   },
   crearProducto: function (datos) {
     if (this.userId) {
-      let tiendaId = Tiendas.findOne({usuarioId: this.userId})._id;
+      let tiendaId = Tiendas.findOne({userId: this.userId})._id;
+      console.log(tiendaId)
       let producto = Productos.insert({
         tiendaId: tiendaId,
         titulo: datos.titulo,

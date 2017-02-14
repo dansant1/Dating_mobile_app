@@ -107,7 +107,7 @@ Template.tienda.helpers({
 
 Template.tiendas.events({
   'keyup [name="search"]' ( event, template ) {
-    console.log('hola');
+    
     let value = event.target.value.trim();
 
     if ( value !== '' && event.keyCode === 13 ) {

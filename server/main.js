@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 
 Meteor.startup(() => {
-  /*var users = [{name:"Admin User",email:"admin@sincompromiso.pe",roles:['admin']}];
+/*var users = [{name:"Admin User",email:"admin@sincompromiso.pe",roles:['admin']}];
 
 _.each(users, function (user) {
   var id;
