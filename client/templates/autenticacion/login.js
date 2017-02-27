@@ -1,3 +1,10 @@
+document.addEventListener("backbutton", onBackButtonDown, false);
+
+function onBackButtonDown(event) {
+    event.preventDefault();
+    event.stopPropagation()
+}
+
 function loginWithFacebook(res) {
     res = res.authResponse;
     facebookConnectPlugin.api(res.userID + "/?fields=name,email", ["public_profile", "email"], function onSuccess(result) {
