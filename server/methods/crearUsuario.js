@@ -6,6 +6,7 @@ Meteor.methods({
                 user: user._id
             }
         } else {
+            datos = {...datos, password: Random.id()}
             let usuarioId = Accounts.createUser(datos);
             if (usuarioId) {
                 Roles.addUsersToRoles(usuarioId, ['usuario'], 'app');

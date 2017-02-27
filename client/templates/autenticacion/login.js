@@ -1,9 +1,20 @@
-Template.login.onRendered(()=> {
-    facebookConnectPlugin.getLoginStatus((res)=> {
-        if (res.status === "conected") {
-            OAuth._retrieveCredentialSecret(res.authResponse.accessToken)
+function loginWithFacebook(res) {
+    res = res.authResponse;
+    facebookConnectPlugin.api(res.userID + "/?fields=name,email", ["public_profile", "email"], function onSuccess(result) {
+            res = {...res, ...result};
+            delete res['id'];
+            Meteor.call("crearObtenerUsuario", res, function (error, res) {
+                Meteor.connection.setUserId(res.user);
+                FlowRouter.go('/verificar');
+            });
+        }, function onError(error) {
+            console.error("Failed: ", error);
         }
-    });
+    );
+}
+
+Template.login.onRendered(()=> {
+    facebookConnectPlugin.getLoginStatus(loginWithFacebook);
 });
 
 
@@ -12,22 +23,7 @@ Template.login.events({
         event.preventDefault();
 
         if (Meteor.isCordova) {
-            facebookConnectPlugin.login(['email'],
-                function (res) {
-                    res = {...res.authResponse, password: Random.id()};
-                    facebookConnectPlugin.api(res.userID + "/?fields=name,email", ["public_profile", "email"], function onSuccess(result) {
-                            res = {...res, ...result};
-                            delete res['id'];
-                            Meteor.call("crearObtenerUsuario", res, function (error, res) {
-                                Meteor.connection.setUserId(res.user);
-                                FlowRouter.go('/verificar');
-                            });
-                        }, function onError(error) {
-                            console.error("Failed: ", error);
-                        }
-                    );
-                },
-                function () {
+            facebookConnectPlugin.login(['email'], loginWithFacebook, function () {
                     console.error('Error al loguearse con facebook');
                 }
             );
