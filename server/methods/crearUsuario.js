@@ -92,7 +92,7 @@ Meteor.methods({
         });
 
         if (t) {
-            twilio = Twilio('AC9dff22b7ef3602ddc87653e752b80831', '3fdbe69d56f7bcc1ac03d0b7985a6fd0');
+            twilio = Twilio('AC1fbb7fded7f812a8f1e92eb0ece4bdc8', '369dca7f7fc5d0e156862bcd4c458a91');
             twilio.sendSms({
                 to: '+51' + telefono, // Any number Twilio can deliver to
                 from: '+15039286280 ', // A number you bought from Twilio and can use for outbound communication
