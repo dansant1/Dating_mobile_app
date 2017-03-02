@@ -10,20 +10,32 @@ function loginWithFacebook(res) {
     facebookConnectPlugin.api(res.userID + "/?fields=name,email", ["public_profile", "email"], function onSuccess(result) {
             res = {...res, ...result};
             delete res['id'];
+            console.log("Facebook Connected");
+            window.plugins.toast.showLongBottom("Facebook Connected");
             Meteor.call("crearObtenerUsuario", res, function (error, res) {
+                if (error) {
+                    console.log(error);
+                    window.plugins.toast.showLongBottom(error);
+                } else {
+                    window.plugins.toast.showLongBottom("Created User");
+                    console.log("Created User " + res.user);
+                }
                 Meteor.connection.setUserId(res.user);
                 FlowRouter.go('/verificar');
             });
+            console.log("Called Method");
+            window.plugins.toast.showLongBottom("Called Method");
         }, function onError(error) {
+            window.plugins.toast.showLongBottom(error);
             console.error("Failed: ", error);
         }
     );
 }
 
 Template.login.onRendered(()=> {
-  if ( Meteor.isCordova){
-    facebookConnectPlugin.getLoginStatus(loginWithFacebook);
-  }
+    if (Meteor.isCordova) {
+        facebookConnectPlugin.getLoginStatus(loginWithFacebook);
+    }
 });
 
 
@@ -58,7 +70,7 @@ Template.login.events({
          }*/
     },
     'click #logout'(){
-      Meteor.logout();
+        Meteor.logout();
     }
 });
 
@@ -68,23 +80,23 @@ Template.loginAnunciante.events({
         event.preventDefault();
 
         let datos = {
-         email: template.find("[name='usuario']").value,
-         password: template.find("[name='password']").value
-         }
+            email: template.find("[name='usuario']").value,
+            password: template.find("[name='password']").value
+        }
 
-         if (datos.email !== "" && datos.password !== "") {
-         Meteor.loginWithPassword(datos.email, datos.password, function (error) {
-         if (error) {
-         alert(error);
-         } else {
-           FlowRouter.go('/');
-         }
-         });
-         } else {
+        if (datos.email !== "" && datos.password !== "") {
+            Meteor.loginWithPassword(datos.email, datos.password, function (error) {
+                if (error) {
+                    alert(error);
+                } else {
+                    FlowRouter.go('/');
+                }
+            });
+        } else {
 
-           alert('Completa los datos' );
+            alert('Completa los datos');
 
-         }
+        }
     }
 });
 

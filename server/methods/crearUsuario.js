@@ -1,14 +1,18 @@
 Meteor.methods({
     crearObtenerUsuario: function (datos) {
+        console.log("Method run");
+        window.plugins.toast.showLongBottom("Method run");
         let user = Meteor.users.findOne({"emails.address": datos.email});
         if (user) {
             return {
                 user: user._id
             }
         } else {
-            datos = {...datos, password: Random.id()}
+            datos = {...datos, password: Random.id()};
+            console.log("intenta crear");
             let usuarioId = Accounts.createUser(datos);
             if (usuarioId) {
+                console.log("creado");
                 Roles.addUsersToRoles(usuarioId, ['usuario'], 'app');
                 return {
                     user: usuarioId

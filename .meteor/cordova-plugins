@@ -1,3 +1,5 @@
 cordova-plugin-facebook4@file://private/plugins/cordova-plugin-facebook4
 cordova-plugin-geolocation@2.4.1
+cordova-plugin-splashscreen@3.2.1
+cordova-plugin-x-toast@2.6.0
 cordova-sms-plugin@0.1.11
