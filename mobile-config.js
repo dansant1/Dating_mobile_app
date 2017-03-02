@@ -1,12 +1,12 @@
 App.info({
-    id: 'com.grupo.ddv.sincompromiso.pe',
+    id: 'com.sc.sincompromiso.pe',
     name: 'Sin Compromiso',
     description: 'APP',
     author: 'Sin Compromiso - DDV',
     email: 'danieldelgadilloh@gmail.com',
     website: 'http://sincompromiso.grupoddv.com',
-    version: '0.0.2',
-    buildNumber: '101',
+    version: '0.0.1',
+    buildNumber: '100',
 });
 
 App.configurePlugin('cordova-plugin-facebook4', {
