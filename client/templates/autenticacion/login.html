@@ -17,7 +17,7 @@
             <input name="password" type="password" placeholder="Contraseña">
           </div> -->
 
-          
+
 
 
              {{#if currentUser}}
@@ -29,7 +29,41 @@
                 <button id="logout">Logout</button>
               {{else}}
                 <input type="button" style="background-color: #4862A3" class="boton ingresar" value="Ingresar con Facebook">
-                <p>¿Eres anunciantes? <a href="/signup">Regístrate</a></p>
+                <p>¿Eres anunciantes? <a href="/signup">Regístrate</a> o <a href="/login">Ingresa</a> </p>
+              {{/if}}
+      </div>
+    </div>
+  </div>
+</template>
+
+
+<template name="loginAnunciante">
+  <div class="contenedor">
+    <div class="wrapper">
+
+      <div class="formulario">
+
+          <div class="marketing">
+            <img src="/logo2.png" alt="logo">
+          </div>
+
+         <div class="search">
+            <span data-icon="f" class="icon"></span>
+            <input name="usuario"  placeholder="Username o Email">
+          </div>
+          <div class="search ">
+            <span data-icon="9" class="icon"></span>
+            <input name="password" type="password" placeholder="Contraseña">
+          </div>
+
+
+
+
+             {{#if currentUser}}
+                <button id="logout">Logout</button>
+              {{else}}
+                <input type="button" style="background-color: #4862A3" class="boton ingresar" value="Ingresar">
+                <p>¿Eres cliente? <a href="/signup">Regístrate</a> o <a href="/">Ingresa</a> </p>
               {{/if}}
       </div>
     </div>
@@ -38,7 +72,7 @@
 
 <template name="Verificar">
   <div class="menu2">
-    <a href="/#" style="color: white"> 
+    <a href="/#" style="color: white">
     <span style="color: white">Verifica tu Cuenta</span></a>
   </div>
   <div class="caracteristicas" style="padding: 15px;">
@@ -50,15 +84,15 @@
       <label for="celular">Celular</label>
       <input type="number" class="form-control" id="celular" name="celular">
     </div>
-    
+
     <input type="button" class="boton ingresar sms" value="Enviar SMS">
-    
+
   </div>
 </template>
 
 <template name="codigo">
   <div class="menu2">
-    <a href="/#" style="color: white"> 
+    <a href="/#" style="color: white">
     <span style="color: white">Verifica tu Cuenta</span></a>
   </div>
   <div class="caracteristicas" style="padding: 15px;">
