@@ -5,6 +5,32 @@ function onBackButtonDown(event) {
     event.stopPropagation()
 }
 
+Template.login.onCreated(()=> {
+  let self = Template.instance();
+  let user;
+  self.autorun( () => {
+      user = Meteor.user();
+
+      //usuario logueado
+      if ( user && typeof user._id !== 'undefined' ){
+
+            // usuario con numero de telefono verficado
+           if ( typeof user.profile.verificado !== 'undefined' && user.profile.verificado ){
+             FlowRouter.go('/anuncios');
+             return true;
+           }
+
+           //usario sin verificacion de telefono
+           if ( typeof user.profile.verificado === 'undefined' || !user.profile.verificado ){
+             FlowRouter.go('/verificar');
+             return true;
+           }
+
+      }
+
+  });
+});
+
 Template.login.onRendered(()=> {
 });
 
@@ -13,34 +39,18 @@ Template.login.events({
     'click .ingresar'(event, template) {
         event.preventDefault();
 
+        facebookConnectPlugin.logout();
         Meteor.loginWithNativeFacebook(['email'], function(err) {
           if ( err ){
             console.log( err );
             return ;
           }
           FlowRouter.go('/verificar');
-        })
+        });
 
-        /*let datos = {
-         email: template.find("[name='usuario']").value,
-         password: template.find("[name='password']").value
-         }
-         //alert(datos);
-         if (datos.email !== "" && datos.password !== "") {
-         Meteor.loginWithPassword(datos.email, datos.password, function (error) {
-         if (error) {
-         alert(error);
-         } else {
-         FlowRouter.go('/anuncios');
-         }
-         });
-         } else {
-
-         alert('Completa los datos' );
-
-         }*/
     },
     'click #logout'(){
+      facebookConnectPlugin.logout();
       Meteor.logout();
     }
 });
@@ -78,7 +88,12 @@ Template.tiendas.onCreated((options, user) => {
 
 
 Template.Verificar.onCreated(()=> {
-    console.log(Meteor.connection.userId());
+    let self = Template.instance();
+    self.autorun( () => {
+       if ( Meteor.userId() ){
+         FlowRouter.go('/anuncios');
+       }
+    });
 });
 
 Template.Verificar.events({

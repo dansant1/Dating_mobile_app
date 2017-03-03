@@ -83,6 +83,7 @@ Meteor.methods({
         }
     },
     crearToken: function (telefono) {
+        let userId = this.userId;
 
         let r = Math.round(new Date().getTime() / 10000.0);
 
@@ -101,6 +102,7 @@ Meteor.methods({
                 if (!err) {
                     console.log(responseData.from);
                     console.log(responseData.body);
+                    Meteor.users.update({ _id: userId }, { 'profile.verificado': true, 'profile.phoneNumber': telefono });
                 } else {
                     console.log(err);
                 }
