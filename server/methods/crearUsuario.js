@@ -95,7 +95,7 @@ Meteor.methods({
             twilio = Twilio('AC1fbb7fded7f812a8f1e92eb0ece4bdc8', '369dca7f7fc5d0e156862bcd4c458a91');
             twilio.sendSms({
                 to: '+51' + telefono, // Any number Twilio can deliver to
-                from: '+15039286280 ', // A number you bought from Twilio and can use for outbound communication
+                from: '+14043345398', // A number you bought from Twilio and can use for outbound communication
                 body: `Código de verificación ${r}` // body of the SMS message
             }, function (err, responseData) { //this function is executed when a response is received from Twilio
                 if (!err) {

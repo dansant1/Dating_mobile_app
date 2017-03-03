@@ -5,25 +5,7 @@ function onBackButtonDown(event) {
     event.stopPropagation()
 }
 
-function loginWithFacebook(res) {
-    res = res.authResponse;
-    facebookConnectPlugin.api(res.userID + "/?fields=name,email", ["public_profile", "email"], function onSuccess(result) {
-            res = {...res, ...result};
-            delete res['id'];
-            Meteor.call("crearObtenerUsuario", res, function (error, res) {
-                Meteor.connection.setUserId(res.user);
-                FlowRouter.go('/verificar');
-            });
-        }, function onError(error) {
-            console.error("Failed: ", error);
-        }
-    );
-}
-
 Template.login.onRendered(()=> {
-  if ( Meteor.isCordova){
-    facebookConnectPlugin.getLoginStatus(loginWithFacebook);
-  }
 });
 
 
@@ -31,12 +13,13 @@ Template.login.events({
     'click .ingresar'(event, template) {
         event.preventDefault();
 
-        if (Meteor.isCordova) {
-            facebookConnectPlugin.login(['email'], loginWithFacebook, function () {
-                    console.error('Error al loguearse con facebook');
-                }
-            );
-        }
+        Meteor.loginWithNativeFacebook(['email'], function(err) {
+          if ( err ){
+            console.log( err );
+            return ;
+          }
+          FlowRouter.go('/verificar');
+        })
 
         /*let datos = {
          email: template.find("[name='usuario']").value,
