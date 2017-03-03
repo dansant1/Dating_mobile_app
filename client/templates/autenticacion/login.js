@@ -31,11 +31,6 @@ Template.login.onCreated(()=> {
   });
 });
 
-Template.login.onRendered(()=> {
-
-});
-
-
 Template.login.events({
     'click .ingresar'(event, template) {
         event.preventDefault();

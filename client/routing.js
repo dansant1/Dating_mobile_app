@@ -1,14 +1,24 @@
 FlowRouter.route('/', {
   name: 'home',
   action() {
-    BlazeLayout.render('login');
+    if (Meteor.userId()) {
+      BlazeLayout.render('layout', { contenido: 'todos'});
+    } else {
+      BlazeLayout.render('login');
+    }
+
   }
 });
 
 FlowRouter.route('/login', {
   name: 'login',
   action() {
-    BlazeLayout.render('loginAnunciante');
+    if (Meteor.userId()) {
+      BlazeLayout.render('layout', { contenido: 'todos'});
+    } else {
+      BlazeLayout.render('loginAnunciante');
+    }
+
   }
 });
 

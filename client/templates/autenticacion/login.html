@@ -1,43 +1,30 @@
 <template name="login">
-  <div class="contenedor">
-    <div class="wrapper">
+    {{#if currentUser}}
 
-      <div class="formulario">
+    {{else}}
+      <div class="contenedor">
+        <div class="wrapper">
 
-          <div class="marketing">
-            <img src="/logo2.png" alt="logo">
+          <div class="formulario">
+
+              <div class="marketing">
+                <img src="/logo2.png" alt="logo">
+              </div>
+                    <input type="button" style="background-color: #4862A3" class="boton ingresar" value="Ingresar con Facebook">
+                    <p>¿Eres anunciante? <a href="/signup">Regístrate</a> o <a href="/login">Ingresa</a> </p>
+
           </div>
-
-         <!-- <div class="search ">
-            <span data-icon="f" class="icon"></span>
-            <input name="usuario"  placeholder="Username o Email">
-          </div>
-          <div class="search ">
-            <span data-icon="9" class="icon"></span>
-            <input name="password" type="password" placeholder="Contraseña">
-          </div> -->
-
-
-
-
-             {{#if currentUser}}
-
-
-              {{currentUser}}
-              {{currentUser.services.facebook.name}} -
-              {{currentUser.services.facebook.gender}}
-                <button id="logout">Logout</button>
-              {{else}}
-                <input type="button" style="background-color: #4862A3" class="boton ingresar" value="Ingresar con Facebook">
-                <p>¿Eres anunciantes? <a href="/signup">Regístrate</a> o <a href="/login">Ingresa</a> </p>
-              {{/if}}
+        </div>
       </div>
-    </div>
-  </div>
+    {{/if}}
 </template>
 
 
 <template name="loginAnunciante">
+  {{#if currentUser}}
+
+
+  {{else}}
   <div class="contenedor">
     <div class="wrapper">
 
@@ -59,15 +46,15 @@
 
 
 
-             {{#if currentUser}}
-                <button id="logout">Logout</button>
-              {{else}}
+
+
                 <input type="button" style="background-color: #4862A3" class="boton ingresar" value="Ingresar">
                 <p>¿Eres cliente? <a href="/signup">Regístrate</a> o <a href="/">Ingresa</a> </p>
-              {{/if}}
+
       </div>
     </div>
   </div>
+  {{/if}}
 </template>
 
 <template name="Verificar">

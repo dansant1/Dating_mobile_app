@@ -21,9 +21,9 @@
     <br>
     <br>
     <div class="sidebar-lista">
-      
+
       <button class="anunciar"><a href="/anuncios">Anuncios</a></button>
-      
+
       <button class="anunciar t"><a href="/productos">Tiendas</a></button>
       <button class="anunciar panico"><a>Pánico</a></button>
       <button class="anunciar a"><a href="/anunciar">Anunciar</a></button>
@@ -37,9 +37,9 @@
 
   <div class="banners" style="position: fixed; bottom: 0px; z-index: 1001">
      <div class="swiper-container" style="height: 97px; width: 100%;">
-      <!-- Additional required wrapper -->
+    
       <div class="swiper-wrapper" style="width: 100%; border-radius: 0;">
-          <!-- Slides -->
+
           {{#each banners}}
           <div class="swiper-slide" style="margin-bottom: 0;">
             {{#if isImage}}
@@ -48,14 +48,8 @@
           </div>
           {{/each}}
       </div>
-      <!-- If we need pagination -->
+
       <div class="swiper-pagination"></div>
-
-      <!-- If we need navigation buttons -->
-      <!--<div class="swiper-button-prev"></div>
-      <div class="swiper-button-next"></div> -->
-
-      <!-- If we need scrollbar -->
       <div class="swiper-scrollbar"></div>
       </div>
   </div>

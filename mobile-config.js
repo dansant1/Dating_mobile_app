@@ -1,11 +1,11 @@
 App.info({
-    id: 'com.sc.sincompromiso.pe',
+    id: 'com.v1.sincompromiso.pe',
     name: 'Sin Compromiso',
     description: 'APP',
     author: 'Sin Compromiso - DDV',
     email: 'danieldelgadilloh@gmail.com',
-    website: 'http://sincompromiso.grupoddv.com',
-    version: '0.0.2',
+    website: 'http://sincompromiso.pe',
+    version: '0.0.3',
     buildNumber: '101',
 });
 
@@ -21,17 +21,6 @@ App.icons({
   'android_xxhdpi': 'public/android/mipmap-xxhdpi/ic_launcher.png',
   'android_xxxhdpi': 'public/android/mipmap-xxxhdpi/ic_launcher.png',
 });
-
-/*App.launchScreens({
-  android_mdpi_portrait: ,
-  android_mdpi_landscape: ,
-  android_hdpi_portrait: ,
-  android_hdpi_landscape: ,
-  android_xhdpi_portrait: ,
-  android_xhdpi_landscape:,
-  android_xxhdpi_portrait: ,
-  android_xxhdpi_landscape:
-})*/
 
 App.accessRule('*.google.com/*');
 App.accessRule('*.googleapis.com/*');
