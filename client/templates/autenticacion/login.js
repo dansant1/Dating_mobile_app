@@ -32,6 +32,7 @@ Template.login.onCreated(()=> {
 });
 
 Template.login.onRendered(()=> {
+
 });
 
 
@@ -61,23 +62,23 @@ Template.loginAnunciante.events({
         event.preventDefault();
 
         let datos = {
-         email: template.find("[name='usuario']").value,
-         password: template.find("[name='password']").value
-         }
+            email: template.find("[name='usuario']").value,
+            password: template.find("[name='password']").value
+        }
 
-         if (datos.email !== "" && datos.password !== "") {
-         Meteor.loginWithPassword(datos.email, datos.password, function (error) {
-         if (error) {
-         alert(error);
-         } else {
-           FlowRouter.go('/');
-         }
-         });
-         } else {
+        if (datos.email !== "" && datos.password !== "") {
+            Meteor.loginWithPassword(datos.email, datos.password, function (error) {
+                if (error) {
+                    alert(error);
+                } else {
+                    FlowRouter.go('/');
+                }
+            });
+        } else {
 
-           alert('Completa los datos' );
+            alert('Completa los datos');
 
-         }
+        }
     }
 });
 
