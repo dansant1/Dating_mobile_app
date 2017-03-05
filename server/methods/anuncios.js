@@ -25,6 +25,9 @@ Meteor.methods({
       return;
     }
   },
+  eliminarFavorito(id) {
+    Favoritos.remove({_id: id})
+  },
   agregarTerminos: function (termino) {
     if (Terminos.find().fetch().length > 0) {
         Terminos.update({_id: Terminos.findOne()._id}, {
@@ -56,7 +59,7 @@ Meteor.methods({
   agregarAnunciante: function (data, password) {
 
     if (this.userId) {
-      
+
         let usuarioId = Accounts.createUser({
           email: data.email,
           password: password
@@ -66,7 +69,7 @@ Meteor.methods({
         data.calificacion = 0;
         data.anuncia = true;
         data.destacar = false;
-        
+
         let anuncianteId;
 
         if (usuarioId) {
@@ -75,12 +78,16 @@ Meteor.methods({
 
           Meteor.users.update({_id: usuarioId}, {
             $set: {
-              'profile.anuncianteId': anuncianteId
+              'profile.anuncianteId': anuncianteId,
+              'profile.verificado': true,
+              'profile.phoneNumber': datos.telefono,
+              'profile.edad': datos.edad,
+              'datos.nombre': datos.nombre
             }
           });
         }
 
-        
+
 
         return {
           id: anuncianteId

@@ -53,7 +53,7 @@ Template.cuenta.events({
     let datos = {
       nombre: t.find("[name='nombre']").value,
       edad: t.find("[name='edad']").value,
-      telefono: t.find("[name='telefono']").value,
+      phoneNumber: t.find("[name='telefono']").value,
       telefonoDeConocido: t.find("[name='telefonoc']").value
     }
 

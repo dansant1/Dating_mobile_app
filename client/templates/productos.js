@@ -1,5 +1,5 @@
 Template.productos.onCreated( () => {
-  
+
   let template = Template.instance();
 
     template.searchQuery = new ReactiveVar();
@@ -19,7 +19,7 @@ Template.productos.onCreated( () => {
     template.subscribe( 'fotosp' );
 
     });
-    
+
 });
 
 Template.productos.events({
@@ -48,7 +48,7 @@ Template.productos.helpers({
     if ( a ) {
       return a;
     }
-  
+
   },
   foto: function () {
     return FotosProductos.find({'metadata.tiendaId': Template.parentData(0)._id});
@@ -74,7 +74,7 @@ Template.productos.helpers({
 });*/
 
 Template.tiendas.onCreated( () => {
-  
+
   let template = Template.instance();
 
     template.searchQuery = new ReactiveVar();
@@ -91,9 +91,9 @@ Template.tiendas.onCreated( () => {
       });
 
       template.subscribe('productos',  FlowRouter.getParam('tiendaId'));
-    
+
     });
-    
+
 });
 
 Template.tienda.helpers({
@@ -102,12 +102,15 @@ Template.tienda.helpers({
   },
   productos: function () {
     return Productos.find();
+  },
+  tienda() {
+    return Tiendas.findOne({_id: FlowRouter.getParam('tiendaId')})
   }
 });
 
 Template.tiendas.events({
   'keyup [name="search"]' ( event, template ) {
-    
+
     let value = event.target.value.trim();
 
     if ( value !== '' && event.keyCode === 13 ) {
@@ -125,7 +128,7 @@ Template.tiendas.events({
 Template.tienda.onCreated( function () {
   var self = this;
   self.autorun(function () {
-    //self.subscribe('tiendas');
+    self.subscribe('tiendas');
     self.subscribe('productos',  FlowRouter.getParam('tiendaId'));
   //  self.subscribe('todosComentariosProductos');
   });

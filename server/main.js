@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 
 Meteor.startup(() => {
-/*var users = [{name:"Admin User",email:"admin@sincompromiso.pe",roles:['admin']}];
+/*var users = [{nombre:"Admin User",email:"admin@sincompromiso.pe",roles:['admin']}];
 
 _.each(users, function (user) {
   var id;
@@ -18,4 +18,17 @@ _.each(users, function (user) {
   }
 
 });*/
+
+/*  user = Accounts.createUser({
+    email: 'user@gmail.com',
+    password: "20dejunio"
+  });
+
+  Meteor.users.update({_id: user}, {
+    $set: {
+      'profile.nombre': 'Daniel Parker',
+      'profile.verificado': false
+    }
+  })
+  Roles.addUsersToRoles(user, 'usuario', 'app');*/
 });

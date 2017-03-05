@@ -1,7 +1,8 @@
 <template name="Favoritos">
   {{#each favoritos}}
 
-    <div class="anuncio" style="margin: 20px auto; height: 175px; padding-top: 5px;">
+    <div class="anuncio" style="margin: 20px auto; height: 195px; padding-top: 5px;">
+      <span class="remove-favorito" style="position: relative; top: 5px; left: 45%"><i class="fa fa-times" aria-hidden="true"></i></span>
       <div class="swiper-container" style="height: 97px; margin-bottom: 5px;">
       <!-- Additional required wrapper -->
       <div class="swiper-wrapper">
@@ -27,7 +28,7 @@
 
       <span ><i class="fa fa-user" aria-hidden="true"></i> {{nombreDeContacto this.anuncianteId}}</span>
       <div class="foot" style="padding-top: 10px;">
-        <a href="tel:+{{telefono this.anuncianteId}}" class="contacto" style="width: 100px; height: 20px; font-size: 12px; color: white; margin-top: 0px;">Llamar</a>
+        <a href="tel:+{{telefono this.anuncianteId}}" class="contacto" style="width: 100px; height: 20px; font-size: 12px; color: white; margin-top: 0px; padding-top: 2px">Llamar</a>
       </div>
     </div>
   {{/each}}

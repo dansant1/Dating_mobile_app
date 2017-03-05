@@ -21,3 +21,15 @@ Template.Favoritos.helpers({
     return Anunciantes.findOne({_id: anuncianteId}).telefono;
   }
 });
+
+Template.Favoritos.events({
+  'click .remove-favorito'() {
+    Meteor.call('eliminarFavorito', this._id, (err) => {
+      if (err) {
+        alert(err)
+      } else {
+        console.log('eliminado');
+      }
+    })
+  }
+})

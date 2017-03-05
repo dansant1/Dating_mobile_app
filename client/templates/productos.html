@@ -42,7 +42,7 @@
       </div>
     </div>
   {{else}}
-    <h2>No se encontro resultados para {{query}}</h2>
+    <h2 style="width: 80%; margin: 5px auto; text-align: center">No hay resultados para {{query}}</h2>
   {{/each}}
   {{/if}}
 
@@ -64,11 +64,11 @@
     <a class="nombre" href="/tiendas/{{this._id}}" style="color: white;">T</a>
       <span><i class="fa fa-shopping-basket" aria-hidden="true"></i> {{this.nombre}}</span>
       <div class="foot">
-        <span><i class="fa fa-comment" aria-hidden="true"></i> {{productos this._id}}</span>
+        <span><i class="fa fa-product-hunt" aria-hidden="true"></i> {{productos this._id}}</span>
       </div>
     </div>
   {{else}}
-    <h2>No hay resultados para {{query}}</h2>
+    <h2 style="width: 80%; margin: 5px auto; text-align: center">No hay resultados para {{query}}</h2>
   {{/each}}
   {{/if}}
   </div>
@@ -79,12 +79,36 @@
     <a href="/productos" style="color: white"><i class="fa fa-chevron-left" aria-hidden="true"></i>
     <span style="color: white">Tienda {{nombre}}</span></a>
   </div>
+  <div class="caracteristicas">
+    <table>
+      {{#with tienda}}
+      <tbody>
+        <tr>
+          <td>Rubro</td>
+          <td>{{this.rubro}}</td>
+
+        </tr>
+        <tr>
+
+          <td>Telefono</td>
+          <td>{{this.telefono}}</td>
+        </tr>
+        <tr>
+
+          <td>Horario de Atencion</td>
+          <td>{{this.horario}}</td>
+        </tr>
+
+       </tbody>
+       {{/with}}
+    </table>
+  </div>
    <div class="anuncios">
   {{#each productos}}
 
     <div class="anuncio" style="padding-top: 20px; height: 210px">
     <a class="nombre" href="/productos/{{this._id}}" style="color: white;">
-      
+
     </a>
       <span><i class="fa fa-shopping-basket" aria-hidden="true"></i> {{this.nombre}}</span>
       <div class="foot">

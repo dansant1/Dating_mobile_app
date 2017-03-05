@@ -99,8 +99,9 @@ Template.Verificar.events({
         let datos = {
             user: t.find("[name='user']").value,
             celular: t.find("[name='celular']").value,
-
         }
+
+        Session.set('telefono', datos.celular)
 
         if (datos.user !== "" && datos.celular !== "") {
             Meteor.call('crearToken', datos.celular, function (err) {
@@ -121,8 +122,9 @@ Template.codigo.events({
     'click .v': function (e, t) {
         let codigo = t.find("[name='codigo']").value;
 
+        let telefono = Session.get('telefono')
         if (codigo !== "") {
-            Meteor.call('verificarToken', codigo, function (err) {
+            Meteor.call('verificarToken', codigo, telefono, function (err) {
                 if (err) {
                     alert(err);
                 } else {

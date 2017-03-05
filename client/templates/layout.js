@@ -5,7 +5,7 @@ function geocodeLatLng () {
 
 navigator.geolocation.getCurrentPosition(function (position) {
     latlng = {
-      lat: position.coords.latitude, 
+      lat: position.coords.latitude,
       lng: position.coords.longitude
     }
 
@@ -20,7 +20,7 @@ navigator.geolocation.getCurrentPosition(function (position) {
               let message = '¡Necesito ayuda!, estoy en ' + ubicacion + " Mis coordenadas son: " + latlng.lat + ", " + latlng.lng;
 
               if (message) {
-                
+
                 //CONFIGURACIÓN
                 var options = {
                   replaceLineBreaks: false,
@@ -47,7 +47,7 @@ navigator.geolocation.getCurrentPosition(function (position) {
                 }
                 var error = function (e) { alert('Mensaje fallido:' + e); };
                 sms.send(number, message, options, success, error);
-              
+
               }
 
               console.log(results[1]);
@@ -55,7 +55,7 @@ navigator.geolocation.getCurrentPosition(function (position) {
           } else {
             alert('Configura tu número de conocido en tu cuenta');
           }
-          
+
         } else {
           alert('No results found');
         }
@@ -68,10 +68,10 @@ navigator.geolocation.getCurrentPosition(function (position) {
               alert('code: '    + error.code    + '\n' +
               'message: ' + error.message + '\n');
 });
-  
-  
 
- 
+
+
+
 }
 
 Template.layout.onCreated(function () {
@@ -81,6 +81,12 @@ Template.layout.onCreated(function () {
     self.subscribe('bannersPub');
   });
 });
+
+function loadURL(url){
+    navigator.app.loadUrl(url, { openExternal:true });
+    return false;
+}
+
 
 Template.layout.onRendered(function () {
   GoogleMaps.load({ v: '3', key: 'AIzaSyAVctAqnGHneN7aqeg7o5NTQTU-378KqEM', libraries: 'geometry,places' });
@@ -112,7 +118,7 @@ Template.layout.events({
     }
   },
   'click .panico': function () {
-    if (GoogleMaps.loaded()) {   
+    if (GoogleMaps.loaded()) {
       //alert('holas');
       let ubicacion = geocodeLatLng();
       Session.set('abrir', '');
@@ -120,7 +126,8 @@ Template.layout.events({
   },
   'click .logout': function  () {
     Meteor.logout();
-    FlowRouter.go('/');
+    //alert('hola')
+    FlowRouter.go('/login');
   },
   'click .a': function () {
     Session.set('abrir', '');
@@ -132,6 +139,9 @@ Template.layout.events({
     FlowRouter.go('/cuenta');
   },
   'click .clic': function (e, t) {
+    let url = $('c' + this._id).attr("href");
+    //alert(url)
+    //loadURL('https://www.youtube.com/watch?v=9LQs2cbKhkc');
     Meteor.call('aumentarClick', this._id, function (err) {
       if (err) {
         alert('Hubo un err');

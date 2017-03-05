@@ -1,7 +1,7 @@
 <template name="Administrador">
 
   {{>AdministradorAnuncios}}
-  
+
 </template>
 
 <template name="menu">
@@ -19,10 +19,10 @@
       <div id="navbar" class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
           <li><a href="/admin">Anuncios</a></li>
-         
+
           <li><a href="/admin/usuarios">Usuarios</a></li>
           <li><a href="/admin/publicidad">Publicidad</a></li>
-          <li><a href="/admin/reportes">Reportes</a></li> 
+          <li><a href="/admin/reportes">Reportes</a></li>
           <li><a href="/admin/contratos">Contratos</a></li>
 
         </ul>
@@ -140,8 +140,8 @@
       <div class="form-group">
         <label for="provincia">Provincia</label>
          <select class="form-control" id="provincia">
-            <option>lima</option>
-            <option>callao</option>
+            <option>Lima</option>
+            <option>Callao</option>
             <option>Amazonas</option>
             <option>Áncash</option>
             <option>Apurímac</option>
@@ -204,7 +204,7 @@
             <option>Surquillo</option>
             <option>Villa El Salvador</option>
             <option>Villa María del Triunfo</option>
-            <option>Otros</option>
+            <option>Multiples</option>
         </select>
       </div>
       <div class="form-group">
@@ -238,12 +238,12 @@
         <th style="padding: 0px; background: white; color: black; text-align: center;">Teléfono</th>
         <!--<th>Color de piel</th>
         <th>Intereses</th> -->
-        <th style="padding: 0px; background: white; color: black; text-align: center;">Género</th> 
+        <th style="padding: 0px; background: white; color: black; text-align: center;">Género</th>
         <th style="padding: 0px; background: white; color: black; text-align: center;">Edad</th>
         <!--<th>Color de cabello</th>
         <th>Medidas</th> -->
         <th style="padding: 0px; background: white; color: black; text-align: center;">Ubicación</th>
-        
+
         <th style="padding: 0px; background: white; color: black; text-align: center;">Precio</th>
         <th style="padding: 0px; background: white; color: black; text-align: center;">Destacar</th>
         <th style="padding: 0px; background: white; color: black; text-align: center;">Aprobar</th>
@@ -254,7 +254,7 @@
       <tr>
         <td style="padding: 5px">{{this.nombre}}</td>
         <td style="padding: 5px">{{this.telefono}}</td>
-        
+
         <td style="padding: 5px">{{this.genero}}</td>
         <td style="padding: 5px">{{this.edad}}</td>
         <td style="padding: 5px">{{this.ubicacion}}</td>
@@ -279,27 +279,41 @@
         <th style="padding: 0px; background: white; color: black; text-align: center;">Teléfono</th>
         <!--<th>Color de piel</th>
         <th>Intereses</th> -->
-        <th style="padding: 0px; background: white; color: black; text-align: center;">Género</th> 
+        <th style="padding: 0px; background: white; color: black; text-align: center;">Género</th>
         <th style="padding: 0px; background: white; color: black; text-align: center;">Edad</th>
-        <!--<th>Color de cabello</th>
-        <th>Medidas</th> -->
+
         <th style="padding: 0px; background: white; color: black; text-align: center;">Ubicación</th>
-        
+
         <th style="padding: 0px; background: white; color: black; text-align: center;">Precio</th>
+        <th style="padding: 0px; background: white; color: black; text-align: center;">Fotos</th>
+        <th style="padding: 0px; background: white; color: black; text-align: center;">Editar</th>
         <th style="padding: 0px; background: white; color: black; text-align: center;">Aprobar</th>
       </tr>
     </thead>
     <tbody>
       {{#each anunciosNoAprobados}}
       <tr>
-        <td style="padding: 5px">{{this.nombre}}</td>
-        <td style="padding: 5px">{{this.telefono}}</td>
-        
-        <td style="padding: 5px">{{this.genero}}</td>
-        <td style="padding: 5px">{{this.edad}}</td>
-        <td style="padding: 5px">{{this.ubicacion}}</td>
+        <td style="padding: 5px"><input type="text" class="an{{this._id}} form-control" value="{{this.nombre}}"></td>
+        <td style="padding: 5px"><input type="text" class="at{{this._id}} form-control" value="{{this.telefono}}"></td>
+        <td style="padding: 5px"><input type="text" class="ag{{this._id}} form-control" value="{{this.genero}}"></td>
+        <td style="padding: 5px"><input type="text" class="ae{{this._id}} form-control" value="{{this.edad}}"></td>
+        <td style="padding: 5px"><input type="text" class="au{{this._id}} form-control" value="{{this.ubicacion}}"></td>
         <td style="padding: 5px">
-          <input type="text" class="precio" name="{{this._id}}" value="{{this.precio}}">
+          <input type="text" class="precio form-control" name="{{this._id}}" value="{{this.precio}}">
+        </td>
+        <td>
+          <label class="btn btn-default btn-file">
+            Subir foto <input type="file" class="f" id="foto{{this._id}}" style="display: none;">
+          </label>
+          <br>
+          {{#each fotos}}
+            <img src="{{this.url}}" style="width: 30px; height: 30px; border-radius: 70%; display: inline-block; margin: 10px auto;">
+            <span class="eliminar-foto" style="display: inline-block; margin-left: 15px"><i class="fa fa-times" aria-hidden="true"></i></span>
+            <br>
+          {{/each}}
+        </td>
+        <td style="padding: 5px">
+          <button class="guardar-anuncio-no btn btn-primary">Guardar</button>
         </td>
         <td style="padding: 5px">
           <button class="aprobar btn btn-default">Aprobar</button>
@@ -309,7 +323,7 @@
     </tbody>
     </table>
   </div>
-  
+
    <div class="row">
      <h2>Interesados</h2>
       <p>Lista de personas interesadas en publicar</p>
@@ -319,7 +333,7 @@
         <th style="padding: 0px; background: white; color: black; text-align: center;">Nombre</th>
         <th style="padding: 0px; background: white; color: black; text-align: center;">Teléfono</th>
         <th style="padding: 0px; background: white; color: black; text-align: center;">Tipo</th>
-        
+
       </tr>
     </thead>
     <tbody>
@@ -344,22 +358,27 @@
         <th style="padding: 0px; background: white; color: black; text-align: center;">Teléfono</th>
         <th style="padding: 0px; background: white; color: black; text-align: center;">Rubro</th>
         <th style="padding: 0px; background: white; color: black; text-align: center;">Horario de atención</th>
+        <th style="padding: 0px; background: white; color: black; text-align: center;">Editar / Eliminar</th>
       </tr>
     </thead>
     <tbody>
       {{#each tiendas}}
       <tr>
-        <td style="padding: 5px">{{this.nombre}}</td>
-        <td style="padding: 5px">{{this.telefono}}</td>
-        <td style="padding: 5px">{{this.rubro}}</td>
-        <td style="padding: 5px">{{this.horario}}</td>   
+        <td style="padding: 5px"><input type="text" class="tn{{this._id}} form-control" name="nombre" value="{{this.nombre}}"></td>
+        <td style="padding: 5px"><input type="text" class="te{{this._id}} form-control" name="telefono" value="{{this.telefono}}"></td>
+        <td style="padding: 5px"><input type="text" class="tr{{this._id}} form-control" name="rubro" value="{{this.rubro}}"></td>
+        <td style="padding: 5px"><input type="text" class="th{{this._id}} form-control" name="horario" value="{{this.horario}}"></td>
+        <td>
+          <button type="button" class="btn btn-primary guardar-tienda">Guardar</button>
+          <button type="button" class="btn btn-danger eliminar-tienda">x</button>
+        </td>
       </tr>
       {{/each}}
     </tbody>
     </table>
   </div>
- 
- 
+
+
 </div>
 </template>
 
@@ -405,9 +424,14 @@
       <div class="col-md-12">
         <div class="form-group">
           <label for="comment">Terminos y condiciones</label>
-          {{#each terminos}}
-          <textarea class="form-control" rows="10" id="t" name="t">{{this.contenido}}</textarea>
-          {{/each}}
+          {{#if noHayTerminos}}
+            <textarea class="form-control" rows="10" id="t" name="t"></textarea>
+          {{else}}
+            {{#each terminos}}
+            <textarea class="form-control" rows="10" id="t" name="t">{{this.contenido}}</textarea>
+            {{/each}}
+          {{/if}}
+
           <br>
           <button class="gt btn btn-default">Guardar</button>
         </div>
@@ -417,9 +441,14 @@
       <div class="col-md-12">
         <div class="form-group">
           <label for="comment">Politicas de privacidad</label>
-          {{#each politicas}}
-          <textarea class="form-control" rows="10" id="p" name="p">{{this.contenido}}</textarea>
-          {{/each}}
+          {{#if noHayPoliticas}}
+          <textarea class="form-control" rows="10" id="p" name="p"></textarea>
+          {{else}}
+            {{#each politicas}}
+            <textarea class="form-control" rows="10" id="p" name="p">{{this.contenido}}</textarea>
+            {{/each}}
+          {{/if}}
+
           <br>
           <button class="gp btn btn-default">Guardar</button>
         </div>

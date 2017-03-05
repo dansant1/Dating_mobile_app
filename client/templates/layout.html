@@ -1,57 +1,64 @@
 <template name="layout">
   {{#if currentUser}}
-  <div class="menu">
-    <i class="fa fa-bars abrir" aria-hidden="true"></i>
-    <i class="fa fa-user cuenta" style="width: 40px; position: relative; top: 10px;  left: 310px;" aria-hidden="true"></i>
-    <div class="lista">
-        {{#if isInRole 'anunciante' 'app'}}
-         <!-- <a href="/ofertas2"  style="width: 105px;">Ofertas</a> -->
-        {{else}}
-          <a href="/contactos"  style="width: 125px;">Mis llamadas</a>
-        {{/if}}
-      <a href="/anuncios" >Todos</a>
-      <a href="/favoritos"  style="width: 95px;">Favoritos</a>
-    </div>
-  </div>
-
-  <div class="sidebar {{mostrar}}">
-  <div class="back" style="background: rgba(104, 16, 255, 0.4)">
-    <i class="fa fa-times cerrar" aria-hidden="true"></i>
-    <br>
-    <br>
-    <br>
-    <div class="sidebar-lista">
-
-      <button class="anunciar"><a href="/anuncios">Anuncios</a></button>
-
-      <button class="anunciar t"><a href="/productos">Tiendas</a></button>
-      <button class="anunciar panico"><a>Pánico</a></button>
-      <button class="anunciar a"><a href="/anunciar">Anunciar</a></button>
-      <button class="anunciar logout"><a href="/#">Logout</a></button>
-    </div>
-  </div>
-
-  </div>
-
-  {{> Template.dynamic template=contenido}}
-
-  <div class="banners" style="position: fixed; bottom: 0px; z-index: 1001">
-     <div class="swiper-container" style="height: 97px; width: 100%;">
-    
-      <div class="swiper-wrapper" style="width: 100%; border-radius: 0;">
-
-          {{#each banners}}
-          <div class="swiper-slide" style="margin-bottom: 0;">
-            {{#if isImage}}
-            <a href="{{this.metadata.url}}" class="clic" target="_blank"><img src="{{this.url}}" alt="{{this.url}}" style="width: 100%; height: 70px; border-radius: 0; margin-bottom: : 0px;"></a>
-            {{/if}}
+    {{#if currentUser.profile.verificado}}
+        <div class="menu">
+          <i class="fa fa-bars abrir" aria-hidden="true"></i>
+          <i class="fa fa-user cuenta" style="width: 40px; position: relative; top: 10px;  left: 310px;" aria-hidden="true"></i>
+          <div class="lista">
+              {{#if isInRole 'anunciante' 'app'}}
+              {{else}}
+                <a href="/contactos"  style="width: 125px;">Mis llamadas</a>
+              {{/if}}
+            <a href="/anuncios" >Todos</a>
+            <a href="/favoritos"  style="width: 95px;">Favoritos</a>
           </div>
-          {{/each}}
-      </div>
+        </div>
+        <div class="sidebar {{mostrar}}">
+        <div class="back" style="background: rgba(104, 16, 255, 0.4)">
+          <i class="fa fa-times cerrar" aria-hidden="true"></i>
+          <br>
+          <br>
+          <br>
+          <div class="sidebar-lista">
 
-      <div class="swiper-pagination"></div>
-      <div class="swiper-scrollbar"></div>
-      </div>
-  </div>
+            <button class="anunciar"><a href="/anuncios">Anuncios</a></button>
+
+            <button class="anunciar t"><a href="/productos">Tiendas</a></button>
+            <button class="anunciar panico"><a>Pánico</a></button>
+            {{#if isInRole 'anunciante' 'app'}}
+            {{else}}
+              <button class="anunciar a"><a href="/anunciar">Anunciar</a></button>
+            {{/if}}
+
+            <button class="anunciar logout"><a href="/">Logout</a></button>
+          </div>
+        </div>
+
+        </div>
+        {{> Template.dynamic template=contenido}}
+
+        <div class="banners" style="position: fixed; bottom: 0px; z-index: 1001">
+           <div class="swiper-container" style="height: 97px; width: 100%;">
+
+            <div class="swiper-wrapper" style="width: 100%; border-radius: 0;">
+
+                {{#each banners}}
+                <div class="swiper-slide" style="margin-bottom: 0;">
+                  {{#if isImage}}
+                  <a href="{{this.metadata.url}}" click="loadURL({{this.metadata.url}})" class="clic c{{this._id}}"><img src="{{this.url}}" alt="{{this.url}}" style="width: 100%; height: 70px; border-radius: 0; margin-bottom: : 0px;"></a>
+                  {{/if}}
+                </div>
+                {{/each}}
+            </div>
+
+            <div class="swiper-pagination"></div>
+            <div class="swiper-scrollbar"></div>
+            </div>
+        </div>
+    {{else}}
+      {{>Verificar}}
+    {{/if}}
+  {{else}}
+    {{>login}}
   {{/if}}
 </template>

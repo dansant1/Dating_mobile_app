@@ -1,68 +1,24 @@
 <template name="PerfilAnunciante">
-
   {{#with anunciante}}
   <div class="perfil">
     <div class="swiper-container">
-      <!-- Additional required wrapper -->
       <div class="swiper-wrapper">
-          <!-- Slides -->
           {{#each fotos}}
           <div class="swiper-slide">
             <img src="{{this.url}}" alt="{{this.url}}">
           </div>
           {{/each}}
       </div>
-      <!-- If we need pagination -->
       <div class="swiper-pagination"></div>
-
-      <!-- If we need navigation buttons -->
       <div class="swiper-button-prev"></div>
       <div class="swiper-button-next"></div>
-
-      <!-- If we need scrollbar -->
       <div class="swiper-scrollbar"></div>
     </div>
     <span class="s-anunciante"><i class="fa fa-map-marker" aria-hidden="true"></i> {{this.ubicacion}}</span>
     <span class="s-anunciante"><i class="fa fa-user" aria-hidden="true"></i> {{this.nombre}}</span>
-    <!--<span class="s-anunciante"><i class="fa fa-map-marker" aria-hidden="true"></i> {{this.ubicacion}}</span>
-    <div class="calificacion">
-      <button class="1">
-        <i class="fa fa-star" aria-hidden="true"></i>
-      </button>
-      <button class="2">
-        <i class="fa fa-star" aria-hidden="true"></i>
-      </button>
-      <button class="3">
-        <i class="fa fa-star" aria-hidden="true"></i>
-      </button>
-      <button class="4">
-        <i class="fa fa-star" aria-hidden="true"></i>
-      </button>
-      <button class="5">
-        <i class="fa fa-star" aria-hidden="true"></i>
-      </button>
-      <button class="6">
-        <i class="fa fa-star" aria-hidden="true"></i>
-      </button>
-      <button class="7">
-        <i class="fa fa-star" aria-hidden="true"></i>
-      </button>
-      <button class="8">
-        <i class="fa fa-star" aria-hidden="true"></i>
-      </button>
-      <button class="9">
-        <i class="fa fa-star" aria-hidden="true"></i>
-      </button>
-      <button class="10">
-        <i class="fa fa-star" aria-hidden="true"></i>
-      </button>
-    </div>
 
-    <p>{{this.calificacion}}</p> -->
-
-    <a href="tel:+{{this.telefono}}" class="contacto llamar">Llamar</a>
-    <a href="tel:+{{this.telefono}}" class="contacto llamar">SMS</a>
-   <!-- <a class="contacto ofertar">Ofertar</a> -->
+    <a href="tel:{{this.telefono}}" class="contacto llamar">Llamar</a>
+    <a href="#" class="contacto sms">SMS</a>
 
     <button class="favorito" style="display: block; width: 40px; height: 40px; margin: 10px auto; border: none; background-color: transparent; color: rgba(241, 196, 15,1.0); font-size: 35px;">
         <i class="fa fa-star" aria-hidden="true"></i>
@@ -101,22 +57,6 @@
         </tr>
        </tbody>
     </table>
-   <!-- <h1>Comentarios</h1>
-    <div class="comentarios">
-      <br>
-      <br>
-      {{#each comentarios}}
-      <div class="comentario">
-        <img src="/principal.jpg">
-        <p>
-          <span>{{this.username}}</span>
-          <a>{{this.comentario}}</a>
-        </p>
-      </div>
-      {{/each}}
-
-
-    </div>-->
   </div>
   {{/with}}
 </template>

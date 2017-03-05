@@ -103,9 +103,9 @@
         });
     }
 // Fin de la funcion para convertir string con tildes a string normal
-function subirFoto (event, template, anuncianteId) {
+function subirFoto (event, template, anuncianteId, id) {
 
-    let archivo = document.getElementById("foto");
+    let archivo = document.getElementById(id);
 
     if ('files' in archivo) {
 
@@ -157,6 +157,7 @@ Template.AdministradorAnuncios.onCreated(function () {
     self.subscribe('anunciantes');
     self.subscribe('tiendas');
     self.subscribe('interesados');
+    self.subscribe('fotos')
   });
 });
 
@@ -173,13 +174,16 @@ Template.AdministradorAnuncios.helpers({
   },
   interesados: function () {
     return Postulantes.find();
+  },
+  fotos() {
+    return Fotos.find({'metadata.anuncianteId': this._id})
   }
 });
 
 Template.AdministradorAnuncios.events({
   'change #destacado': function (e, t) {
       let destacado = $('#destacado.' + this._id).is(':checked')
-      
+
       console.log(destacado);
 
       Meteor.call('destacar', destacado, this._id, function (err) {
@@ -189,6 +193,51 @@ Template.AdministradorAnuncios.events({
           alert('Anunciante destacado');
         }
       });
+  },
+  'click .eliminar-foto'() {
+    Fotos.remove({_id: this._id})
+  },
+  'click .guardar-tienda'(e, t) {
+    let datos = {
+      nombre: $('.tn' + this._id).val(),
+      telefono: $('.te' + this._id).val(),
+      rubro: $('.tr' + this._id).val(),
+      horario: $('.th' + this._id).val()
+    }
+
+    Meteor.call('editarTienda', this._id, datos, (err) => {
+      if (err) {
+        alert('Hubo un error')
+      } else {
+        alert('Tienda Editada')
+      }
+    })
+  },
+  'click .eliminar-tienda'() {
+    Meteor.call('eliminarTienda', this._id, (err) => {
+      if (err) {
+        alert(err)
+      } else {
+        alert('Tienda Eliminada')
+      }
+    })
+  },
+  'click .guardar-anuncio-no'(e, t) {
+    let datos = {
+      nombre: $(".an" + this._id).val(),
+      telefono: $(".at" + this._id).val(),
+      genero: $(".ag" + this._id).val(),
+      edad: $(".ae" + this._id).val(),
+      ubicacion: $(".au" + this._id).val()
+    }
+
+    Meteor.call('editarAnuncio', this._id, datos, (err) => {
+      if (err) {
+        alert(err)
+      } else {
+        alert('Anuncio Editado')
+      }
+    })
   }
 });
 
@@ -218,7 +267,7 @@ Template.Administrador.events({
     });
   },
   'change #foto': function (event, template) {
-    subirFoto(event, template, this._id);
+    subirFoto(event, template, this._id, '#foto');
   },
   'keyup .precio': function (event, template) {
 
@@ -252,6 +301,9 @@ Template.AdministradorAnuncios.events({
       }
     });
   },
+  'change .f'(event, template) {
+    subirFoto(event, template, this._id, 'foto' + this._id);
+  },
   'click .desaprobar': function () {
     Meteor.call('desaprobar', this._id, function (error) {
       if (error) {
@@ -284,7 +336,7 @@ Template.AdministradorAnuncios.events({
         if (err) {
           alert(err);
         } else {
-          subirFoto(event, template, result.id);
+          subirFoto(event, template, result.id, 'foto');
           alert('Anunciante agregado')
         }
     });
@@ -335,6 +387,20 @@ Template.AdministradorContratos.helpers({
   },
   politicas: function () {
     return Politicas.find();
+  },
+  noHayTerminos() {
+    if (Terminos.find().fetch().length < 1) {
+      return true
+    } else {
+      return false
+    }
+  },
+  noHayPoliticas() {
+    if (Politicas.find().fetch().length < 1) {
+      return true
+    } else {
+      return false
+    }
   }
 });
 
@@ -376,7 +442,8 @@ Template.AgregarTienda.events({
     if (datos.email !== "" && datos.password !== "" && datos.nombre !== "" && datos.rubro !== "" && datos.telefonotienda !== "" && datos.horario !== "") {
         Meteor.call('crearVendedor', datos, function (err) {
           if (err) {
-            alert(err);
+
+            console.log(err);
           } else {
             t.find("[name='email']").value = "";
             t.find("[name='password']").value = "";

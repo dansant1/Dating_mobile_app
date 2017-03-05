@@ -1,4 +1,5 @@
 <template name="todos">
+
   <div class="anuncios">
   <div class="form-group" style="width: 80%; display: block; margin: 10px auto;">
 
@@ -9,12 +10,12 @@
       <h2>Cargando...</h2>
   {{else}}
     {{#each anunciantes}}
-          
+
         <div class="anuncio">
           {{#if this.destacar}}
-            
-            <div class="novedad">Anuncio Destacado</div>          
-  
+
+            <div class="novedad">Anuncio Destacado</div>
+
           {{/if}}
           <div class="swiper-container" style="height: 97px;">
           <!-- Additional required wrapper -->
@@ -51,8 +52,9 @@
 
       {{/each}}
   {{/if}}
-  
+
   </div>
+
 </template>
 
 

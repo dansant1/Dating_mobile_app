@@ -35,7 +35,7 @@ Template.PerfilAnunciante.onRendered(function () {
 });
 
 Template.PerfilAnunciante.events({
-  
+
   'click .panico'() {
 
         let number = document.getElementById('numberTxt').value;
@@ -177,6 +177,24 @@ Template.PerfilAnunciante.events({
         alert('Agregado a favoritos');
       }
     });
+  },
+  'click .sms'() {
+    let number = this.telefono;
+    let message = 'Desearia contactarte';
+
+    console.log("número: " + number + ", mensaje: " + message);
+
+    //CONFIGURACIÓN
+    var options = {
+        replaceLineBreaks: false,
+        android: {
+            intent: 'INTENT'
+        }
+    };
+
+    var success = function () { /*alert('Mensaje enviado exitosamente'); */};
+    var error = function (e) { alert('Mensaje fallido:' + e); };
+    sms.send(number, message, options, success, error);
   }
 });
 

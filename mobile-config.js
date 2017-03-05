@@ -28,4 +28,4 @@ App.accessRule('*.gstatic.com/*');
 
 App.setPreference('SplashScreen', 'CDVSplashScreen');
 App.setPreference('AutoHideSplashScreen', false);
-App.setPreference('SplashScreenDelay', '1000');
+App.setPreference('SplashScreenDelay', '3000');
