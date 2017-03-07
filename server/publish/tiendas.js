@@ -16,7 +16,7 @@ Meteor.publish('tiendas', function () {
   }
 });
 
-Meteor.publish('productos', function (tiendaId) {
+Meteor.publish('tiendaProductos', function (tiendaId) {
   if (this.userId) {
     return Productos.find({tiendaId: tiendaId});
   } else {
