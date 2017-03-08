@@ -80,9 +80,9 @@ Meteor.methods({
             $set: {
               'profile.anuncianteId': anuncianteId,
               'profile.verificado': true,
-              'profile.phoneNumber': datos.telefono,
-              'profile.edad': datos.edad,
-              'datos.nombre': datos.nombre
+              'profile.phoneNumber': data.telefono,
+              'profile.edad': data.edad,
+              'datos.nombre': data.nombre
             }
           });
         }
