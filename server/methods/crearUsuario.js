@@ -77,15 +77,18 @@ Meteor.methods({
       Tiendas.remove({_id: id})
     },
     editarAnuncio(id, datos) {
+      console.log( id );
+      console.log( datos );
       Anunciantes.update({_id: id}, {
         $set: {
           nombre: datos.nombre,
           telefono: datos.telefono,
+          intereses: datos.intereses,
           genero: datos.genero,
           edad: datos.edad,
           ubicacion: datos.ubicacion
         }
-      })
+      });
     },
     crearVendedor: function (datos) {
 

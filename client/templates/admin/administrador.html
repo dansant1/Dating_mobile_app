@@ -279,6 +279,7 @@
       <tr>
         <th style="padding: 0px; background: white; color: black; text-align: center;">Nombre</th>
         <th style="padding: 0px; background: white; color: black; text-align: center;">Teléfono</th>
+        <th style="padding: 0px; background: white; color: black; text-align: center;">Correo</th>
         <!--<th>Color de piel</th>
         <th>Intereses</th> -->
         <th style="padding: 0px; background: white; color: black; text-align: center;">Género</th>
@@ -287,7 +288,7 @@
         <th>Medidas</th> -->
         <th style="padding: 0px; background: white; color: black; text-align: center;">Ubicación</th>
 
-        <th style="padding: 0px; background: white; color: black; text-align: center;">Precio</th>
+        <th style="padding: 0px; background: white; color: black; text-align: center;">Descripcion</th>
         <th style="padding: 0px; background: white; color: black; text-align: center;">Destacar</th>
         <th style="padding: 0px; background: white; color: black; text-align: center;">Aprobar</th>
       </tr>
@@ -297,13 +298,12 @@
       <tr>
         <td style="padding: 5px">{{this.nombre}}</td>
         <td style="padding: 5px">{{this.telefono}}</td>
+        <td style="padding: 5px">{{#with getUser this.userId }} {{#each this.emails}} {{this.address}} {{/each}} {{/with}}</td>
 
         <td style="padding: 5px">{{this.genero}}</td>
         <td style="padding: 5px">{{this.edad}}</td>
         <td style="padding: 5px">{{this.ubicacion}}</td>
-        <td style="padding: 5px">
-          <input type="text" class="precio" name="{{this._id}}" value="{{this.precio}}">
-        </td>
+        <td style="padding: 5px">{{this.intereses}}</td>
          <td style="padding: 5px">
           <input type="checkbox" name="destacado" class="{{this._id}}" id="destacado" {{checked}}>
         </td>
@@ -320,6 +320,7 @@
       <tr>
         <th style="padding: 0px; background: white; color: black; text-align: center;">Nombre</th>
         <th style="padding: 0px; background: white; color: black; text-align: center;">Teléfono</th>
+        <th style="padding: 0px; background: white; color: black; text-align: center;">Correo</th>
         <!--<th>Color de piel</th>
         <th>Intereses</th> -->
         <th style="padding: 0px; background: white; color: black; text-align: center;">Género</th>
@@ -327,7 +328,7 @@
 
         <th style="padding: 0px; background: white; color: black; text-align: center;">Ubicación</th>
 
-        <th style="padding: 0px; background: white; color: black; text-align: center;">Precio</th>
+        <th style="padding: 0px; background: white; color: black; text-align: center;">Descripcion</th>
         <th style="padding: 0px; background: white; color: black; text-align: center;">Fotos</th>
         <th style="padding: 0px; background: white; color: black; text-align: center;">Editar</th>
         <th style="padding: 0px; background: white; color: black; text-align: center;">Aprobar</th>
@@ -338,12 +339,11 @@
       <tr>
         <td style="padding: 5px"><input type="text" class="an{{this._id}} form-control" value="{{this.nombre}}"></td>
         <td style="padding: 5px"><input type="text" class="at{{this._id}} form-control" value="{{this.telefono}}"></td>
+        <td style="padding: 5px"><input type="text" class="email {{this._id}} form-control" value="{{#with getUser this.userId }} {{#each this.emails}} {{this.address}} {{/each}} {{/with}}"></td>
         <td style="padding: 5px"><input type="text" class="ag{{this._id}} form-control" value="{{this.genero}}"></td>
         <td style="padding: 5px"><input type="text" class="ae{{this._id}} form-control" value="{{this.edad}}"></td>
         <td style="padding: 5px"><input type="text" class="au{{this._id}} form-control" value="{{this.ubicacion}}"></td>
-        <td style="padding: 5px">
-          <input type="text" class="precio form-control" name="{{this._id}}" value="{{this.precio}}">
-        </td>
+        <td style="padding: 5px"><input type="text" class="intereses {{this._id}} form-control" name="{{this._id}}" value="{{this.intereses}}"></td>
         <td>
           <label class="btn btn-default btn-file">
             Subir foto <input type="file" class="f" id="foto{{this._id}}" style="display: none;">

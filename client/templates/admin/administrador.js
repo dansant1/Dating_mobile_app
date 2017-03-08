@@ -153,6 +153,8 @@ Template.Administrador.onCreated( function () {
 Template.AdministradorAnuncios.onCreated(function () {
   var self = this;
 
+  Meteor.subscribe( 'users' );
+
   self.autorun(function () {
     self.subscribe('anunciantes');
     self.subscribe('tiendas');
@@ -177,6 +179,9 @@ Template.AdministradorAnuncios.helpers({
   },
   fotos() {
     return Fotos.find({'metadata.anuncianteId': this._id})
+  },
+  getUser( userId ){
+    return Meteor.users.findOne({ _id: userId });
   }
 });
 
@@ -226,10 +231,13 @@ Template.AdministradorAnuncios.events({
     let datos = {
       nombre: $(".an" + this._id).val(),
       telefono: $(".at" + this._id).val(),
+      intereses: $(".intereses." + this._id).val(),
+      email: $(".email." + this._id).val(),
       genero: $(".ag" + this._id).val(),
       edad: $(".ae" + this._id).val(),
       ubicacion: $(".au" + this._id).val()
     }
+    console.log( datos );
 
     Meteor.call('editarAnuncio', this._id, datos, (err) => {
       if (err) {
