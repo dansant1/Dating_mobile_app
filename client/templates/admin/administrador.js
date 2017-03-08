@@ -267,6 +267,7 @@ Template.Administrador.events({
     });
   },
   'change #foto': function (event, template) {
+    console.log( this );
     subirFoto(event, template, this._id, '#foto');
   },
   'keyup .precio': function (event, template) {
@@ -435,6 +436,7 @@ Template.AgregarTienda.events({
       password: t.find("[name='password']").value,
       nombre: t.find("[name='tienda']").value,
       rubro: $( "#rubro option:selected" ).text(),
+      distrito: $( "#distritotienda option:selected" ).text(),
       telefono: t.find("[name='telefonotienda']").value,
       horario: t.find("[name='horario']").value
     }
