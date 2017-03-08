@@ -40,16 +40,6 @@ Template.login.events({
     'click .ingresar'(event, template) {
         event.preventDefault();
 
-        /*facebookConnectPlugin.logout();
-        Meteor.loginWithNativeFacebook(['email'], function(err) {
-<<<<<<< HEAD
-          if ( err ){
-            console.log( err );
-            return ;
-          }
-          FlowRouter.go('/verificar');
-        });*/
-
         let datos = {
           email: template.find("[name='email']").value,
           password: template.find("[name='password']").value,
@@ -58,7 +48,7 @@ Template.login.events({
           }
         }
 
-        if (datos.email !== "" && datos.password !== "" && datos.profile.telefono !== "" && datos.profile.edad >= 18 && datos.profile.edad <= 70) {
+        if (datos.email !== "" && datos.password !== "" && datos.profile.edad >= 18 && datos.profile.edad <= 70) {
           Meteor.call('crearUsuario', datos, function (error) {
               if (error) {
                 alert(error);
@@ -80,13 +70,6 @@ Template.login.events({
             alert('completa los datos');
           }
         }
-=======
-            if ( err ){
-              console.log( err );
-              return ;
-            }
-        });
->>>>>>> aeaa70bb8ec2303a5397e22dd2b1808326f60378
 
     },
     'click #logout'(){
