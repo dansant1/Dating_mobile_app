@@ -29,12 +29,11 @@ Meteor.methods({
       if (userId) {
         Meteor.users.update({_id: userId}, {
             $set: {
-                'profile.nombre': datos.profile.nombre,
                 'profile.edad': datos.profile.edad,
                 'profile.verificado': false
             }
         })
-        Roles.addUsersToRoles(userId, ['anunciante'], 'app');
+        Roles.addUsersToRoles(userId, ['usuario'], 'app');
         console.log(userId);
 
       } else {

@@ -72,8 +72,8 @@ textarea:focus, input:focus, input[type]:focus, .uneditable-input:focus {
   color: #7f8c8d;
   font-family: 'Raleway', sans-serif;
   font-weight: 300;
-  margin-top: 7.5px;
-  font-size: 14px;
+  margin-top: 0px;
+  font-size: 13px;
 }
 
 .formulario p a {
@@ -89,9 +89,9 @@ a:hover {
   width: 80%;
   margin: 0px auto;
 	position: relative;
-	top: -11px;
+	top: -60px;
 
-	padding-top: 19px;
+	padding-top: 15px;
 	color: white;
 }
 .search input {

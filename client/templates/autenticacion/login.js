@@ -35,14 +35,45 @@ Template.login.events({
     'click .ingresar'(event, template) {
         event.preventDefault();
 
-        facebookConnectPlugin.logout();
+        /*facebookConnectPlugin.logout();
         Meteor.loginWithNativeFacebook(['email'], function(err) {
           if ( err ){
             console.log( err );
             return ;
           }
           FlowRouter.go('/verificar');
-        });
+        });*/
+
+        let datos = {
+          email: template.find("[name='email']").value,
+          password: template.find("[name='password']").value,
+          profile: {
+            edad: template.find("[name='edad']").value
+          }
+        }
+
+        if (datos.email !== "" && datos.password !== "" && datos.profile.telefono !== "" && datos.profile.edad >= 18 && datos.profile.edad <= 70) {
+          Meteor.call('crearUsuario', datos, function (error) {
+              if (error) {
+                alert(error);
+              } else {
+                Meteor.loginWithPassword(datos.email, datos.password, function (error) {
+                  if (error) {
+                    alert(error);
+                  } else {
+                    //alert('verifica');
+                    FlowRouter.go('/verificar');
+                  }
+                });
+              }
+          });
+        } else {
+          if (datos.profile.edad < 18) {
+            alert('No puedes registrarter, eres menor de 18 años');
+          } else {
+            alert('completa los datos');
+          }
+        }
 
     },
     'click #logout'(){
