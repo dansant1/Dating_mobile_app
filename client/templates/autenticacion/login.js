@@ -13,15 +13,20 @@ Template.login.onCreated(()=> {
 
       //usuario logueado
       if ( user && typeof user._id !== 'undefined' ){
+            // si el usuario es admin, no necesita verficar
+            if ( Roles.userIsInRole( user._id, 'admin', 'default-group' ) ){
+              FlowRouter.go('/anuncios');
+              return true;
+            }
 
             // usuario con numero de telefono verficado
-           if ( typeof user.profile.verificado !== 'undefined' && user.profile.verificado ){
+           else if ( typeof user.profile.verificado !== 'undefined' && user.profile.verificado ){
              FlowRouter.go('/anuncios');
              return true;
            }
 
            //usario sin verificacion de telefono
-           if ( typeof user.profile.verificado === 'undefined' || !user.profile.verificado ){
+           else if ( typeof user.profile.verificado === 'undefined' || !user.profile.verificado ){
              FlowRouter.go('/verificar');
              return true;
            }
@@ -37,6 +42,7 @@ Template.login.events({
 
         /*facebookConnectPlugin.logout();
         Meteor.loginWithNativeFacebook(['email'], function(err) {
+<<<<<<< HEAD
           if ( err ){
             console.log( err );
             return ;
@@ -74,6 +80,13 @@ Template.login.events({
             alert('completa los datos');
           }
         }
+=======
+            if ( err ){
+              console.log( err );
+              return ;
+            }
+        });
+>>>>>>> aeaa70bb8ec2303a5397e22dd2b1808326f60378
 
     },
     'click #logout'(){

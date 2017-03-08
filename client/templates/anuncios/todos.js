@@ -1,9 +1,11 @@
 Template.todos.onCreated( () => {
-  
+  console.log("todos - anuncios");
+
   let template = Template.instance();
 
     template.searchQuery = new ReactiveVar();
     template.searching   = new ReactiveVar( false );
+
 
     template.autorun( () => {
       template.subscribe( 'anunciantes2', template.searchQuery.get(), () => {
@@ -20,7 +22,7 @@ Template.todos.onCreated( () => {
 
     });
 
-    
+
 });
 
 Template.todos.events({
@@ -31,12 +33,12 @@ Template.todos.events({
 
 Template.todos.helpers({
   anunciantes: function () {
-    
+
     let a = Anunciantes.find({});
     if ( a ) {
       return a;
     }
-    
+
 
     //return Anunciantes.find({});
   },

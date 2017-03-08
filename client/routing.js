@@ -8,7 +8,7 @@ FlowRouter.route('/', {
 FlowRouter.route('/login', {
   name: 'login',
   action() {
-    if (Meteor.userId()) {
+    if ( Meteor.userId() ) {
       BlazeLayout.render('layout', { contenido: 'todos'});
     } else {
       BlazeLayout.render('loginAnunciante');

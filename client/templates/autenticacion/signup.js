@@ -21,7 +21,7 @@ Template.signup.events({
                 if (error) {
                   alert(error);
                 } else {
-                  //alert('verifica');
+                  console.log("signup - verficar");
                   FlowRouter.go('/verificar');
                 }
               });
