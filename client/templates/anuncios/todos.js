@@ -26,8 +26,10 @@ Template.todos.onCreated( () => {
 });
 
 Template.todos.events({
-  'click .anuncio': function () {
-    FlowRouter.go('/anunciante/' + this._id);
+  'click .anuncio'(e,t) {
+    let target = $(e.currentTarget);
+    let anuncioId = target.attr( "id" );
+    FlowRouter.go('/anunciante/' + anuncioId );
   }
 });
 
