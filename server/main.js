@@ -1,6 +1,12 @@
 import { Meteor } from 'meteor/meteor';
 
 Meteor.startup(() => {
+  process.env.MAIL_URL = "smtp://postmaster@grupoddv.com:faf68e2df2f77397baf3a38e8cd9f209@smtp.mailgun.org:587";
+
+  Accounts.urls.resetPassword = function(token) {
+    return Meteor.absoluteUrl('reset-password/' + token);
+  };
+
 // var users = [{nombre:"Admin User",email:"admin@sincompromiso.pe",roles:['admin']}];
 //
 // _.each(users, function (user) {

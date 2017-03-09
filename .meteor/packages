@@ -38,4 +38,4 @@ accounts-facebook
 service-configuration
 accolver:twilio-meteor
 random
-jsep:facebook-native-login
+themeteorchef:bert

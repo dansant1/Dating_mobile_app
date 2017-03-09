@@ -60,6 +60,13 @@ Meteor.methods({
 
     if (this.userId) {
 
+        let userExist = Accounts.users.find({'emails.address': data.email }).count();
+
+        if ( userExist ){
+          throw new Meteor.Error("Ese correo ya esta asociado a otro usuario");
+        }
+
+
         let usuarioId = Accounts.createUser({
           email: data.email,
           password: password
@@ -82,7 +89,7 @@ Meteor.methods({
               'profile.verificado': true,
               'profile.phoneNumber': data.telefono,
               'profile.edad': data.edad,
-              'datos.nombre': data.nombre
+              'datos.nombre': data.nombre,
             }
           });
         }

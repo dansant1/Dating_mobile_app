@@ -237,7 +237,6 @@ Template.AdministradorAnuncios.events({
       edad: $(".ae" + this._id).val(),
       ubicacion: $(".au" + this._id).val()
     }
-    console.log( datos );
 
     Meteor.call('editarAnuncio', this._id, datos, (err) => {
       if (err) {
@@ -343,9 +342,9 @@ Template.AdministradorAnuncios.events({
 
     Meteor.call('agregarAnunciante', datos, password, function (err, result) {
         if (err) {
-          alert(err);
+          Bert.alert(err.error, 'danger', 'growl-top-right');
         } else {
-          subirFoto(event, template, result.id, 'foto');
+          // subirFoto(event, template, result.id, 'foto');
           alert('Anunciante agregado')
         }
     });
@@ -452,8 +451,7 @@ Template.AgregarTienda.events({
     if (datos.email !== "" && datos.password !== "" && datos.nombre !== "" && datos.rubro !== "" && datos.telefonotienda !== "" && datos.horario !== "") {
         Meteor.call('crearVendedor', datos, function (err) {
           if (err) {
-
-            console.log(err);
+            Bert.alert(err, 'danger');
           } else {
             t.find("[name='email']").value = "";
             t.find("[name='password']").value = "";

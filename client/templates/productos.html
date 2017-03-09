@@ -99,16 +99,23 @@
           <td>{{this.horario}}</td>
         </tr>
 
+        <tr>
+          <td class="perfil" style="width:auto;border:none;"> <a href="tel:{{this.telefono}}" class="contacto llamar">Llamar</a> </td>
+          <td class="perfil" style="width:auto;border:none;"> <a href="#" class="contacto sms">SMS</a> </td>
+        </tr>
+
        </tbody>
        {{/with}}
     </table>
   </div>
+
    <div class="anuncios">
   {{#each productos}}
 
     <div class="anuncio" style="padding-top: 20px; height: 210px">
-    <a class="nombre" href="/productos/{{this._id}}" style="color: white;">
 
+    <a class="nombre" href="/productos/{{this._id}}" style="color: white;">
+      <!-- <img src="{{this.url}}" alt="{{this.url}}" style="width: 95px; height: 95px; margin-top: 2px;"> -->
     </a>
       <span><i class="fa fa-shopping-basket" aria-hidden="true"></i> {{this.nombre}}</span>
       <div class="foot">

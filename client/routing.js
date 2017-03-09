@@ -5,6 +5,13 @@ FlowRouter.route('/', {
   }
 });
 
+FlowRouter.route('/forgotpassword', {
+  name: 'forgotpassword',
+  action() {
+      BlazeLayout.render('forgotpassword');
+  }
+});
+
 FlowRouter.route('/login', {
   name: 'login',
   action() {

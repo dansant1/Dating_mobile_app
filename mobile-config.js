@@ -5,8 +5,8 @@ App.info({
     author: 'Sin Compromiso - DDV',
     email: 'danieldelgadilloh@gmail.com',
     website: 'http://sincompromiso.pe',
-    version: '0.0.4',
-    buildNumber: '104',
+    version: '0.0.5',
+    buildNumber: '105',
 });
 
 App.configurePlugin('cordova-plugin-facebook4', {

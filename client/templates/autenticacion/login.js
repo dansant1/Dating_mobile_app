@@ -105,8 +105,8 @@ Template.loginAnunciante.events({
 });
 
 Template.tiendas.onCreated((options, user) => {
-    console.log(options);
-    console.log(user);
+    // console.log(options);
+    // console.log(user);
 });
 
 
@@ -143,6 +143,21 @@ Template.Verificar.events({
             alert('Complete los datos');
         }
     }
+});
+
+Template.forgotpassword.events({
+  'click .ingresar'(e,t) {
+
+    let email = t.find("[name='email']").value;
+
+    Accounts.forgotPassword({email: email}, function (e, r) {
+        if (e) {
+            Bert.alert(e.reason, 'warning', 'growl-top-right');
+        } else {
+            Bert.alert('Hemos enviado un correo, para reiniciar su cuenta', 'success', 'growl-top-right');
+        }
+    });
+  }
 });
 
 Template.codigo.events({
