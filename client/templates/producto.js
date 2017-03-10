@@ -189,12 +189,31 @@ Template.calificarProducto.events({
   'click .comentar': function (event, template) {
     let comentario = template.find("[name='comentario']").value;
     let productoId = FlowRouter.getParam('productoId')
-    Meteor.call('comentarProducto', comentario, productoId, function (err) {
-      if (err) {
-        console.log(err);
-      } else {
-        Modal.hide('calificarProducto');
-      }
-    });
+    if (comentario !== "") {
+      Meteor.call('comentarProducto', comentario, productoId, function (err) {
+        if (err) {
+          console.log(err);
+        } else {
+          Modal.hide('calificarProducto');
+        }
+      });
+    }
+
   }
 });
+
+Template.tienda.onCreated( () => {
+  let template = Template.instance()
+
+  template.autorun( () => {
+    template.subscribe("fotosp")
+  })
+})
+
+Template.tienda.helpers({
+  FotosProductos() {
+    let n = FotosTienda.find({'metadata.tiendId': this._id}).fetch().length
+    console.log(n);
+    return FotosTienda.find({'metadata.tiendId': this._id})
+  }
+})

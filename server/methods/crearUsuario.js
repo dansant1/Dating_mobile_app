@@ -92,18 +92,16 @@ Meteor.methods({
     },
     crearVendedor: function (datos) {
 
-        let userExist = Accounts.find({'emails.$': datos.email }).count();
+        /*let userExist = Accounts.find({'emails.$': datos.email }).count();
         console.log( userExist );
 
         if ( userExist ){
           throw new Meteor.Error("Ese correo ya esta asociado a otro usuario");
-        }
+        }*/
 
         let usuarioId = Accounts.createUser({
             email: datos.email,
             password: datos.password
-        }, (error) => {
-          throw new Meteor.Error(error);
         });
 
         let tiendaId = Tiendas.insert({

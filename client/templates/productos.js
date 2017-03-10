@@ -89,7 +89,7 @@ Template.tiendas.onCreated( () => {
           }, 300 );
 
       });
-
+      template.subscribe('fotost')
       template.subscribe('productos',  FlowRouter.getParam('tiendaId'));
 
     });
@@ -101,10 +101,15 @@ Template.tienda.helpers({
     return Tiendas.findOne({_id: FlowRouter.getParam('tiendaId')}).nombre
   },
   productos: function () {
-    return Productos.find();
+    return Productos.find({tiendaId: FlowRouter.getParam('tiendaId')});
   },
   tienda() {
     return Tiendas.findOne({_id: FlowRouter.getParam('tiendaId')})
+  },
+  fotos() {
+    let n = FotosProductos.find({'metadata.tiendaId': this._id}).fetch().length
+    console.log(n);
+    return FotosProductos.find({'metadata.tiendaId': this._id})
   }
 });
 
@@ -129,6 +134,8 @@ Template.tienda.onCreated( function () {
   var self = this;
   self.autorun(function () {
     self.subscribe('tiendas');
+    self.subscribe('fotost')
+    self.subscribe('fotosp')
     self.subscribe('productos',  FlowRouter.getParam('tiendaId'));
   //  self.subscribe('todosComentariosProductos');
   });
@@ -155,5 +162,31 @@ Template.tiendas.helpers({
   },
   query() {
     return Template.instance().searchQuery.get();
+  },
+  fotos(tiendaId) {
+    let n = FotosTienda.find({'metadata.tiendId': this._id}).fetch().length
+    console.log(n);
+    return FotosTienda.find({'metadata.tiendId': this._id})
   }
 });
+
+Template.tienda.events({
+  'click .sms'() {
+    let number = this.telefono;
+    let message = 'Quisiera contactarlos';
+
+    console.log("número: " + number + ", mensaje: " + message);
+
+    //CONFIGURACIÓN
+    var options = {
+        replaceLineBreaks: false,
+        android: {
+            intent: 'INTENT'
+        }
+    };
+
+    var success = function () { /*alert('Mensaje enviado exitosamente');*/ };
+    var error = function (e) { alert('Mensaje fallido:' + e); };
+    sms.send(number, message, options, success, error);
+  }
+})

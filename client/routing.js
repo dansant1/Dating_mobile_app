@@ -15,12 +15,9 @@ FlowRouter.route('/forgotpassword', {
 FlowRouter.route('/login', {
   name: 'login',
   action() {
-    if ( Meteor.userId() ) {
-      BlazeLayout.render('layout', { contenido: 'todos'});
-    } else {
-      BlazeLayout.render('loginAnunciante');
-    }
 
+      BlazeLayout.render('loginAnunciante');
+    
   }
 });
 

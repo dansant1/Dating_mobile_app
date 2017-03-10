@@ -401,6 +401,7 @@
         <th style="padding: 0px; background: white; color: black; text-align: center;">Teléfono</th>
         <th style="padding: 0px; background: white; color: black; text-align: center;">Rubro</th>
         <th style="padding: 0px; background: white; color: black; text-align: center;">Horario de atención</th>
+        <th>Logo</th>
         <th style="padding: 0px; background: white; color: black; text-align: center;">Editar / Eliminar</th>
       </tr>
     </thead>
@@ -411,6 +412,12 @@
         <td style="padding: 5px"><input type="text" class="te{{this._id}} form-control" name="telefono" value="{{this.telefono}}"></td>
         <td style="padding: 5px"><input type="text" class="tr{{this._id}} form-control" name="rubro" value="{{this.rubro}}"></td>
         <td style="padding: 5px"><input type="text" class="th{{this._id}} form-control" name="horario" value="{{this.horario}}"></td>
+        <td style="padding: 5px">
+          <label class="btn btn-default btn-file">
+            Subir Logo <input type="file" class="ft" id="fototienda{{this._id}}" style="display: none;">
+          </label>
+
+        </td>
         <td>
           <button type="button" class="btn btn-primary guardar-tienda">Guardar</button>
           <button type="button" class="btn btn-danger eliminar-tienda">x</button>

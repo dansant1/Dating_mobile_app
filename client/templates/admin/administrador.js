@@ -142,6 +142,59 @@ function subirFoto (event, template, anuncianteId, id) {
     }
 } // Fin de la funcion subirFoto
 
+function subirFotoTienda (event, template, tiendaId, id) {
+
+    let archivo = document.getElementById(id);
+
+    if ('files' in archivo) {
+
+        if (archivo.files.length == 0) {
+           console.log('Selecciona una foto');
+        } else if (archivo.files.length > 1) {
+           console.log('Selecciona solo una foto');
+        } else {
+
+
+          for (var i = 0; i < archivo.files.length; i++) {
+
+            var filei = archivo.files[i];
+
+            var doc = new FS.File(filei);
+
+            var nuevoNombre = removeDiacritics(doc.name());
+            doc.name(nuevoNombre);
+
+            doc.metadata = {
+              tiendId: tiendaId
+            };
+            let hay = FotosTienda.find({'metadata.tiendId': tiendaId}).fetch().length
+            let id = FotosTienda.find({'metadata.tiendId': tiendaId}).fetch()[0]._id;
+            if (hay > 0) {
+              FotosTienda.remove({_id: id})
+              FotosTienda.insert(doc, function (err, fileObj) {
+                if (err) {
+                  console.log(err);
+                } else {
+
+                  console.log('Foto subida');
+                }
+              });
+            } else {
+              FotosTienda.insert(doc, function (err, fileObj) {
+                if (err) {
+                  console.log(err);
+                } else {
+
+                  console.log('Foto subida');
+                }
+              });
+            }
+
+          }
+        }
+    }
+}
+
 Template.Administrador.onCreated( function () {
   var self = this;
 
@@ -160,6 +213,7 @@ Template.AdministradorAnuncios.onCreated(function () {
     self.subscribe('tiendas');
     self.subscribe('interesados');
     self.subscribe('fotos')
+    self.subscribe('fotost')
   });
 });
 
@@ -312,6 +366,9 @@ Template.AdministradorAnuncios.events({
   'change .f'(event, template) {
     subirFoto(event, template, this._id, 'foto' + this._id);
   },
+  'change .ft'(event, template) {
+    subirFotoTienda(event, template, this._id, 'fototienda' + this._id);
+  },
   'click .desaprobar': function () {
     Meteor.call('desaprobar', this._id, function (error) {
       if (error) {
@@ -451,7 +508,7 @@ Template.AgregarTienda.events({
     if (datos.email !== "" && datos.password !== "" && datos.nombre !== "" && datos.rubro !== "" && datos.telefonotienda !== "" && datos.horario !== "") {
         Meteor.call('crearVendedor', datos, function (err) {
           if (err) {
-            Bert.alert(err, 'danger');
+            //Bert.alert(err, 'danger');
           } else {
             t.find("[name='email']").value = "";
             t.find("[name='password']").value = "";

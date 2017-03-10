@@ -91,7 +91,7 @@ Politicas = new Mongo.Collection('politicas');
 
 Terminos = new Mongo.Collection('terminos');
 
-Panico = new Mongo.Collection('panico'); 
+Panico = new Mongo.Collection('panico');
 
 Comentarios = new Mongo.Collection('comentarios');
 
@@ -109,6 +109,33 @@ Fotos = new FS.Collection("fotos", {
 
 // agregamos los permisos allow/deny
 Fotos.allow({
+  insert: function () {
+    return true;
+  },
+  update: function () {
+    return true;
+  },
+  remove: function () {
+    return true;
+  },
+  download: function () {
+    return true;
+  }
+});
+
+// tienda
+let docStoret = new FS.Store.GridFS("fotost", {
+  maxTries: 3
+});
+
+
+// Creamos la DB para Fotos
+FotosTienda = new FS.Collection("fotost", {
+  stores: [docStoret]
+});
+
+// agregamos los permisos allow/deny
+FotosTienda.allow({
   insert: function () {
     return true;
   },

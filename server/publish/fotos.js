@@ -8,6 +8,15 @@ Meteor.publish('fotos', function () {
 
 });
 
+Meteor.publish('fotost', function () {
+  if (this.userId) {
+    return FotosTienda.find({});
+  } else {
+    this.stop();
+    return;
+  }
+
+});
 
 Meteor.publish('bannersPub', function () {
   if (this.userId) {
@@ -18,4 +27,3 @@ Meteor.publish('bannersPub', function () {
   }
 
 });
-
