@@ -122,15 +122,28 @@
   {{#each productos}}
 
     <div class="anuncio" style="padding-top: 20px; height: 210px">
-    {{#each fotos}}
-    <a class="nombre" href="/productos/{{this._id}}" style="color: white;">
-       <img src="{{this.url}}" alt="{{this.url}}" style="width: 100px;
-    height: 100px;
-    margin: -35px;">
-    </a>
-    {{else}}
-      <a class="nombre" href="/productos/{{this._id}}" style="color: white;"></a>
-    {{/each}}
+      <div class="swiper-container" style="height: 123px">
+        <div class="swiper-wrapper">
+            {{#each fotos}}
+            <div class="swiper-slide" >
+              <a  href="/productos/{{this.metadata.tiendaId}}" style="color: white;">
+              <img src="{{this.url}}" style="margin-top: 0px;
+    width: 125px;
+    height: 125px;
+"  alt="{{this.url}}"></a>
+            </div>
+            {{else}}
+            <div class="swiper-slide">
+              <a class="nombre" href="/productos/{{this._id}}" style="color: white;"></a>
+            </div>
+            {{/each}}
+        </div>
+        <div class="swiper-pagination"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-scrollbar"></div>
+      </div>
+  
       <span><i class="fa fa-shopping-basket" aria-hidden="true"></i> {{this.nombre}}</span>
       <div class="foot">
         <span style="width: 195px">S/ {{this.precio}}</span>

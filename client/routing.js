@@ -17,7 +17,7 @@ FlowRouter.route('/login', {
   action() {
 
       BlazeLayout.render('loginAnunciante');
-    
+
   }
 });
 
@@ -146,6 +146,13 @@ FlowRouter.route('/admin', {
   name: 'Administrador',
   action() {
     BlazeLayout.render('Admin', { administrador: 'Administrador'});
+  }
+});
+
+FlowRouter.route('/admin/comentarios', {
+  name: 'Administrador.Comentarios',
+  action() {
+    BlazeLayout.render('Admin', { administrador: 'AdministradorComentarios'});
   }
 });
 

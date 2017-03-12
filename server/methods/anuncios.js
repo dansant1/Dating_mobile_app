@@ -89,7 +89,7 @@ Meteor.methods({
               'profile.verificado': true,
               'profile.phoneNumber': data.telefono,
               'profile.edad': data.edad,
-              'datos.nombre': data.nombre,
+              'profile.nombre': data.nombre,
             }
           });
         }
@@ -169,6 +169,7 @@ Meteor.methods({
         userId: this.userId,
         createdAt: new Date(),
         comentario: comentario,
+        aprobado: false,
         anuncianteId: anuncianteId,
         username: Meteor.users.findOne({_id: this.userId}).username
       });
@@ -276,5 +277,19 @@ Meteor.methods({
   },
   panico: function (datos) {
     Panico.insert(datos);
+  },
+  aprobarComentario(id) {
+    Comentarios.update({_id: id}, {
+      $set: {
+        aprobado: true
+      }
+    })
+  },
+  desaprobarComentario(id) {
+    Comentarios.update({_id: id}, {
+      $set: {
+        aprobado: false
+      }
+    })
   }
 });

@@ -1,23 +1,61 @@
 <template name="PerfilAnunciante">
   {{#with anunciante}}
   <div class="perfil">
-    <div class="swiper-container">
+
+    <!--<div class="swiper-container2">
       <div class="swiper-wrapper">
-          {{#each fotos}}
-          <div class="swiper-slide">
-            <img src="{{this.url}}" alt="{{this.url}}">
-          </div>
-          {{/each}}
+
       </div>
-      <div class="swiper-pagination"></div>
-      <div class="swiper-button-prev"></div>
-      <div class="swiper-button-next"></div>
-      <div class="swiper-scrollbar"></div>
+    </div> -->
+
+    <div class="galeria">
+      {{#each fotos}}
+
+              {{#if isImage}}
+                <img src="{{this.url}}" alt="{{this.url}}">
+              {{/if}}
+
+      {{/each}}
     </div>
+
       <span class="s-anunciante"><i class="fa fa-user" aria-hidden="true"></i> {{this.nombre}}</span>
     <span class="s-anunciante" style="font-size: 15px">{{this.intereses}}</span>
     <span class="s-anunciante"><i class="fa fa-map-marker" aria-hidden="true"></i> {{this.ubicacion}}</span>
 
+    <div class="calificacion">
+       <button class="1">
+         <i class="fa fa-star" aria-hidden="true"></i>
+       </button>
+       <button class="2">
+         <i class="fa fa-star" aria-hidden="true"></i>
+       </button>
+       <button class="3">
+         <i class="fa fa-star" aria-hidden="true"></i>
+       </button>
+       <button class="4">
+         <i class="fa fa-star" aria-hidden="true"></i>
+       </button>
+       <button class="5">
+         <i class="fa fa-star" aria-hidden="true"></i>
+       </button>
+       <button class="6">
+         <i class="fa fa-star" aria-hidden="true"></i>
+       </button>
+       <button class="7">
+         <i class="fa fa-star" aria-hidden="true"></i>
+       </button>
+       <button class="8">
+         <i class="fa fa-star" aria-hidden="true"></i>
+       </button>
+       <button class="9">
+         <i class="fa fa-star" aria-hidden="true"></i>
+       </button>
+       <button class="10">
+         <i class="fa fa-star" aria-hidden="true"></i>
+       </button>
+     </div>
+
+     <p>{{this.calificacion}}</p>
 
     <a href="tel:{{this.telefono}}" class="contacto llamar">Llamar</a>
     <a href="#" class="contacto sms">SMS</a>
@@ -59,6 +97,20 @@
         </tr>
        </tbody>
     </table>
+    <h1>Comentarios</h1>
+     <div class="comentarios">
+       <br>
+       <br>
+       {{#each comentarios}}
+       <div class="comentario">
+
+         <p>
+           <span>{{user}}</span>
+           <a>{{this.comentario}}</a>
+         </p>
+       </div>
+       {{/each}}
+     </div>
   </div>
   {{/with}}
 </template>

@@ -176,13 +176,45 @@ Template.Ventas.events({
     let id = document.getElementById('foto' + _id)
 
     subirFoto(event, template, this._id, id);
+  },
+  'click .remove'(e, t) {
+    Meteor.call('eliminarProducto', this._id, (err) => {
+      if (err) {
+        alert(err)
+      } else {
+        alert('Producto Eliminado')
+      }
+    })
+  },
+  'click .edit'(e, t) {
+    let datos = {
+      titulo: $(".t" + this._id).val(),
+      descripcion: $(".d" + this._id).val(),
+      precio: $(".p" + this._id).val()
+    }
+    let id = this._id;
+
+    if (datos.titulo !== "" && datos.descripcion !== "" && datos.precio !== "") {
+      Meteor.call('editarProducto', id, datos, (err) => {
+        if (err) {
+          alert(err)
+        } else {
+          alert('Producto Actualizado')
+        }
+      })
+    } else {
+      alert('Complete los datos')
+    }
+  },
+  'click .remove-foto'() {
+    FotosProductos.remove({_id: this._id})
   }
 });
 
 Template.menuVentas.events({
   'click .salir': function () {
       Meteor.logout();
-  } 
+  }
 });
 
 Template.adminVentas.onCreated(function () {
@@ -190,6 +222,7 @@ Template.adminVentas.onCreated(function () {
 
   self.autorun(function () {
       self.subscribe('productosxtienda');
+      self.subscribe('fotosp')
   });
 
 });
@@ -197,5 +230,8 @@ Template.adminVentas.onCreated(function () {
 Template.adminVentas.helpers({
   productos: function () {
     return Productos.find();
+  },
+  fotos() {
+    return FotosProductos.find({'metadata.tiendaId': this._id})
   }
 });

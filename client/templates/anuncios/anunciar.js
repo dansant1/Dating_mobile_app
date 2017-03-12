@@ -43,6 +43,10 @@ Template.Anunciar.events({
         }
       });
     }
+  },
+  'click .logout'() {
+    Meteor.logout()
+    FlowRouter.go('/login');
   }
 });
 

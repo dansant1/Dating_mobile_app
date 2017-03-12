@@ -4,7 +4,7 @@
 			"env":
 				{
         	"ROOT_URL": "http://v1.sincompromiso.pe/",
-					"MONGO_URL": "mongodb://admin:admin@ds127958.mlab.com:27958/sincompromiso"
+					"MONGO_URL": "mongodb://admin:admin@ds129030.mlab.com:29030/sincompromiso"
 				}
 		}
 }

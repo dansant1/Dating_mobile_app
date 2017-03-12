@@ -31,5 +31,9 @@ Template.Favoritos.events({
         console.log('eliminado');
       }
     })
+  },
+  'click .a'(e,t) {
+
+    FlowRouter.go('/anunciante/' + this.anuncianteId );
   }
 })

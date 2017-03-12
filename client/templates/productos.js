@@ -64,14 +64,25 @@ Template.productos.helpers({
   }
 });
 
-/*Template.tienda.onCreated(function () {
-  var self = this;
+Template.tienda.onRendered(function () {
+  var mySwiper = new Swiper ('.swiper-container', {
+    // Optional parameters
+    direction: 'horizontal',
+    loop: true,
+    autoplay: 10000,
 
-  self.autorun(function () {
-    self.subscribe('tiendas');
-    self.subscribe('productos',  FlowRouter.getParam('tiendaId'));
+    // If we need pagination
+    pagination: '.swiper-pagination',
+
+    // Navigation arrows
+    nextButton: '.swiper-button-next',
+    prevButton: '.swiper-button-prev',
+
+    // And if we need scrollbar
+    scrollbar: '.swiper-scrollbar',
+    watchSlidesProgress: true
   });
-});*/
+});
 
 Template.tiendas.onCreated( () => {
 

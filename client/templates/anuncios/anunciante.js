@@ -1,34 +1,41 @@
 //import CallNumber from 'call-number';
 
 Template.PerfilAnunciante.onCreated(function () {
+  let template = Template.instance()
+  template.cargado = new ReactiveVar(false);
   var self = this;
   self.autorun(function () {
     self.subscribe('anunciantes');
-    self.subscribe('fotos');
     let anuncianteId = FlowRouter.getParam('anuncianteId')
     self.subscribe('comentarios', anuncianteId);
     self.subscribe('contactos');
+    self.subscribe('fotos');
+    self.subscribe('users')
   });
 });
 
 Template.PerfilAnunciante.onRendered(function () {
-  var mySwiper = new Swiper ('.swiper-container', {
-    // Optional parameters
-    direction: 'horizontal',
-    loop: true,
-    autoplay: 10000,
+  if (Fotos.find().fetch().length > 0) {
 
-    // If we need pagination
-    pagination: '.swiper-pagination',
 
-    // Navigation arrows
-    nextButton: '.swiper-button-next',
-    prevButton: '.swiper-button-prev',
+    //Template.instance().cargado.set(true)
 
-    // And if we need scrollbar
-    scrollbar: '.swiper-scrollbar',
-    watchSlidesProgress: true
-  });
+  } else {
+    //Template.instance().cargado.set(false)
+  }
+
+  /*Meteor.setTimeout(function () {
+    var mySwiper2 = new Swiper ('.swiper-container2', {
+      // Optional parameters
+      direction: 'horizontal',
+      resistance : '100%',
+      createPagination:false,
+      loop: false
+    });
+    mySwiper2.reInit()
+
+  }, 200)*/
+
 
   $('table tr').each(function(){  $(this).find('th').first().addClass('first');  $(this).find('th').last().addClass('last');  $(this).find('td').first().addClass('first');
   $(this).find('td').last().addClass('last');});$('table tr').first().addClass('row-first');$('table tr').last().addClass('row-last');
@@ -214,15 +221,13 @@ Template.ofertar.events({
 });
 
 Template.PerfilAnunciante.helpers({
+  cargado() {
+    return Template.instance().cargado.get()
+  },
+  user() {
+    return Meteor.users.findOne({_id: this.userId}).profile.nombre
+  },
   estaPendiente() {
-    /*let anuncioId = FlowRouter.getParam('anuncianteId');
-    let pendiente = Contactos.findOne({ anuncianteId: anuncioId, userId: Meteor.userId() }).aprobado;
-    let existe = Contactos.findOne({ anuncianteId: anuncioId, userId: Meteor.userId() })
-    if ( pendiente === false || existe === undefined  ) {
-      return false;
-    } else {
-      return true;
-    }*/
     let anuncioId = FlowRouter.getParam('anuncianteId')
     let aprobado = Contactos.find({ anuncianteId: anuncioId, de: Meteor.userId()}).aprobado;
     if (aprobado === false) {
@@ -238,7 +243,7 @@ Template.PerfilAnunciante.helpers({
     return Anunciantes.findOne({_id: FlowRouter.getParam('anuncianteId')});
   },
   comentarios: function () {
-    return Comentarios.find({}, {sort: {createdAt: -1}});
+    return Comentarios.find({aprobado: true}, {sort: {createdAt: -1}});
   }
 });
 
@@ -248,12 +253,19 @@ Template.calificar.events({
   'click .comentar': function (event, template) {
     let comentario = template.find("[name='comentario']").value;
     let anuncianteId = FlowRouter.getParam('anuncianteId');
-    Meteor.call('comentar', comentario, anuncianteId, function (err) {
-      if (err) {
-        console.log(err);
-      } else {
-        Modal.hide('calificar');
-      }
-    });
+
+    if (comentario !== "") {
+      Meteor.call('comentar', comentario, anuncianteId, function (err) {
+        if (err) {
+          console.log(err);
+        } else {
+          alert('Gracias por Comentar, en espera de ser aprobado')
+          Modal.hide('calificar');
+        }
+      });
+    } else {
+      alert('Complete los Datos')
+    }
+
   }
 });

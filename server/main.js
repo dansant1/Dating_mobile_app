@@ -7,7 +7,7 @@ Meteor.startup(() => {
     return Meteor.absoluteUrl('reset-password/' + token);
   };
 
- /*var users = [{nombre:"Admin User",email:"admin@sincompromiso.pe",roles:['admin']}];
+ var users = [{nombre:"Admin User",email:"admin@sincompromiso.pe",roles:['admin']}];
 
 _.each(users, function (user) {
   var id;
@@ -23,7 +23,7 @@ _.each(users, function (user) {
      Roles.addUsersToRoles(id, user.roles, 'default-group');
    }
 
- }); */
+ }); 
 
 /*  user = Accounts.createUser({
     email: 'user@gmail.com',

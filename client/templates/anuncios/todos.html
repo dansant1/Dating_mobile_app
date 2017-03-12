@@ -23,21 +23,15 @@
               <!-- Slides -->
               {{#each foto}}
               <div class="swiper-slide">
+
                 {{#if isImage}}
                 <img src="{{this.url}}" alt="{{this.url}}" style="width: 95px; height: 95px; margin-top: 2px;">
                 {{/if}}
+
               </div>
               {{/each}}
           </div>
-          <!-- If we need pagination -->
-          <div class="swiper-pagination"></div>
 
-          <!-- If we need navigation buttons -->
-          <div class="swiper-button-prev"></div>
-          <div class="swiper-button-next"></div>
-
-          <!-- If we need scrollbar -->
-          <div class="swiper-scrollbar"></div>
           </div>
           <span><i class="fa fa-map-marker" aria-hidden="true"></i> {{this.ubicacion}}</span>
           <!--<div class="foot">

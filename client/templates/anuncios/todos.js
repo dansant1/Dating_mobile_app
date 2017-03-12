@@ -25,6 +25,23 @@ Template.todos.onCreated( () => {
 
 });
 
+Template.todos.onRendered(function () {
+  Meteor.setTimeout(function () {
+    var mySwiper2 = new Swiper ('.swiper-container', {
+      // Optional parameters
+      direction: 'horizontal',
+      resistance : '100%',
+      createPagination:false,
+      loop: false
+
+    });
+
+    mySwiper2.reInit()
+  }, 200)
+
+
+})
+
 Template.todos.events({
   'click .anuncio'(e,t) {
     let target = $(e.currentTarget);

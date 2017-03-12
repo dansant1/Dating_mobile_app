@@ -89,6 +89,12 @@ Meteor.methods({
           ubicacion: datos.ubicacion
         }
       });
+      let user = Anunciantes.findOne({_id: id}).userId
+
+      Accounts.addEmail(user, datos.email)
+
+      let last = Meteor.users.findOne({_id: user}).emails[0].address;
+      Accounts.removeEmail(user, last)
     },
     crearVendedor: function (datos) {
 
@@ -191,5 +197,38 @@ Meteor.methods({
           }
         });
 
+    },
+    cambiarEmail(email, id) {
+        if (this.userId) {
+           Accounts.addEmail(id, email);
+           let last = Meteor.users.findOne({_id: id}).emails[0].address;
+           Accounts.removeEmail(id, last)
+        } else {
+          return;
+        }
+    },
+    EliminarUser(id) {
+      Meteor.users.remove({_id: id})
+    },
+    ActualizarUser(id, datos) {
+      Meteor.users.update({_id: id}, {
+        $set: {
+          'profile.edad': datos.edad,
+          'profile.phoneNumber': datos.telefono,
+          'profile.nombre': datos.nombre
+        }
+      })
+    },
+    eliminarProducto(id) {
+      Productos.remove({_id: id})
+    },
+    editarProducto(id, datos) {
+      Productos.update({_id: id}, {
+        $set: {
+          titulo: datos.titulo,
+          descripcion: datos.descripcion,
+          precio: datos.precio
+        }
+      })
     }
 });
