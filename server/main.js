@@ -9,7 +9,7 @@ Meteor.startup(() => {
 
  var users = [{nombre:"Admin User",email:"admin@sincompromiso.pe",roles:['admin']}];
 
-_.each(users, function (user) {
+/*_.each(users, function (user) {
   var id;
 
    id = Accounts.createUser({
@@ -23,7 +23,7 @@ _.each(users, function (user) {
      Roles.addUsersToRoles(id, user.roles, 'default-group');
    }
 
- }); 
+ }); */
 
 /*  user = Accounts.createUser({
     email: 'user@gmail.com',

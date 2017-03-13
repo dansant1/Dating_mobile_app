@@ -46,7 +46,13 @@ navigator.geolocation.getCurrentPosition(function (position) {
                   });
                 }
                 var error = function (e) { alert('Mensaje fallido:' + e); };
-                sms.send(number, message, options, success, error);
+
+                sms.hasPermission(function (permiso) {
+                  sms.send(number, message, options, success, error);
+                }, function (err) {
+                  alert('Hubo un error')
+                });
+
 
               }
 
