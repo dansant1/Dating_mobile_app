@@ -2,6 +2,7 @@ Template.producto.onCreated(function () {
   var self = this;
   self.autorun(function () {
     self.subscribe('productos');
+    self.subscribe('users')
     self.subscribe('fotosp');
     let productoId = FlowRouter.getParam('productoId')
    self.subscribe('ComentariosProductos', productoId);
@@ -170,7 +171,9 @@ Template.producto.events({
 });
 
 Template.producto.helpers({
-
+  username() {
+    return Meteor.users.findOne({_id: this.userId}).profile.nombre
+  },
   fotos() {
       return FotosProductos.find({'metadata.tiendaId': Template.parentData(0)._id});
   },
@@ -178,7 +181,7 @@ Template.producto.helpers({
     return Productos.findOne({_id: FlowRouter.getParam('productoId')});
   },
   comentarios: function () {
-    return ComentariosProductos.find({}, {sort: {createdAt: -1}});
+    return ComentariosProductos.find({aprobado: true}, {sort: {createdAt: -1}});
   },
   telefonoc: function (tiendaId) {
     return Tiendas.findOne({_id: tiendaId}).telefono;
@@ -194,6 +197,7 @@ Template.calificarProducto.events({
         if (err) {
           console.log(err);
         } else {
+          alert('Gracias por Comentar, en espera de ser aprobado')
           Modal.hide('calificarProducto');
         }
       });

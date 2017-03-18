@@ -20,7 +20,7 @@
 
       <span class="s-anunciante"><i class="fa fa-user" aria-hidden="true"></i> {{this.nombre}}</span>
     <span class="s-anunciante" style="font-size: 15px">{{this.intereses}}</span>
-    <span class="s-anunciante"><i class="fa fa-map-marker" aria-hidden="true"></i> {{this.ubicacion}}</span>
+    <span class="s-anunciante"><i class="fa fa-map-marker" aria-hidden="true"></i>{{#if this.provincia}} {{this.provincia}} - {{/if}}  {{this.ubicacion}}</span>
 
     <div class="calificacion">
        <button class="1">

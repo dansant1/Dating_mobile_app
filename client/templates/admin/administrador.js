@@ -221,7 +221,9 @@ Template.AdministradorAnuncios.onCreated(function () {
 
 Template.AdministradorAnuncios.helpers({
   email() {
-    return Meteor.users.findOne({_id: this.userId}).emails[0].address;
+    let numero = Meteor.users.findOne({_id: this.userId}).emails.length - 1;
+    return Meteor.users.findOne({_id: this.userId}).emails[numero].address
+    //return Meteor.users.findOne({_id: this.userId}).emails[0].address;
   },
   anuncios: function () {
       return Anunciantes.find({anuncia: true});
@@ -309,7 +311,8 @@ Template.AdministradorAnuncios.events({
       email: $(".email" + this._id).val(),
       genero: $(".ag" + this._id).val(),
       edad: $(".ae" + this._id).val(),
-      ubicacion: $(".au" + this._id).val()
+      ubicacion: $(".au" + this._id).val(),
+      provincia: $(".ap" + this._id).val()
     }
 
     if (datos.edad >= 18 && datos.edad < 69) {
@@ -422,6 +425,8 @@ Template.AdministradorAnuncios.events({
       precio: template.find("[name='precio']").value,
     }
 
+    //console.log(datos.provincia);
+
     let password = template.find("[name='password']").value;
 
     if (datos.edad >= 18 && datos.edad < 69) {
@@ -469,7 +474,8 @@ Template.Usuarios.helpers({
     return Meteor.users.find({'profile.verificado': true});
   },
   email() {
-    return Meteor.users.findOne({_id: this._id}).emails[0].address
+    let numero = Meteor.users.findOne({_id: this._id}).emails.length - 1;
+    return Meteor.users.findOne({_id: this._id}).emails[numero].address
   }
 });
 
@@ -477,8 +483,9 @@ Template.Usuarios.events({
   'click [name="change-email"]'() {
     let email = $('.e' + this._id).val()
     let id = this._id
-
-    if (email !== '') {
+    console.log(email);
+    console.log(id);
+    if (email !== "") {
       Meteor.call('cambiarEmail', email, id, (err) => {
         if (err) {
           alert(err)
@@ -585,6 +592,7 @@ Template.AgregarTienda.events({
       nombre: t.find("[name='tienda']").value,
       rubro: $( "#rubro option:selected" ).text(),
       distrito: $( "#distritotienda option:selected" ).text(),
+      provincia: $( "#provinciat option:selected" ).text(),
       telefono: t.find("[name='telefonotienda']").value,
       horario: t.find("[name='horario']").value
     }
@@ -614,7 +622,10 @@ Template.AdministradorComentarios.onCreated(function () {
   self.autorun( function () {
     self.subscribe('todosComentarios')
     self.subscribe('users')
+    self.subscribe('productos')
+    self.subscribe('tiendas')
     self.subscribe('anunciantes')
+    self.subscribe('todosComentariosProductos')
   })
 })
 
@@ -622,12 +633,24 @@ Template.AdministradorComentarios.helpers({
   comentarios() {
     return Comentarios.find()
   },
+  comentariosp() {
+    return ComentariosProductos.find()
+  },
   user() {
     return Meteor.users.findOne({_id: this.userId}).profile.nombre;
   },
   anunciante() {
     let id = Anunciantes.findOne({_id: this.anuncianteId}).userId;
     return Meteor.users.findOne({_id: id}).profile.nombre;
+  },
+  producto() {
+    console.log('Producto: ' + this.productoId);
+    let id = Productos.findOne({_id: this.productoId}).tiendaId;
+    console.log('Tienda: ' + id);
+    let tienda = Tiendas.findOne({_id: id}).nombre
+    //console.log(tienda);
+    //return Meteor.users.findOne({_id: tiendaId}).profile.nombre;
+    return tienda
   }
 })
 
@@ -643,6 +666,24 @@ Template.AdministradorComentarios.events({
   },
   'click .desaprobar'() {
     Meteor.call('desaprobarComentario', this._id, (err) => {
+      if (err) {
+        alert(err)
+      } else {
+        alert('Comentario Desaprobado')
+      }
+    })
+  },
+  'click .aprobarp'() {
+    Meteor.call('aprobarComentariop', this._id, (err) => {
+      if (err) {
+        alert(err)
+      } else {
+        alert('Comentario Aprobado')
+      }
+    })
+  },
+  'click .desaprobarp'() {
+    Meteor.call('desaprobarComentariop', this._id, (err) => {
       if (err) {
         alert(err)
       } else {

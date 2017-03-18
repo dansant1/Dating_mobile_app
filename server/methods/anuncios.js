@@ -80,7 +80,9 @@ Meteor.methods({
         let anuncianteId;
 
         if (usuarioId) {
+          console.log(data.provincia);
           anuncianteId = Anunciantes.insert(data);
+
           Roles.addUsersToRoles(usuarioId, ['anunciante'], 'app');
 
           Meteor.users.update({_id: usuarioId}, {
@@ -181,6 +183,7 @@ Meteor.methods({
         userId: this.userId,
         createdAt: new Date(),
         comentario: comentario,
+        aprobado: false,
         productoId: anuncianteId,
         username: Meteor.users.findOne({_id: this.userId}).username
       });
@@ -287,6 +290,20 @@ Meteor.methods({
   },
   desaprobarComentario(id) {
     Comentarios.update({_id: id}, {
+      $set: {
+        aprobado: false
+      }
+    })
+  },
+  aprobarComentariop(id) {
+    ComentariosProductos.update({_id: id}, {
+      $set: {
+        aprobado: true
+      }
+    })
+  },
+  desaprobarComentariop(id) {
+    ComentariosProductos.update({_id: id}, {
       $set: {
         aprobado: false
       }

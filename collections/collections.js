@@ -24,7 +24,7 @@ Anunciantes.deny({
 
 Ofertas = new Mongo.Collection('ofertas');
 
-Schemas.Anunciantes = new SimpleSchema({
+/*Schemas.Anunciantes = new SimpleSchema({
     nombre: {
         type: String,
         label: "Nombre",
@@ -79,9 +79,9 @@ Schemas.Anunciantes = new SimpleSchema({
     destacar: {
       type: Boolean
     }
-});
+});*/
 
-Anunciantes.attachSchema(Schemas.Anunciantes);
+//Anunciantes.attachSchema(Schemas.Anunciantes);
 
 Favoritos = new Mongo.Collection('favoritos');
 

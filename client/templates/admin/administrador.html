@@ -102,6 +102,33 @@
         </select>
       </div>
       <div class="form-group">
+        <label for="pro">Provincia</label>
+        <select class="form-control" id="provinciat">
+           <option>Lima</option>
+           <option>Callao</option>
+           <option>Amazonas</option>
+           <option>Áncash</option>
+           <option>Apurímac</option>
+           <option>Arequipa</option>
+           <option>Ayacucho</option>
+           <option>Cajamarca</option>
+           <option>Huancavelica</option>
+           <option>Cusco</option>
+           <option>Huánuco</option>
+           <option>Ica</option>
+           <option>Junín</option>
+           <option>Lambayeque</option>
+           <option>Tacna</option>
+           <option>Piura</option>
+           <option>Puno</option>
+           <option>Loreto</option>
+           <option>Ucayali</option>
+           <option>Madre de Dios</option>
+           <option>Moquegua</option>
+           <option>Pasco</option>
+       </select>
+      </div>
+      <div class="form-group">
         <label for="telefonotienda">Teléfono</label>
         <input type="text" name="telefonotienda" class="form-control" id="telefonotienda">
       </div>
@@ -343,6 +370,7 @@
         <td style="padding: 5px"><input type="text" class="ag{{this._id}} form-control" value="{{this.genero}}"></td>
         <td style="padding: 5px"><input type="text" class="ae{{this._id}} form-control" value="{{this.edad}}"></td>
         <td style="padding: 5px"><input type="text" class="au{{this._id}} form-control" value="{{this.ubicacion}}"></td>
+        <td style="padding: 5px"><input type="text" class="ap{{this._id}} form-control" value="{{this.provincia}}"></td>
         <td style="padding: 5px"><input type="text" class="intereses {{this._id}} form-control" name="{{this._id}}" value="{{this.intereses}}"></td>
         <td>
           <label class="btn btn-default btn-file">
@@ -459,7 +487,7 @@
       {{#each users}}
       <tr>
         <td><input type="text" class="n{{this._id}}" value="{{this.profile.nombre}}"></td>
-        <td><input type="text" value="{{email}}"> <button type="button" class="e{{this._id}}" name="change-email">Actualizar Email</button></td>
+        <td><input type="text" class="e{{this._id}}" value="{{email}}"> <button type="button" name="change-email">Actualizar Email</button></td>
         <td><input type="text" class="t{{this._id}}" value="{{this.profile.phoneNumber}}"></td>
         <td><input type="text" class="ee{{this._id}}" value="{{this.profile.edad}}"></td>
         <td><button type="button" class="editar">Editar</button> <button type="button" class="remove">x</button></td>
@@ -548,5 +576,41 @@
   </table>
       </div>
     </div>
+
+    <div class="row">
+      <h1>Comentarios de Productos</h1>
+    </div>
+    <div class="row">
+      <div class="col-md-10">
+        <table class="table">
+    <thead>
+      <tr>
+        <th>Usuario</th>
+        <th>Tienda</th>
+        <th>Comentario</th>
+        <th>Aprobar / Desaprobar</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each comentariosp}}
+      <tr>
+        <td>{{user}}</td>
+        <td>{{producto}}</td>
+        <td>{{comentario}}</td>
+        <td>
+          {{#if this.aprobado}}
+          <button type="button" class="desaprobarp">Desaprobar</button>
+
+          {{else}}
+          <button type="button" class="aprobarp">Aprobar</button>
+          {{/if}}
+        </td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+      </div>
+    </div>
+
   </div>
 </template>

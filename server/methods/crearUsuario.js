@@ -86,7 +86,8 @@ Meteor.methods({
           intereses: datos.intereses,
           genero: datos.genero,
           edad: datos.edad,
-          ubicacion: datos.ubicacion
+          ubicacion: datos.ubicacion,
+          provincia: datos.provincia
         }
       });
       let user = Anunciantes.findOne({_id: id}).userId
@@ -113,6 +114,8 @@ Meteor.methods({
         let tiendaId = Tiendas.insert({
             nombre: datos.nombre,
             rubro: datos.rubro,
+            ubicacion: datos.distrito,
+            provincia: datos.provincia,
             telefono: datos.telefono,
             horario: datos.horario,
             userId: usuarioId
@@ -201,8 +204,10 @@ Meteor.methods({
     cambiarEmail(email, id) {
         if (this.userId) {
            Accounts.addEmail(id, email);
-           let last = Meteor.users.findOne({_id: id}).emails[0].address;
-           Accounts.removeEmail(id, last)
+           //let last = Meteor.users.findOne({_id: id}).emails[0].address;
+
+           //console.log(last);
+           //Accounts.removeEmail(id, last)
         } else {
           return;
         }
