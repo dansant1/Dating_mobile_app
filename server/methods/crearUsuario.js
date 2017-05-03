@@ -75,6 +75,12 @@ Meteor.methods({
     },
     eliminarTienda(id) {
       Tiendas.remove({_id: id})
+
+      Productos.find({tiendaId: id}).forEach((p) => {
+        Productos.remove({tiendaId: p._id})  
+      })
+
+      
     },
     editarAnuncio(id, datos) {
       console.log( id );
@@ -214,6 +220,16 @@ Meteor.methods({
     },
     EliminarUser(id) {
       Meteor.users.remove({_id: id})
+
+      Anunciantes.find({userId: id}).forEach( (a) => {
+        Favoritos.remove({anuncianteId: a._id})
+        Anunciantes.remove({userId: a._id})  
+      })
+
+      Postulantes.find({userId: id}).forEach( (p) => {
+        Postulantes.remove({p._id})
+      })
+      
     },
     ActualizarUser(id, datos) {
       Meteor.users.update({_id: id}, {
