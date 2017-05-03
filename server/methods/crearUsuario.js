@@ -227,7 +227,7 @@ Meteor.methods({
       })
 
       Postulantes.find({userId: id}).forEach( (p) => {
-        Postulantes.remove({p._id})
+        Postulantes.remove({_id: p._id})
       })
       
     },
