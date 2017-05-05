@@ -312,7 +312,10 @@ Template.AdministradorAnuncios.events({
       genero: $(".ag" + this._id).val(),
       edad: $(".ae" + this._id).val(),
       ubicacion: $(".au" + this._id).val(),
-      provincia: $(".ap" + this._id).val()
+      provincia: $(".ap" + this._id).val(),
+      contextura: $(".acon" + this._id).val(),
+      cabello: $(".acab" + this._id).val(),
+      piel: $(".apiel" + this._id).val() 
     }
 
     if (datos.edad >= 18 && datos.edad < 69) {

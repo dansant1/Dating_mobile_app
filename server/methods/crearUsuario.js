@@ -93,7 +93,10 @@ Meteor.methods({
           genero: datos.genero,
           edad: datos.edad,
           ubicacion: datos.ubicacion,
-          provincia: datos.provincia
+          provincia: datos.provincia,
+          piel: datos.piel,
+          cabello: datos.cabello,
+          contextura: datos.contextura
         }
       });
       let user = Anunciantes.findOne({_id: id}).userId

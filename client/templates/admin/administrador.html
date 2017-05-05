@@ -352,9 +352,12 @@
         <th>Intereses</th> -->
         <th style="padding: 0px; background: white; color: black; text-align: center;">Género</th>
         <th style="padding: 0px; background: white; color: black; text-align: center;">Edad</th>
+        <th style="padding: 0px; background: white; color: black; text-align: center;">Contextura</th>
+        <th style="padding: 0px; background: white; color: black; text-align: center;">Color de Piel</th>
+        <th style="padding: 0px; background: white; color: black; text-align: center;">Color de Cabello</th>
 
         <th style="padding: 0px; background: white; color: black; text-align: center;">Ubicación</th>
-
+        <th style="padding: 0px; background: white; color: black; text-align: center;">Provincia</th>
         <th style="padding: 0px; background: white; color: black; text-align: center;">Descripcion</th>
         <th style="padding: 0px; background: white; color: black; text-align: center;">Fotos</th>
         <th style="padding: 0px; background: white; color: black; text-align: center;">Editar</th>
@@ -369,6 +372,11 @@
         <td style="padding: 5px"><input type="text" class="email{{this._id}} form-control" value="{{#with getUser this.userId }} {{#each this.emails}} {{this.address}} {{/each}} {{/with}}"></td>
         <td style="padding: 5px"><input type="text" class="ag{{this._id}} form-control" value="{{this.genero}}"></td>
         <td style="padding: 5px"><input type="text" class="ae{{this._id}} form-control" value="{{this.edad}}"></td>
+  
+        <td style="padding: 5px"><input type="text" class="acon{{this._id}} form-control" value="{{this.contextura}}"></td>
+        <td style="padding: 5px"><input type="text" class="apiel{{this._id}} form-control" value="{{this.piel}}"></td>
+        <td style="padding: 5px"><input type="text" class="acab{{this._id}} form-control" value="{{this.cabello}}"></td>
+
         <td style="padding: 5px"><input type="text" class="au{{this._id}} form-control" value="{{this.ubicacion}}"></td>
         <td style="padding: 5px"><input type="text" class="ap{{this._id}} form-control" value="{{this.provincia}}"></td>
         <td style="padding: 5px"><input type="text" class="intereses {{this._id}} form-control" name="{{this._id}}" value="{{this.intereses}}"></td>
