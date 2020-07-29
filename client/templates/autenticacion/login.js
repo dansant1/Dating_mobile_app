@@ -14,22 +14,24 @@ Template.login.onCreated(()=> {
       //usuario logueado
       if ( user && typeof user._id !== 'undefined' ){
             // si el usuario es admin, no necesita verficar
-            if ( Roles.userIsInRole( user._id, 'admin', 'default-group' ) ){
+            if ( Roles.userIsInRole( user._id, 'admin', 'default-group' ) ) {
               FlowRouter.go('/anuncios');
               return true;
+            } else {
+              FlowRouter.go('/anuncios');
             }
 
             // usuario con numero de telefono verficado
-           else if ( typeof user.profile.verificado !== 'undefined' && user.profile.verificado ){
-             FlowRouter.go('/anuncios');
-             return true;
-           }
+           //else if ( typeof user.profile.verificado !== 'undefined' && user.profile.verificado ){
+           //  FlowRouter.go('/anuncios');
+           //  return true;
+           //}
 
            //usario sin verificacion de telefono
-           else if ( typeof user.profile.verificado === 'undefined' || !user.profile.verificado ){
-             FlowRouter.go('/verificar');
-             return true;
-           }
+          //else if ( typeof user.profile.verificado === 'undefined' || !user.profile.verificado ){
+          //   FlowRouter.go('/verificar');
+          //   return true;
+          // }
 
       }
 

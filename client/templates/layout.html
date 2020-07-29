@@ -1,9 +1,14 @@
 <template name="layout">
-  {{#if currentUser}}
-    {{#if currentUser.profile.verificado}}
+  <!--{{#if currentUser}}-->
+    <!--{{#if currentUser.profile.verificado}}-->
         <div class="menu">
           <i class="fa fa-bars abrir" aria-hidden="true"></i>
+          {{#if currentUser}}
           <i class="fa fa-user cuenta" style="width: 40px; position: relative; top: 10px;  left: 310px;" aria-hidden="true"></i>
+          {{else}}
+          <a href="/login2"> <i class="fa fa-user" style="width: 40px; position: relative; top: 10px;  left: 310px;" aria-hidden="true"></i> </a> 
+
+          {{/if}}
           <div class="lista">
               {{#if isInRole 'anunciante' 'app'}}
               {{else}}
@@ -22,15 +27,20 @@
           <div class="sidebar-lista">
 
             <button class="anunciar"><a href="/anuncios">Anuncios</a></button>
-
+            {{#if currentUser}}
             <button class="anunciar t"><a href="/productos">Tiendas</a></button>
+            {{/if}}
+            {{#if currentUser}}
             <button class="anunciar panico"><a>Pánico</a></button>
+            {{/if}}
+            {{#if currentUser}}
             {{#if isInRole 'anunciante' 'app'}}
             {{else}}
               <button class="anunciar a"><a href="/anunciar">Anunciar</a></button>
             {{/if}}
-
+            
             <button class="anunciar logout"><a href="/">Logout</a></button>
+            {{/if}}
           </div>
         </div>
 
@@ -55,10 +65,10 @@
             <div class="swiper-scrollbar"></div>
             </div>
         </div> -->
-    {{else}}
+    <!--{{else}}
       {{>Verificar}}
-    {{/if}}
-  {{else}}
+    {{/if}}-->
+  <!--{{else}}
     {{>login}}
-  {{/if}}
+  {{/if}}-->
 </template>

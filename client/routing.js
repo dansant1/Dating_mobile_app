@@ -1,6 +1,15 @@
 FlowRouter.route('/', {
   name: 'home',
   action() {
+      //BlazeLayout.render('login');
+      BlazeLayout.render('layout', { contenido: 'todos'});
+    
+  }
+});
+
+FlowRouter.route('/login2', {
+  name: 'home',
+  action() {
       BlazeLayout.render('login');
   }
 });
