@@ -28,6 +28,14 @@
                 <img src="{{this.url}}" alt="{{this.url}}" style="width: 95px; height: 95px; margin-top: 2px;">
                 {{/if}}
 
+                {{#if isVideo}}
+                  <video width="320" height="240" controls>
+                    <source src="{{this.url}}" type="video/mp4">
+                    <source src="{{this.url}}" type="video/ogg">
+                    Your browser does not support the video tag
+                  </video>
+                {{/if}}
+
               </div>
               {{/each}}
           </div>

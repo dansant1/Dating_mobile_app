@@ -109,10 +109,12 @@ function subirFoto (event, template, anuncianteId, id) {
 
     if ('files' in archivo) {
 
+      
+
         if (archivo.files.length == 0) {
            console.log('Selecciona una foto');
         } else if (archivo.files.length > 1) {
-           console.log('Selecciona solo una foto');
+          console.log('Selecciona solo una foto');
         } else {
 
 
@@ -126,7 +128,7 @@ function subirFoto (event, template, anuncianteId, id) {
             doc.name(nuevoNombre);
 
             doc.metadata = {
-              anuncianteId: anuncianteId,
+              anuncianteId,
             };
 
             Fotos.insert(doc, function (err, fileObj) {
@@ -141,6 +143,77 @@ function subirFoto (event, template, anuncianteId, id) {
         }
     }
 } // Fin de la funcion subirFoto
+
+function validarFoto ( archivo ) {
+  
+
+  if ('files' in archivo) {
+
+      if (archivo.files.length == 0) {
+         console.log('Selecciona una foto');
+         return false;
+      } else if (archivo.files.length > 1) {
+         console.log('Selecciona solo una foto');
+         return false;
+      } else {
+        return true;
+      }
+  }
+
+}
+
+function tratarArchivo ( tiendaId, archivo ) {
+
+  var doc = new FS.File( archivo.files[0] );
+
+  var nuevoNombre = removeDiacritics(doc.name());
+  doc.name(nuevoNombre);
+
+  doc.metadata = {
+    tiendaId
+  };
+
+  return doc;
+}
+
+function subirFotoTienda ( _id, id, tipo ) {
+
+  let archivo = document.getElementById(id);
+
+  if ( validarFoto( archivo ) ) {
+    
+    let doc = tratarArchivo( _id, archivo, tipo )
+
+    if ( tipo === "anunciante" ) {
+      
+      Fotos.insert(doc, function (err, fileObj) {
+        if (err) {
+          console.log(err);
+        } else {
+
+          console.log('Foto subida');
+        }
+      });
+    } 
+
+    if ( tipo === "tienda" ) {
+      FotosTienda.upsert( { 'metadata.tiendId' : tiendaId }, {
+        $set: {
+          doc
+        }
+      })
+    }
+
+    
+
+  }
+
+        
+        
+      
+  
+}
+
 
 function subirFotoTienda (event, template, tiendaId, id) {
 
@@ -204,8 +277,12 @@ Template.Administrador.onCreated( function () {
   });
 });
 
-Template.AdministradorAnuncios.onCreated(function () {
+Template.AdministradorAnuncios.onCreated( function () {
   var self = this;
+
+  let template = Template.instance()
+
+  template.esModeloConfirmada = new ReactiveVar(false)
 
   Meteor.subscribe( 'users' );
 
@@ -247,6 +324,11 @@ Template.AdministradorAnuncios.helpers({
 });
 
 Template.AdministradorAnuncios.events({
+  'change [name="modelo_confirmada"]'(e, t) {
+    let value = $(event.target).is(":checked")
+
+    t.esModeloConfirmada.set(value)
+  },
   'click [name="change-email"]'(e, t) {
     let email = t.find("[name='email-tienda" + this._id + "']").value
     let id = this.userId;
@@ -279,6 +361,7 @@ Template.AdministradorAnuncios.events({
     Fotos.remove({_id: this._id})
   },
   'click .guardar-tienda'(e, t) {
+    
     let datos = {
       nombre: $('.tn' + this._id).val(),
       telefono: $('.te' + this._id).val(),
@@ -293,6 +376,26 @@ Template.AdministradorAnuncios.events({
         alert('Tienda Editada')
       }
     })
+  },
+  'click .guardar-tienda--_nombre_telefono_rubro_horario'(e, t) {
+
+    let data = "guardar-tienda--_nombre_telefono_rubro_horario"
+
+    function getData( data ) {
+
+      let start = data.search("--");
+
+      let end = data.lenght;
+
+      data.substring(start, end);
+
+      return data;
+
+    }
+
+    console.log(data)
+
+    
   },
   'click .eliminar-tienda'() {
     Meteor.call('eliminarTienda', this._id, (err) => {
@@ -341,6 +444,9 @@ Template.Administrador.helpers({
 });
 
 Template.AdministradorAnuncios.helpers({
+  esModeloConfirmada() {
+    return Template.instance().esModeloConfirmada.get()
+  },
   anunciosNoAprobados: function () {
      return Anunciantes.find({anuncia: false});
   },
@@ -426,6 +532,10 @@ Template.AdministradorAnuncios.events({
       provincia: $( "#provincia option:selected" ).text(),
       ubicacion: $( "#distrito option:selected" ).text(),
       precio: template.find("[name='precio']").value,
+      calificacion: template.find("[name='calificacion']").value,
+      comentarios: template.find("[name='comentarios']").value,
+      independiente: $("[name='anunciante_independiente']").is(":checked"),
+      esModeloConfirmada: $("[name='modelo_confirmada']").is(":checked"),
     }
 
     //console.log(datos.provincia);
@@ -437,7 +547,7 @@ Template.AdministradorAnuncios.events({
           if (err) {
             Bert.alert(err.error, 'danger', 'growl-top-right');
           } else {
-            // subirFoto(event, template, result.id, 'foto');
+            subirFoto(event, template, result.id, 'foto');
             alert('Anunciante agregado')
           }
       });

@@ -190,6 +190,33 @@
         <label for="edad">Edad</label>
         <input type="number" name="edad" class="form-control" id="edad">
       </div>
+
+      <div class="form-group">
+        <div class="checkbox">
+          <label><input type="checkbox" name="anunciante_independiente" >Anunciante Independiente</label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="checkbox">
+          <label><input type="checkbox" name="modelo_confirmada" >Es modelo confirmada</label>
+        </div>
+      </div>
+
+      {{#if esModeloConfirmada}}
+
+        <div class="form-group">
+          <label for="calificacion">Calificacion 1 - 5</label>
+          <input type="number" name="calificacion" class="form-control" id="calificacion">
+        </div>
+
+        <div class="form-group">
+          <label for="comentarios">Comentarios</label>
+          <textarea name="comentarios" class="form-control" id="comentarios" cols="30" rows="10"></textarea>
+        </div>
+
+      {{/if}}    
+
        <div class="form-group">
          <label for="cabello">Color de cabello</label>
           <select class="form-control" id="cabello">
@@ -277,11 +304,11 @@
             <option>Multiples</option>
         </select>
       </div>
-      <!-- <div class="form-group">
+       <div class="form-group">
         <label class="btn btn-default btn-file">
           Subir foto <input type="file" id="foto" style="display: none;">
         </label>
-      </div> -->
+      </div>
       <div class="form-group">
         <label for="precio">Precio</label>
         <input type="number" name="precio" class="form-control" id="precio">
@@ -462,7 +489,7 @@
 
         </td>
         <td>
-          <button type="button" class="btn btn-primary guardar-tienda">Guardar</button>
+          <button type="button" class="btn btn-primary guardar-tienda--_nombre_telefono_rubro_horario">Guardar</button>
           <button type="button" class="btn btn-danger eliminar-tienda">x</button>
         </td>
       </tr>

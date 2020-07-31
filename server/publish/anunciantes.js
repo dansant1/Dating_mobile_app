@@ -1,10 +1,7 @@
 Meteor.publish('anunciantes', function () {
-  if (this.userId) {
+ 
     return Anunciantes.find({anuncia: true});
-  } else {
-    this.stop();
-    return;
-  }
+ 
 });
 
 Meteor.publish('anunciantes2', function (search) {
@@ -52,22 +49,16 @@ Meteor.publish('postulantes', function () {
 });
 
 Meteor.publish('users', function () {
-  if (this.userId) {
+  
     return Meteor.users.find();
-  } else {
-    this.stop();
-    return;
-  }
+  
 });
 
 
 Meteor.publish('comentarios', function (anuncianteId) {
-  if (this.userId) {
+  
     return Comentarios.find({anuncianteId: anuncianteId});
-  } else {
-    this.stop();
-    return;
-  }
+  
 });
 
 Meteor.publish('todosComentarios', function () {
